@@ -1,0 +1,64 @@
+
+.head_typo, .nav-link:hover{
+	font-size: 18px;
+  color: #ff851b;
+}
+/*
+.navbar-brand{
+	font-size: 23px;
+	padding-left: 50px;
+	padding-right: 50px;
+}
+.navbar-nav > li{
+	color: white;
+	padding-left: 80px;
+	padding-right: 80px;
+}*/
+#drop{
+		margin-left: 100px;
+		color: white;
+		background-color: #FF851B;
+ 	 	border-color: #FF851B;
+}
+	
+.otogbtn{
+	color: white;
+ 	background-color: #FF851B;
+ 	border-color: #FF851B;
+}
+.callout {
+  padding: 20px;
+  margin: 20px 0;
+  border: 1px solid #eee;
+  border-left-width: 5px;
+  border-radius: 3px;
+  h4 {
+    margin-top: 0;
+    margin-bottom: 5px;
+  }
+  p:last-child {
+    margin-bottom: 0;
+  }
+  code {
+    border-radius: 3px;
+  }
+  & + .bs-callout {
+    margin-top: -5px;
+  }
+}
+
+/* primary setup for element + include custom color */
+@each $name,$color in 
+(default, #777), (primary, #428bca), (success, #5cb85c), (danger, #d9534f),
+(warning, #f0ad4e), (info, #ff851b), (bdc, #29527a), (otog, #ff851b) {
+  .callout-#{$name} {
+    border-left-color: $color;
+    h4 {
+      color: $color;
+    }
+  }
+  .btn-#{$name}{
+  	background-color: $color;
+  }
+
+}
