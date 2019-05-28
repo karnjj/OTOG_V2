@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<html lang="en">
+	<head>
+ 		<meta charset="utf-8">
+		<title>OTOG - One Tambon One Grader</title>
+
+	<!-- bootstrap integral -->
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+  <!-- main source of custom css -->
+  <link rel="stylesheet" type="text/css" href="main.css">
+</head>
+
+<body>
+
+	<!-- navigation bar -->
+	<nav class="navbar navbar-expand-sm navbar-light justify-content-end" style="background-color: #F1F1F1">
+		<a class="navbar-brand head_typo" href="#">OTOG - One Tambon One Grader</a>
+		<ul class="navbar-nav">
+			<li class="nav-item">
+				<a class="nav-link head_typo" href="main.html">
+				<i class="fa fa-home"></i>
+				Main</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link head_typo active" href="problems.html">
+				<i class="fa fa-puzzle-piece"></i>
+				Problems</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link head_typo" href="contest.html">
+				<i class="fa fa-trophy"></i>
+				Contest</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link head_typo" href="ratings.html">
+				<i class="fa fa-bar-chart"></i>
+				Ratings</a>
+			</li>
+		</ul>
+	</nav><br><br><br>
+
+	<!-- problem section -->
+	<div class="container">
+		<h2> <i class ="fa fa-puzzle-piece"></i> Problem </h2>
+		<hr>
+	<!-- search problem -->
+	<form class="form-inline">
+		<div class="form-group">
+			<label><b>ค้นหาโจทย์</b></label>
+			<input type="text" class="form-control" id="inputProb">
+		</div>
+	</form>
+	<!-- pagination -->
+	<nav>
+		<ul class="pagination justify-content-center">
+			<li class="page-item disabled">
+				<a href="#" class="page-link" tabindex="-1">Previous</a>
+			</li>
+			<li class="page-item active"><a href="#" class="page-link">1</a></li>
+			<li class="page-item"><a href="#" class="page-link">2</a></li>
+			<li class="page-item"><a href="#" class="page-link">3</a></li>
+			<li class="page-item"><a href="#" class="page-link">Next</a></li>
+
+		</ul>
+	</nav>
+</body>
+</html>
