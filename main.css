@@ -14,6 +14,31 @@
 	padding-left: 80px;
 	padding-right: 80px;
 }*/
+
+.pagination > li > a{
+  background-color: white;
+  color: #FF851B
+}
+
+.pagination > li > a:focus,
+.pagination > li > a:hover,
+.pagination > li > span:focus,
+.pagination > li > span:hover{
+    color: white;
+    background-color: #FF851B;
+    border-color: #FF851B;
+}
+.pagination > .active > li > a{
+  color: #FF851B;
+  background-color: #FF851B;
+  border : solid 1px;
+}
+
+.pagination > .active > a:hover{
+  background-color: #FF851B;
+  border : solid 1px;
+}
+
 #drop{
 		margin-left: 100px;
 		color: white;
