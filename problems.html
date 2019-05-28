@@ -13,7 +13,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
   <!-- main source of custom css -->
-  <link rel="stylesheet" type="text/css" href="main.css">
+  <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
 <body>
@@ -47,15 +47,18 @@
 
 	<!-- problem section -->
 	<div class="container">
-		<h2> <i class ="fa fa-puzzle-piece"></i> Problem </h2>
-		<hr>
 	<!-- search problem -->
-	<form class="form-inline">
+	<form class="form-inline" action="#">
 		<div class="form-group">
-			<label><b>ค้นหาโจทย์</b></label>
-			<input type="text" class="form-control" id="inputProb">
+			<h2> <i class ="fa fa-puzzle-piece"></i> Problem </h2>
+			<div style="padding-left: 675px ">
+				<label class="sr-only"><b>ค้นหาโจทย์</b></label>
+				<input type="text" class="form-control" id="input_prob" placeholder="ค้นหาโจทย์">
+				<button type="submit" class="btn otogbtn btn-md">Search</button>
+			</div>
 		</div>
 	</form>
+	<hr>
 	<!-- pagination -->
 	<nav>
 		<ul class="pagination justify-content-center">
