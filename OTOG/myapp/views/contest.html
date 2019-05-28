@@ -14,6 +14,15 @@
 
   <!-- main source of custom css -->
   <link rel="stylesheet" type="text/css" href="style.css">
+
+  <!-- js for show contest -->
+  <script>
+  	$(document).ready(function(){ // onload
+  		var is_contest = 1; // 0 = no contest, 1 = contest mode
+  		if(is_contest == 0) $("#contest_section").load("unshow_contest.html");
+  		else $("#contest_section").load("show_contest.html");
+  	});
+  </script>
 </head>
 
 <body>
@@ -49,15 +58,9 @@
 			</li>
 		</ul>
 	</nav><br><br><br>
+	<div class="container">
+	<div id="contest_section"></div>
 
-	<!-- show contest
-		if(!is_contest()){
-			show.not_contest();
-		}
-		else{
-			show.contest();
-		}
-	-->
 		<!-- footer of Phakphum Dev Team -->
 	<hr>
 	<footer>
@@ -70,5 +73,6 @@
 			</div>
 		</div>
 	</footer>
+	</div>
 </body>
 </html>
