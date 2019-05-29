@@ -10,6 +10,7 @@ var problemsRouter = require('./routes/problems');
 var registerRouter = require('./routes/register');
 var contestRouter = require('./routes/contest');
 var IndexRouter = require('./routes/index');
+var RatingsRouter = require('./routes/ratings');
 
 var app = express();
 
@@ -29,6 +30,7 @@ app.use('/problems', problemsRouter);
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);
 app.use('/contest', contestRouter);
+app.use('/ratings', RatingsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
