@@ -74,27 +74,24 @@
 				<th scope="col">ผ่านแล้ว</th>
 			</tr>
 		</thead>
+
+		<!-- problem fetch function -->
+		<!-- remind me to change data name + field -->
+		<% var prob_num = problem.length;
+		if(problem.length > 0){
 		<tbody class="justify-content-center">
-				<tr>
-					<td>1</td>
-					<td><a href="#" style="color: #FF851B">TOI_14 Logistic</a></td>
-					<td>1900</td>
-					<td>19</td>
-				</tr>
-				<tr>
-					<td>2</td>
-					<td><a href="#" style="color: #FF851B">TOI_14 BlockChain</a></td>
-					<td>1600</td>
-					<td>13</td>
-				</tr>
-				<tr>
-					<td>3</td>
-					<td><a href="#" style="color: #FF851B">TOI_14 NBK48</a></td>
-					<td>1300</td>
-					<td>31</td>
-				</tr>
-			</tbody>
+			for(var i = 0; i != prob_num; ++i){%>
+			<tr style="color: #FF851B">
+				<td><%=(i+1)%></td>
+				<td><%=problem[i].name%></td>	
+				<td><%=problem[i].ratings%></td>	
+				<td><%=problem[i].passed%></td>	
+			</tr>
+			<%}
+		</tbody>
+	 } %>
 	</table>
+
 	<!-- pagination -->
 	<nav>
 		<ul class="pagination justify-content-center">
