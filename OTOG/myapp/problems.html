@@ -64,22 +64,40 @@
 		</div>
 	</form>
 	<hr>
-	<table class="table table-hover" style="text-align: center;">
+		<!-- fetch online problem -->
+	<!--
+	<table class="table table-condensed table-hover" style="text-align: center;">
 		<thead>
 			<tr style="color: #FF851B">
-				<th>id</th>
-				<th>name</th>
+				<th scope="col">#</th>
+				<th scope="col">ชื่อโจทย์</th>
+				<th scope="col">Ratings</th>
+				<th scope="col">ผ่านแล้ว</th>
 			</tr>
 		</thead>
-		<tbody>
-			<% problems.forEach(function(problem){ %>
+	-->
+		<!-- problem fetch function -->
+		<!-- remind me to change data name + field -->
+		<!--
+		<tbody class="justify-content-center">
 			<tr>
-    			<td> <%= problem.id_Prob %> </td>
-    			<td><a href="problems/docs/<%=problem.sname%>" target="_blank" style="color: #FF851B"> <%= problem.name %> </td>
-    		</tr>
-  			<% })%>
-  		</tbody>
-	</table>
+				<td>1</td>
+				<td>2</td>
+				<td>3</td>
+				<td>4</td>
+			</tr>
+			<% if(problems[0] != null){
+			for(var i = 0; i < problem.length; i++){ %>
+			<tr style="color: #FF851B">
+				<td><%=(i+1)%></td>
+				<td><%=problems[i].name%></td>
+				<td>1500</td>
+				<td>19</td>
+			</tr>
+			<%}
+			%> 
+		</tbody>
+	</table> -->
 	<!-- pagination -->
 	<nav>
 		<ul class="pagination justify-content-center">
@@ -93,7 +111,6 @@
 
 		</ul>
 	</nav>
-
 		<!-- footer of Phakphum Dev Team -->
 	<hr>
 	<footer>
