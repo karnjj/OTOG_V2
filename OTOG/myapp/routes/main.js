@@ -16,15 +16,15 @@ router.get('/', function(req, res, next) {
   var sql = "SELECT * FROM Problem WHERE state = 1 ORDER BY see_date desc limit 11";
   con.query(sql, function (err, result, fields) {
     if (err) throw err;
-    Problems = result;
+    res.render("main.html", { 
+      title: 'main',
+      showname: name_user,
+      is_login: is_login,
+      problems : result,
+    });
     //console.log(Problems);
   });
-  res.render("main.html", { 
-    title: 'main',
-    showname: name_user,
-    is_login: is_login,
-    problems : Problems,
-  });
+  
 });
 
 router.post('/', function(req, res){
