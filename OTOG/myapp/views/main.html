@@ -97,16 +97,16 @@
 			</tr>
 		</thead>
 		<tbody>
-				<% for(var i = 0; i < 10; i++){ %>
+				<% problems.forEach(function(problem){ %>
 					<tr>
-    				<td> <%= problems[i].id_Prob %> </td>
-    				<td><a href="problems/docs/<%=problem.sname%>" target="_blank" style="color: #FF851B"> <%= problems[i].name %> </a></td>
+    				<td> <%= problem.id_Prob %> </td>
+    				<td><a href="problems/docs/<%=problem.sname%>" target="_blank" style="color: #FF851B"> <%= problem.name %> </a></td>
     				<td> </td>
     				<td> </td>
     			</tr>
   			<% })%>
   		</tbody>
-  </table>
+	</table>
 
 	<!-- footer of Phakphum Dev Team -->
 	<hr>
