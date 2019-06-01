@@ -14,6 +14,15 @@
 
   <!-- main source of custom css -->
   <link rel="stylesheet" type="text/css" href="style.css">
+
+  <script type="text/javascript">
+  	$(document).ready(function(){
+  		$("button").click(function(){
+  			$(".ext_config").load("ext_config.html");
+  		});
+  	});
+  </script>
+
 </head>
 
 <body>
@@ -71,9 +80,10 @@
 		</div>
 	</form><br>
 
+	<div class="ext_config"></div>
 	<!-- problem config -->
 	<div class="row">
-		<div class="col-md-8"><h2><b>Problem Detials</b></h2></div>
+		<div class="col-md-8"><h2><b>Problem Details</b></h2></div>
 		<div class="col-md-4">
 			<button type="botton" class="btn otogbtn add-new float-right">
 				<i class="fa fa-plus"></i> Add New
@@ -90,6 +100,7 @@
 					<th>Time</th>
 					<th>Memory</th>
 					<th>Status</th>
+					<th>Action</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -99,9 +110,17 @@
     				<td><a href="problems/docs/<%=problem.sname%>" target="_blank" style="color: #FF851B"> <%= problem.name %> </a></td>
     				<td> <%= problem.sname %> </td>
     				<td> <%= problem.score %> </td>
-    				<td> <%= problem.time %> </td>
-    				<td> <%= problem.memory %> </td>
+    				<td> <%= problem.time %> วินาที</td>
+    				<td> <%= problem.memory %> MB</td>
     				<td> <%= problem.state %> </td>
+    				<td>
+    						<a class = "add" title = "Add" data-toggle = "tooltip">
+    						<i class = "fa fa-plus-circle"></i></a>
+    						<a class = "edit" title = "Edit" data-toggle = "tooltip">
+    						<i class = "fa fa-pencil"></i></a>
+    						<a class = "rejudge" title="Rejudge" data-toggle = "tooltip">
+    						<i class = "fa fa-refresh"></i></a>
+    				</td>
     			</tr>
   			<% })%>
   		</tbody>

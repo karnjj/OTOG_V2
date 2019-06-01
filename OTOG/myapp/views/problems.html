@@ -72,7 +72,6 @@
 					<th>Score</th>
 					<th>Time</th>
 					<th>Memory</th>
-					<th>Status</th>
 					<th>Passed</th>
 				</tr>
 			</thead>
@@ -82,9 +81,8 @@
     				<td> <%= problem.id_Prob %> </td>
     				<td><a href="problems/docs/<%=problem.sname%>" target="_blank" style="color: #FF851B"> <%= problem.name %> </a></td>
     				<td> <%= problem.score %> </td>
-    				<td> <%= problem.time %> </td>
-    				<td> <%= problem.memory %> </td>
-    				<td> <%= problem.state %> </td>
+    				<td> <%= problem.time %> วินาที</td>
+    				<td> <%= problem.memory %> MB</td>
     				<td> </td>
     			</tr>
   			<% })%>
