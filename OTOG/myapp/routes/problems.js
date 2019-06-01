@@ -10,10 +10,17 @@ var con = mysql.createConnection({
 /* GET home page. */
 router.get('/', function(req, res, next) {
 	//res.render("problems.html", {title: 'Problems',});
+<<<<<<< Updated upstream
 	var sql = "SELECT * FROM Problem WHERE state = 1 ORDER BY id_Prob desc";
 	con.query(sql, function (err, rows) {
     	if (err) throw err;
     	//console.log(rows);
+=======
+	var sql = "SELECT * FROM Problem";
+	con.query(sql, function (err, rows) {
+    	if (err) throw err;
+    	console.log(rows);
+>>>>>>> Stashed changes
 		res.render("problems.html", {
 			title: 'Problems',
 			problems : rows,

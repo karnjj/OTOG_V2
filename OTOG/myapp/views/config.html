@@ -14,6 +14,7 @@
 
   <!-- main source of custom css -->
   <link rel="stylesheet" type="text/css" href="style.css">
+<<<<<<< Updated upstream
 
   <script type="text/javascript">
   	$(document).ready(function(){
@@ -23,6 +24,8 @@
   	});
   </script>
 
+=======
+>>>>>>> Stashed changes
 </head>
 
 <body>
@@ -80,10 +83,16 @@
 		</div>
 	</form><br>
 
+<<<<<<< Updated upstream
 	<div class="ext_config"></div>
 	<!-- problem config -->
 	<div class="row">
 		<div class="col-md-8"><h2><b>Problem Details</b></h2></div>
+=======
+	<!-- problem config -->
+	<div class="row">
+		<div class="col-md-8"><h2><b>Problem Detials</b></h2></div>
+>>>>>>> Stashed changes
 		<div class="col-md-4">
 			<button type="botton" class="btn otogbtn add-new float-right">
 				<i class="fa fa-plus"></i> Add New
@@ -100,7 +109,10 @@
 					<th>Time</th>
 					<th>Memory</th>
 					<th>Status</th>
+<<<<<<< Updated upstream
 					<th>Action</th>
+=======
+>>>>>>> Stashed changes
 				</tr>
 			</thead>
 			<tbody>
@@ -110,6 +122,7 @@
     				<td><a href="problems/docs/<%=problem.sname%>" target="_blank" style="color: #FF851B"> <%= problem.name %> </a></td>
     				<td> <%= problem.sname %> </td>
     				<td> <%= problem.score %> </td>
+<<<<<<< Updated upstream
     				<td> <%= problem.time %> วินาที</td>
     				<td> <%= problem.memory %> MB</td>
     				<td> <%= problem.state %> </td>
@@ -121,6 +134,11 @@
     						<a class = "rejudge" title="Rejudge" data-toggle = "tooltip">
     						<i class = "fa fa-refresh"></i></a>
     				</td>
+=======
+    				<td> <%= problem.time %> </td>
+    				<td> <%= problem.memory %> </td>
+    				<td> <%= problem.state %> </td>
+>>>>>>> Stashed changes
     			</tr>
   			<% })%>
   		</tbody>

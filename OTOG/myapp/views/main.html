@@ -87,9 +87,10 @@
 		</div>
 		<hr>
 	<!-- fetch new problem (maybe top 10) -->
-	<table class="table table-condensed table-hover" style="text-align: center;">
+	<table class="table table-hover" style="text-align: center;">
 		<thead>
 			<tr style="color: #FF851B">
+<<<<<<< Updated upstream
 				<th scope="col">#</th>
 				<th scope="col">Name</th>
 				<th scope="col">Passed</th>
@@ -104,6 +105,23 @@
     				<td> </td>
     				<td> </td>
     			</tr>
+=======
+				<th>#</th>
+				<th>Name</th>
+				<th>Short Name</th>
+				<th>Score</th>
+				<th>Time</th>
+				<th>Memory</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% problems.forEach(function(problem){ %>
+			<tr>
+    			<td> <%= problem.id_Prob %> </td>
+    			<td><a href="problems/docs/<%=problem.sname%>" 
+    				target="_blank" style="color: #FF851B"> <%= problem.name %> </td>
+    		</tr>
+>>>>>>> Stashed changes
   			<% })%>
   		</tbody>
 	</table>
