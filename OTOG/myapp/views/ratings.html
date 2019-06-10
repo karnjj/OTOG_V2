@@ -25,6 +25,14 @@
   	});
   </script>
 
+  <!-- color name -->
+  <script type="text/javascript">
+  	$(document).ready(function()){
+  		var all_user = $("td").filter("name");
+  		
+  	}
+  </script>
+
 </head>
 
 <body>
@@ -58,9 +66,9 @@
 					<tr class="item">
     				<td> <%= user.id %> </td>
     				<td>
-    					<a href="#" target="_blank" style="color: #FF851B"> <%= user.showname %></a>
+    					<a href="#" style="color: #FF851B"> <%= user.showname %></a>
     				</td>
-    				<td>1500</td>
+    				<td class="name">1500</td>
     				<td>19</td>
     			</tr>
   			<% })%>
