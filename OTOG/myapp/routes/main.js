@@ -7,19 +7,17 @@ var con = mysql.createConnection({
   password: "0000",
   database: "OTOG"
 });
-var name_user = 'Guest';
-var is_login = 0;
 con.connect();
-
 /* GET home page. */
 router.get('/', function(req, res, next) {
   var sql = "SELECT * FROM Problem WHERE state = 1 ORDER BY see_date desc limit 11";
   con.query(sql, function (err, result, fields) {
     if (err) throw err;
+    //console.log(arr["Login_status"]);
     res.render("main.html", { 
       title: 'main',
-      showname: name_user,
-      is_login: is_login,
+      showname: req.session.name_user,
+      is_login: req.session.is_login,
       problems : result,
     });
     //console.log(Problems);
@@ -44,13 +42,15 @@ router.post('/', function(req, res){
     else if(result[0].password != password) {
       res.redirect('login');
     }else {
-      name_user = result[0].show_name;
-      console.log(name_user);
+      req.session.username = username;
+      req.session.is_login = 1;
+      req.session.name_user = result[0].show_name;
+      //console.log(name_user);
       is_login = 1;
       res.render("main.html", { 
         title: 'main',
-        showname: name_user,
-        is_login: is_login,
+        showname: req.session.name_user,
+        is_login: req.session.is_login,
         problems : Problems,
       });
     }

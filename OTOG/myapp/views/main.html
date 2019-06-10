@@ -18,8 +18,8 @@
   <!-- action with login -->
  	<script type="text/javascript">
  		$(document).ready(function(){
- 			var isLogin = "<%= Session["Login_status"] %>";
- 			if(isLogin == 1){
+ 			var isLogin = "<%= is_login %>";
+ 			if(isLogin == "1"){
  				$("#login").attr("href", "logout");
  			}
  		});

@@ -2,7 +2,7 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var logger = require('morgan');
-var session = require('express-session');
+const session = require('express-session');
 
 var loginRouter = require('./routes/login');
 var mainRouter = require('./routes/main');
@@ -12,8 +12,10 @@ var contestRouter = require('./routes/contest');
 var IndexRouter = require('./routes/index');
 var RatingsRouter = require('./routes/ratings');
 var ConfigRouter = require('./routes/config');
+var Logout = require('./routes/logout');
 
 var app = express();
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -24,6 +26,11 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+    secret: "qwert",
+    resave: false,
+    saveUninitialized: false
+}));
 
 app.use('/', IndexRouter);
 app.use('/main', mainRouter);
@@ -33,6 +40,7 @@ app.use('/register', registerRouter);
 app.use('/contest', contestRouter);
 app.use('/ratings', RatingsRouter);
 app.use('/config', ConfigRouter);
+app.use('/logout', Logout);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
