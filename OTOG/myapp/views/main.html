@@ -19,7 +19,6 @@
  	<script type="text/javascript">
  		$(document).ready(function(){
  			var isLogin = "<%= Session["Login_status"] %>"
- 			var x = check(isLogin);
  			if(isLogin == 1){
  				$("#login").html("<a class="nav-link head_typo" href="logout"> <i class="fa fa-sign-in"></i>Logout</a>");
  			}
