@@ -21,6 +21,11 @@ router.get('/', function(req, res, next) {
 	});
 });
 
+router.get('/head_prob', function(req, res, next) {
+	res.render("head_prob.html", { title: 'problems' });
+});
+
+
 router.get('/docs/:prob_name', function(req, res) {
 	console.log(req.params.prob_name);
 	res.sendFile(__dirname+'/docs/'+req.params.prob_name+'.pdf');
