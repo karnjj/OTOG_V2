@@ -28,18 +28,21 @@
   <!-- color name -->
   <script type="text/javascript">
   	$(document).ready(function(){
+  		var all_user =	"<%= users %>";
   		var tr;
-  		for(var i = 0; i < users.length; i++){
+  		//alert("FUCK YOU");
+  		for(var i = 0; i < all_user.length; i++){
   			tr = $("</tr>");
-  			var name = users[i].sname;
-  			var rating = users[i].rating;
+  			var name = all_user[i].sname;
+  			var rating = all_user[i].rating;
   			tr.append("<td>" + i+1 + "</td>");
-  			if(rating >= 2000) 
+  			/*if(rating >= 2000) 
   				$("tr").append("<td class='grandmaster'>" + name + "</td>");
   			else if(rating >= 1800)
   				$("tr").append("<td class='master'>" + name + "</td>");
   			else
-  				$("tr").append("<td class='regular'>" + name + "</td>");
+  				$("tr").append("<td class='regular'>" + name + "</td>");*/
+  			tr.append("<td>" + name + "</td>");
   			tr.append("<td>" + rating + "</td>");
   			tr.append("<td>" + "19" + "</td>");
   			$("#user").append(tr);
