@@ -1,19 +1,31 @@
 
+/* user type */
+.legendary{ /* 2500 */
+  color: #FF851B;
+}
+.grandmaster{ /* 2000 */
+  color: #fd971f;
+}
+.master{  /* 1800 */
+  color: #ae81ff;
+}
+.professional{ /*1700 */
+  color: #f92672;
+}
+.regular{ /* 1500 */
+  color: #a6e22e;
+}
+.pupil { /* 1400 */
+ color: #66d9ef;
+}
+.admin{
+  color: black;
+}
+
 .head_typo, .nav-link:hover{
-	font-size: 18px;
+  font-size: 18px;
   color: #ff851b;
 }
-/*
-.navbar-brand{
-	font-size: 23px;
-	padding-left: 50px;
-	padding-right: 50px;
-}
-.navbar-nav > li{
-	color: white;
-	padding-left: 80px;
-	padding-right: 80px;
-}*/
 
 .pagination > li > a{
   background-color: white;
@@ -40,16 +52,16 @@
 }
 
 #drop{
-		margin-left: 100px;
-		color: white;
-		background-color: #FF851B;
- 	 	border-color: #FF851B;
+    margin-left: 100px;
+    color: white;
+    background-color: #FF851B;
+    border-color: #FF851B;
 }
-	
+  
 .otogbtn{
-	color: white;
- 	background-color: #FF851B;
- 	border-color: #FF851B;
+  color: white;
+  background-color: #FF851B;
+  border-color: #FF851B;
 }
 .callout {
   padding: 20px;
@@ -83,7 +95,7 @@
     }
   }
   .btn-#{$name}{
-  	background-color: $color;
+    background-color: $color;
   }
 
 }
