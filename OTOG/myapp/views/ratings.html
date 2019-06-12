@@ -36,16 +36,16 @@
   			tr = $("<tr/>");
   			var name = all_user[i].sname;
   			var rating = all_user[i].rating;
-  			$("tr").append("<td>" + i + "</td>");
+  			tr.append("<td>" + i + "</td>");
   			if(rating >= 2000) 
-  				$("tr").append("<td class='item grandmaster'>" + name + "</td>");
+  				tr.append("<td class='item grandmaster'>" + name + "</td>");
   			else if(rating >= 1800)
-  				$("tr").append("<td class='item master'>" + name + "</td>");
+  				tr.append("<td class='item master'>" + name + "</td>");
   			else
-  				$("tr").append("<td class='item regular'>" + name + "</td>");
+  				tr.append("<td class='item regular'>" + name + "</td>");
   			//$("tr").append("<td>" + name + "</td>");
-  			$("tr").append("<td class='item'>" + rating + "</td>");
-  			$("tr").append("<td class='item'>" + "19" + "</td>");
+  			tr.append("<td class='item'>" + rating + "</td>");
+  			tr.append("<td class='item'>" + "19" + "</td>");
   			$("#body").append(tr);
   		}
   	});
