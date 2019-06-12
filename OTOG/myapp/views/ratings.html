@@ -32,11 +32,11 @@
   		var tr;
   		var sz = all_user.length;
   		//alert(sz);
-  		for(var i = 1; i <= sz; i++){
+  		for(var i = 0; i < sz; i++){
   			tr = $("<tr/>");
   			var name = all_user[i].sname;
   			var rating = all_user[i].rating;
-  			tr.append("<td>" + i + "</td>");
+  			tr.append("<td>" + (i+1) + "</td>");
   			if(rating >= 2000) 
   				tr.append("<td class='item grandmaster'>" + name + "</td>");
   			else if(rating >= 1800)

@@ -9,7 +9,7 @@ var con = mysql.createConnection({
 });
 /* GET home page. */
 router.get('/', function(req, res, next) {
-	var sql = "SELECT * FROM User";
+	var sql = "SELECT * FROM User ORDER BY rating desc";
 	con.query(sql, function (err, rows) {
     	if (err) throw err;
     	//console.log(rows);
