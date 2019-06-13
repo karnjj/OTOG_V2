@@ -44,7 +44,7 @@ router.post('/', function(req, res){
     }else {
       req.session.username = username;
       req.session.is_login = 1;
-      req.session.name_user = result[0].show_name;
+      req.session.name_user = result[0].sname;
       //console.log(name_user);
       is_login = 1;
       res.render("main.html", {
