@@ -14,7 +14,7 @@ router.get('/', function(req, res, next) {
   con.query(sql, function (err, result, fields) {
     if (err) throw err;
     //console.log(arr["Login_status"]);
-    res.render("main.html", { 
+    res.render("main.html", {
       title: 'main',
       showname: req.session.name_user,
       is_login: req.session.is_login,
@@ -22,7 +22,7 @@ router.get('/', function(req, res, next) {
     });
     //console.log(Problems);
   });
-  
+
 });
 
 router.post('/', function(req, res){
@@ -34,20 +34,20 @@ router.post('/', function(req, res){
     Problems = result;
     console.log(Problems);
   });
-	var sql = "SELECT password, show_name FROM User WHERE username = ?";
+	var sql = "SELECT password, sname FROM User WHERE username = ?";
 	con.query(sql, [username], function (err, result, fields) {
     if (err) throw err;
-    
+
     if(result[0] == null) res.redirect('login');
     else if(result[0].password != password) {
       res.redirect('login');
     }else {
       req.session.username = username;
       req.session.is_login = 1;
-      req.session.name_user = result[0].show_name;
+      req.session.name_user = result[0].sname;
       //console.log(name_user);
       is_login = 1;
-      res.render("main.html", { 
+      res.render("main.html", {
         title: 'main',
         showname: req.session.name_user,
         is_login: req.session.is_login,
@@ -56,7 +56,7 @@ router.post('/', function(req, res){
     }
     //console.log(result);
   });
-  
+
 });
 
 module.exports = router;
