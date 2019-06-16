@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<html lang="en">
+	<head>
+ 		<meta charset="utf-8">
+		<title>OTOG - One Tambon One Grader</title>
+
+	<!-- bootstrap integral -->
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <!-- W3.js -->
+  <script src="https://www.w3schools.com/lib/w3.js"></script>
+
+  <!-- main source of custom css -->
+  <link rel="stylesheet" type="text/css" href="style.css">
+
+  <script type="text/javascript">
+  	$(document).ready(function(){
+
+  		var prob = <%-JSON.stringify(problems)%>;
+  		var tr;
+  		var sz = prob.length;
+  		//alert(sz);
+  		for(var i = 1; i <= sz; i++){
+  			tr = $("<tr/>");
+  			var id = prob[i].id_Prob;
+  			var name = prob[i].name;
+  			var time = prob[i].time;
+  			var mem = prob[i].memory;
+  			//var rating = prob[i].rating;
+  			var pass = prob[i].pass;
+  			var path = "docs/" + name;
+  			tr.append("<td class='item'>" + id + "</td>");
+  			tr.append("<td class='item'>" + "<a href =" + path + ">" + name + "<br>" 
+  			+ "(" + time + "วินาที, " + mem + "MB" + ")" + "</a>" + "</td>");
+  			tr.append("<td class='item'>" + "1500" + "</td>");
+  			tr.append("<td class='item'>" + pass + "</td>");
+  			tr.append("<td>" +  "<button id = 'show_submit' class='btn otogbtn'"+  + "</td>");
+  			$("#body").append(tr);
+  		}
+  	});
+  </script>
+
+  <script type="text/javascript">
+  	function show_submit(id){
+
+  	}
+  </script>
+
+</head>
+
+<body>
+	<!-- problem section -->
+	<div class="container">
+	<!-- search problem -->
+	<h2> <i class ="fa fa-puzzle-piece"></i> Problem </h2><br>
+	<div class="row">
+		<input class ="col-md-9 form-control"
+		oninput="w3.filterHTML('#probs', '.item', this.value)" placeholder="ค้นหาโจทย์">
+		<a href="submission" class="col-md-3 btn otogbtn">View Submission</a>
+	</div>
+	<hr>
+	
+	<table class="table table-hover" id = "probs" style="text-align: center;">
+			<thead>
+				<tr style="color: #FF851B">
+					<th onclick = "w3.sortHTML('#probs', '.item', 'td:nth-child(1)')">#</th>
+					<th onclick= "w3.sortHTML('#probs', '.item', 'td:nth-child(2)')">Name</th>
+					<th onclick= "w3.sortHTML('#probs', '.item', 'td:nth-child(3)')">Rating</th>
+					<th onclick= "w3.sortHTML('#probs', '.item', 'td:nth-child(4)')">Passed</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody id = "body"></tbody>
+	</table>
+</body>
+</html>
