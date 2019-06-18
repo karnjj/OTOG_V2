@@ -8,27 +8,30 @@ var con = mysql.createConnection({
   database: "OTOG"
 });
 /* GET home page. */
-router.get('/', function(req, res, next) {
+
+router.get('/',function(req, res, next) {
+  res.render("problems.html", {
+    title: 'Problems'
+  });
+});
+
+router.get('/prob_page', function(req, res, next) {
 	//res.render("problems.html", {title: 'Problems',});
 	var sql = "SELECT * FROM Problem WHERE state = 1 ORDER BY id_Prob desc";
 	con.query(sql, function (err, rows) {
     	if (err) throw err;
     	//console.log(rows);
-		res.render("problems.html", {
+		res.render("prob_page.html", {
 			title: 'Problems',
 			problems : rows,
 		});
 	});
 });
 
-router.get('/head_prob', function(req, res, next) {
-	res.render("head_prob.html", { title: 'problems' });
-});
-
-
 router.get('/docs/:prob_name', function(req, res) {
 	console.log(req.params.prob_name);
 	res.sendFile(__dirname+'/docs/'+req.params.prob_name+'.pdf');
+  //console.log(__dirname);
 	//if (err) throw err;
 	//res.redirect('/main');
 });

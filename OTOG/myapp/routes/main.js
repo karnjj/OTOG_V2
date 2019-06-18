@@ -32,7 +32,7 @@ router.post('/', function(req, res){
   con.query(sql, function (err, result, fields) {
     if (err) throw err;
     Problems = result;
-    console.log(Problems);
+    //console.log(Problems);
   });
 	var sql = "SELECT password, sname FROM User WHERE username = ?";
 	con.query(sql, [username], function (err, result, fields) {
