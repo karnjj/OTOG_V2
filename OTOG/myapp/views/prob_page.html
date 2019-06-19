@@ -19,7 +19,7 @@
 
   <script type="text/javascript">
   	$(document).ready(function(){
-
+      $("#submit_modal").hide();
   		var prob = <%-JSON.stringify(problems)%>;
   		var tr;
   		var sz = prob.length;
@@ -34,21 +34,25 @@
   			//var rating = prob[i].rating;
   			var pass = prob[i].pass;
   			var path = "problems/docs/" + sname;
-  			tr.append("<td class='item'>" + id + "</td>");
-  			tr.append("<td class='item'>" + "<a href =" + path + ">" + name + "<br>"
+        var param = "show_submit(" + id + ")";
+  			tr.append("<td>" + id + "</td>");
+  			tr.append("<td>" + "<a href =" + path + ">" + name + "<br>"
   			+ "(" + time + "วินาที, " + mem + "MB" + ")" + "</a>" + "</td>");
-  			tr.append("<td class='item'>" + "1500" + "</td>");
-  			tr.append("<td class='item'>" + pass + "</td>");
-  			tr.append("<td>" +  "<button id = 'show_submit' class='btn otogbtn'"+  + "</td>");
+  			tr.append("<td>" + "1500" + "</td>");
+  			tr.append("<td>" + pass + "</td>");
+  			tr.append("<td>" +  "<button class='btn otogbtn' onclick=" + param + 
+        "data-toggle = 'modal' data-target='#submit_modal'>Submit</button>" + "</td>");
   			$("#body").append(tr);
   		}
   	});
   </script>
 
   <script type="text/javascript">
-  	function show_submit(id){
-
-  	}
+    function show_submit(id){
+      var prob = <%-JSON.stringify(problems)%>;
+      var pname = prob[id].sname;
+      $("#prob_head").text(pname);
+    }
   </script>
 
 </head>
@@ -75,7 +79,42 @@
 					<th></th>
 				</tr>
 			</thead>
-			<tbody id = "body"></tbody>
+			<tbody id = "body" class="item"></tbody>
 	</table>
+
+  <!-- submit form -->
+  <div class="modal fade" id="submit_modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 id = "prob_head" class="modal-title"> Modal Header </h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+          <form>
+
+            <div class="custom-file">
+              <input type="file" class="custom-file-input" id="customfile">
+              <label class="custom-file-label" for="customfile">Choose file</label>
+            </div><br><br>
+
+            <label>Choose Language</label>
+            <select class="custom-select">
+              <option selected value="c">C</option>
+              <option selected value="cpp">C++</option>
+            </select><br><br>
+
+            <div class="modal-footer">
+            <button type="submit" class="btn otogbtn">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
