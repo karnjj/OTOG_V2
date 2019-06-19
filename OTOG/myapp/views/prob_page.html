@@ -35,7 +35,7 @@
   			//var rating = prob[i].rating;
   			var pass = prob[i].pass;
   			var path = "problems/docs/" + sname;
-        var param = '"' + "show_submit(" + id + ")" + '"';
+        var param = '"' + "show_submit(" + i + ")" + '"';
   			tr.append("<td>" + id + "</td>");
   			tr.append("<td>" + "<a href =" + path + ">" + name + "<br>"
   			+ "(" + time + "วินาที, " + mem + "MB" + ")" + "</a>" + "</td>");
@@ -52,8 +52,8 @@
     function show_submit(id){
       //alert("It's (may) work !");
       var prob = <%-JSON.stringify(problems)%>;
-      var pname = prob[id].sname;
-      alert(pname);
+      var pname = prob[id].name;
+      //alert(pname);
       $("#prob_head").text(pname);
     }
   </script>
