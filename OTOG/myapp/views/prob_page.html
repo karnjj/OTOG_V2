@@ -19,7 +19,7 @@
 
   <script type="text/javascript">
   	$(document).ready(function(){
-      //$("#submit_modal").hide();
+      $("#submit_modal").hide();
   		var prob = <%-JSON.stringify(problems)%>;
   		var tr;
   		var sz = prob.length;
@@ -35,7 +35,7 @@
   			//var rating = prob[i].rating;
   			var pass = prob[i].pass;
   			var path = "problems/docs/" + sname;
-        var param = "show_submit(" + id + ")";
+        var param = '"' + "show_submit(" + id + ")" + '"';
   			tr.append("<td>" + id + "</td>");
   			tr.append("<td>" + "<a href =" + path + ">" + name + "<br>"
   			+ "(" + time + "วินาที, " + mem + "MB" + ")" + "</a>" + "</td>");
@@ -114,10 +114,12 @@
             <div class="modal-footer">
             <button type="submit" class="btn otogbtn">Submit</button>
             </div>
+
           </form>
         </div>
       </div>
     </div>
+  </div>
   </div>
 </body>
 </html>
