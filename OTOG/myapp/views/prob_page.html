@@ -26,6 +26,7 @@
   		//alert(sz);
   		for(var i = 1; i <= sz; i++){
   			tr = $("<tr/>");
+        tr.addClass("item");
   			var id = prob[i].id_Prob;
   			var name = prob[i].name;
 				var sname = prob[i].sname;
@@ -63,9 +64,10 @@
 	<!-- search problem -->
 	<h2> <i class ="fa fa-puzzle-piece"></i> Problem </h2><br>
 	<div class="row">
-		<input class ="col-md-9 form-control"
-		oninput="w3.filterHTML('#probs', '.item', this.value)" placeholder="ค้นหาโจทย์">
-		<a href="submission" class="col-md-3 btn otogbtn">View Submission</a>
+    <input class ="col-md-8 form-control"
+    oninput="w3.filterHTML('#probs', '.item', this.value)" placeholder="ค้นหาโจทย์">
+    <div class="col-md-2"></div>
+    <a href="submission" class="col-md-2 btn otogbtn">View Submission</a>
 	</div>
 	<hr>
 
@@ -79,7 +81,7 @@
 					<th></th>
 				</tr>
 			</thead>
-			<tbody id = "body" class="item"></tbody>
+			<tbody id = "body"></tbody>
 	</table>
 
   <!-- submit form -->
