@@ -19,8 +19,10 @@
  	<script type="text/javascript">
  		$(document).ready(function(){
  			var isLogin = "<%= is_login %>";
+ 			$("#hello").hide();
  			if(isLogin == "1"){
- 				$("#login").attr("href", "logout");
+ 				$("#login").html("<a class = 'nav-link head_typo' href= 'logout' style = 'color:red;'> LOGOUT </a>");
+ 				$("#hello").show();
  			}
  		});
  	</script>
@@ -62,14 +64,33 @@
 	</nav>
 	<!-- end navigation bar -->
 	<br>
-	<h1>hello <%= showname %></h1>
 	<div class = "jumbotron">
 		<div class = "container">
+			<!-- not login -->
 			<h1>Welcome to <code style = "color : #ff851b">OTOG</code></h1>
 			<h1>Become a god of competitive programming.</code></h1>
-			<h3>Learn how to code and build algorithms efficiently.</h2><br>
+			<h3>Learn how to code and build algorithms efficiently.</h3><br>
 			<a href="register" target="_blank" class="btn btn-lg otogbtn">Sign Up</a>
-		</div>
+			<!-- login -->
+			<div id="hello">
+				<h1 class="otogtxt">สวัสดี <%= showname %>!</h1>
+				<div class="count_btn gray">
+					<div class="cnt_msg font_gray">ทั้งหมด</div>
+					<div class="cnt_num font_gray">234</div>
+				</div>
+				<div class="count_btn green">
+					<div class="cnt_msg font_white">ผ่านแล้ว</div>
+					<div class="cnt_num font_white">171</div>
+				</div>
+				<div class="count_btn red">
+					<div class="cnt_msg font_white">ยังไม่ผ่าน</div>
+					<div class="cnt_num font_white">9</div>
+				</div>
+				<div class="count_btn org">
+					<div class="cnt_msg font_white">ยังไม่ส่ง</div>
+					<div class="cnt_num font_white">54</div>
+				</div>
+			</div>
 	</div>
 	<!-- 3 main path -->
 	<div class="container">
