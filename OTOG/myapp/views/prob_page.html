@@ -50,9 +50,9 @@
 
   <script type="text/javascript">
     function show_submit(id){
-      alert("It's (may) work !");
       var prob = <%-JSON.stringify(problems)%>;
       var pname = prob[id].sname;
+      alert(pname);
       $("#prob_head").text(pname);
     }
   </script>
