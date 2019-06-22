@@ -49,6 +49,10 @@
         "data-toggle = 'modal' data-target='#submit_modal'>Submit</button>" + "</td>");
   			$("#body").append(tr);
   		}
+      $('.custom-file-input').on('change',function(){
+       var fileName = document.getElementById("customfile").files[0].name;
+       $(this).next('.form-control-file').addClass("selected").html(fileName);
+      })
   	});
   </script>
 
