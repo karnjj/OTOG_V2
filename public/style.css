@@ -47,6 +47,15 @@
   .font_gray {
     color: #111111;
   }
+  .font_green {
+    color: #41E241;
+  }
+  .font_red{
+    color: #FF4D4D;
+  }
+  .font_org{
+    color: #FFAD33;
+  }
   .count_btn {
     border-radius: 6px;
     display: inline-block;
@@ -140,6 +149,25 @@
   }
 }
 
+#customFile .custom-file-control:lang(en)::after {
+  content: "Select file...";
+}
+
+#customFile .custom-file-control:lang(en)::before {
+  content: "Browse";
+}
+
+/*when a value is selected, this class removes the content */
+.custom-file-control.selected:lang(en)::after {
+  content: "" !important;
+}
+
+.custom-file {
+  overflow: hidden;
+}
+.custom-file-control {
+  white-space: nowrap;
+}
 /* primary setup for element + include custom color */
 @each $name,$color in 
 (default, #777), (primary, #428bca), (success, #5cb85c), (danger, #d9534f),
