@@ -55,13 +55,13 @@
   			var mem = prob[i].memory;
   			var rating = prob[i].rating;
   			var pass = prob[i].pass;
-        if(pass_state[id] == 1) tr.addClass("item table-success");
-        else if(pass_state[id] == 2) tr.addClass("item table-danger");
+        if(pass_state[id] == 1) tr.addClass("table-success");
+        else if(pass_state[id] == 2) tr.addClass("table-danger");
   			var path = "problems/docs/" + sname;
   			tr.append("<td>" + id + "</td>");
   			tr.append("<td>" + "<a class = 'otogtxt' href =" + path + ">" + name + "<br>"
   			+ "(" + time + " วินาที, " + mem + " MB" + ")" + "</a>" + "</td>");
-  			tr.append("<td>" + "1500" + "</td>");
+  			tr.append("<td>" + rating + "</td>");
   			tr.append("<td>" + pass + "</td>");
   			if(is_login == "1") tr.append("<td>" +  "<button class='btn otogbtn' onclick=" + param +
         "data-toggle = 'modal' data-target='#submit_modal'>Submit</button>" + "</td>");
