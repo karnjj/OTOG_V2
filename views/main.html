@@ -18,6 +18,7 @@
   <!-- action with login -->
  	<script type="text/javascript">
  		$(document).ready(function(){
+
  			var isLogin = "<%= is_login %>";
  			var allprob = "<%= allprob %>";
  			var passed = "<%= passprob %>";
@@ -36,7 +37,37 @@
  				$("#guest").show();
  			}
 
+
  		});
+ 	</script>
+ 	<script type="text/javascript">
+ 		$(document).ready(function(){
+ 			var prob = <%-JSON.stringify(problems)%>;
+ 			var tr;
+  		var sz = prob.length;
+ 			for(var i = 1; i <= sz; i++){
+  			tr = $("<tr/>");
+        //tr.addClass("item");
+  			var id = prob[i].id_Prob;
+  			var name = prob[i].name;
+				var sname = prob[i].sname;
+  			var time = prob[i].time;
+  			var mem = prob[i].memory;
+  			var rating = prob[i].rating;
+  			var pass = prob[i].pass;
+        if(pass_state[id] == 1) tr.addClass("item table-success");
+        else if(pass_state[id] == 2) tr.addClass("item table-danger");
+  			var path = "problems/docs/" + sname;
+  			tr.append("<td>" + id + "</td>");
+  			tr.append("<td>" + "<a class = 'otogtxt' href =" + path + ">" + name + "<br>"
+  			+ "(" + time + " วินาที, " + mem + " MB" + ")" + "</a>" + "</td>");
+  			tr.append("<td>" + "1500" + "</td>");
+  			tr.append("<td>" + pass + "</td>");
+  			if(is_login == "1") tr.append("<td>" +  "<button class='btn otogbtn' onclick=" + param +
+        "data-toggle = 'modal' data-target='#submit_modal'>Submit</button>" + "</td>");
+  			$("#body").append(tr);
+  		}
+  	});	
  	</script>
 
 </head>
@@ -141,16 +172,7 @@
 				<th scope="col">Ratings</th>
 			</tr>
 		</thead>
-		<tbody>
-				<% problems.forEach(function(problem){ %>
-					<tr>
-    				<td> <%= problem.id_Prob %> </td>
-    				<td><a href="problems/docs/<%=problem.sname%>" target="_blank" style="color: #FF851B"> <%= problem.name %> </a></td>
-    				<td> </td>
-    				<td> </td>
-    			</tr>
-  			<% })%>
-  		</tbody>
+		<tbody id = body></tbody>
 	</table>
 
 	<!-- footer of Phakphum Dev Team -->
