@@ -1,6 +1,12 @@
 var express = require('express');
 var router = express.Router();
-
+var con = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "0000",
+  database: "OTOG"
+});
+con.connect();
 /* GET home page. */
 router.post('/', function(req, res, next){
   if(!req.files || req.session.is_login != 1) {
