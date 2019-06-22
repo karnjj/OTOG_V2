@@ -2,6 +2,7 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var logger = require('morgan');
+const fileUpload = require('express-fileupload');
 const session = require('express-session');
 
 var loginRouter = require('./routes/login');
@@ -13,6 +14,7 @@ var IndexRouter = require('./routes/index');
 var RatingsRouter = require('./routes/ratings');
 var ConfigRouter = require('./routes/config');
 var Logout = require('./routes/logout');
+var UploadRouter = require('./routes/upload');
 
 var app = express();
 
@@ -31,6 +33,8 @@ app.use(session({
     resave: false,
     saveUninitialized: false
 }));
+app.use(fileUpload());
+
 
 app.use('/', IndexRouter);
 app.use('/main', mainRouter);
@@ -41,6 +45,7 @@ app.use('/contest', contestRouter);
 app.use('/ratings', RatingsRouter);
 app.use('/config', ConfigRouter);
 app.use('/logout', Logout);
+app.use('/upload', UploadRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

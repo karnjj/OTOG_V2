@@ -34,7 +34,7 @@ router.post('/', function(req, res){
     Problems = result;
     //console.log(Problems);
   });
-	var sql = "SELECT password, sname FROM User WHERE username = ?";
+	var sql = "SELECT password, sname, idUser FROM User WHERE username = ?";
 	con.query(sql, [username], function (err, result, fields) {
     if (err) throw err;
 
@@ -45,6 +45,7 @@ router.post('/', function(req, res){
       req.session.username = username;
       req.session.is_login = 1;
       req.session.name_user = result[0].sname;
+      req.session.name_id = result[0].idUser
       //console.log(name_user);
       is_login = 1;
       res.render("main.html", {

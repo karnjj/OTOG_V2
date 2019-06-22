@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var mysql = require('mysql');
+var fileUpload = require('express-fileupload');
 var con = mysql.createConnection({
   host: "localhost",
   user: "root",
