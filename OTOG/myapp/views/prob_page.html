@@ -21,6 +21,7 @@
   	$(document).ready(function(){
       $("#submit_modal").hide();
   		var prob = <%-JSON.stringify(problems)%>;
+			var is_login = "<%= is_login %>";
   		var tr;
   		var sz = prob.length;
   		//alert(sz);
@@ -41,7 +42,7 @@
   			+ "(" + time + "วินาที, " + mem + "MB" + ")" + "</a>" + "</td>");
   			tr.append("<td>" + "1500" + "</td>");
   			tr.append("<td>" + pass + "</td>");
-  			tr.append("<td>" +  "<button class='btn otogbtn' onclick=" + param +
+  			if(is_login == "1") tr.append("<td>" +  "<button class='btn otogbtn' onclick=" + param +
         "data-toggle = 'modal' data-target='#submit_modal'>Submit</button>" + "</td>");
   			$("#body").append(tr);
   		}
@@ -55,7 +56,7 @@
       var pname = prob[id].name;
       //alert(pname);
       $("#prob_head").text(pname);
-      $("#send_id").attr("value", id);
+      $("#send_id").attr("value", prob[id].id_Prob);
     }
   </script>
 

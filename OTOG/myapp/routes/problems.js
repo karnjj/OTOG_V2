@@ -25,6 +25,7 @@ router.get('/prob_page', function(req, res, next) {
 		res.render("prob_page.html", {
 			title: 'Problems',
 			problems : rows,
+      is_login : req.session.is_login,
 		});
 	});
 });
