@@ -37,7 +37,7 @@
   			var path = "problems/docs/" + sname;
         var param = '"' + "show_submit(" + i + ")" + '"';
   			tr.append("<td>" + id + "</td>");
-  			tr.append("<td>" + "<a href =" + path + ">" + name + "<br>"
+  			tr.append("<td>" + "<a class = 'otogtxt' href =" + path + ">" + name + "<br>"
   			+ "(" + time + "วินาที, " + mem + "MB" + ")" + "</a>" + "</td>");
   			tr.append("<td>" + "1500" + "</td>");
   			tr.append("<td>" + pass + "</td>");
@@ -55,6 +55,7 @@
       var pname = prob[id].name;
       //alert(pname);
       $("#prob_head").text(pname);
+      $("#send_id").attr("value", id);
     }
   </script>
 
@@ -111,7 +112,7 @@
               <option selected value="c">C</option>
               <option selected value="cpp">C++</option>
             </select><br><br>
-
+            <input type="hidden" value = "#" name="prod_id" id = "send_id">
             <div class="modal-footer">
             <button type="submit" class="btn otogbtn">Submit</button>
             </div>
