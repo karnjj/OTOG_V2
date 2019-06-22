@@ -19,11 +19,23 @@
  	<script type="text/javascript">
  		$(document).ready(function(){
  			var isLogin = "<%= is_login %>";
- 			$("#hello").hide();
+ 			var allprob = "<%= allprob %>";
+ 			var passed = "<%= passprob %>";
+ 			var notpassed = "<%= notpassed %>";
+ 			var nosub = allprob - passed - notpassed;
  			if(isLogin == "1"){
- 				$("#login").html("<a class = 'nav-link head_typo' href= 'logout' style = 'color:red;'> LOGOUT </a>");
- 				$("#hello").show();
+ 				$("#login").attr("href", "logout");
+ 				$("#login").css("color", "red");
+ 				$("#welcome").show();
+ 				$("#guest").hide();
  			}
+ 			else{
+ 				$("#login").attr("href", "login");
+ 				$("#login").css("color", "rgba(0, 0, 0, 0.7)");
+ 				$("#welcome").hide();
+ 				$("#guest").show();
+ 			}
+
  		});
  	</script>
 
@@ -67,29 +79,29 @@
 	<div class = "jumbotron">
 		<div class = "container">
 			<!-- not login -->
-			<h1>Welcome to <code style = "color : #ff851b">OTOG</code></h1>
-			<h1>Become a god of competitive programming.</code></h1>
-			<h3>Learn how to code and build algorithms efficiently.</h3><br>
-			<a href="register" target="_blank" class="btn btn-lg otogbtn">Sign Up</a>
+			<div id = "guest">
+				<h1>Welcome to <code style = "color : #ff851b">OTOG</code></h1>
+				<h1>Become a god of competitive programming.</code></h1>
+				<h3>Learn how to code and build algorithms efficiently.</h3><br>
+				<a href="register" target="_blank" class="btn btn-lg otogbtn">Sign Up</a>
+			</div>
 			<!-- login -->
-			<div id="hello">
-				<h1 class="otogtxt">สวัสดี <%= showname %>!</h1>
-				<div class="count_btn gray">
-					<div class="cnt_msg font_gray">ทั้งหมด</div>
-					<div class="cnt_num font_gray">234</div>
-				</div>
-				<div class="count_btn green">
-					<div class="cnt_msg font_white">ผ่านแล้ว</div>
-					<div class="cnt_num font_white">171</div>
-				</div>
-				<div class="count_btn red">
-					<div class="cnt_msg font_white">ยังไม่ผ่าน</div>
-					<div class="cnt_num font_white">9</div>
-				</div>
-				<div class="count_btn org">
-					<div class="cnt_msg font_white">ยังไม่ส่ง</div>
-					<div class="cnt_num font_white">54</div>
-				</div>
+			<div id="Welcome">
+				<h2> <code class = "otogtxt"> สวัสดี <%= showname %>!</code></h2>
+				<ul>
+					<li>
+						<h3> <code class = "font_gray">ทั้งหมด <%= allprob %></code></h3>
+					</li>
+					<li>
+						<h3> <code class = "font_green">ผ่านแล้ว <%= passed %></code></h3>
+					</li>
+					<li>
+						<h3> <code class = "font_red">ยังไม่ผ่าน <%= notpassed %></code></h3>
+					</li>
+					<li>
+						<h3> <code class = "font_org">ยังไม่ส่ง <%= nosub %></code></h3>
+					</li>
+				</ul>
 			</div>
 	</div>
 	</div><br>
