@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var mysql = require('mysql');
 var con = mysql.createConnection({
   host: "localhost",
   user: "root",
@@ -24,7 +25,7 @@ router.post('/', function(req, res, next){
     //Use the mv() method to place the file in upload directory (i.e. "uploads")
     upload_file.mv('./uploaded/' + prob_id + "_" + req.session.name_id+".cpp");
     var sql = "INSERT INTO Result (time, user_id, prob_id, status) VALUES ?";
-    var values = [time_now,req.session.name_id,prob_id,0];
+    var values = [[time_now,req.session.name_id,Number(prob_id),0],];
     con.query(sql, [values], function (err, result) {
       if (err) throw err;
     });
