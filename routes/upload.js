@@ -31,7 +31,7 @@ router.post('/', function(req, res, next){
     });
     //send response
   }
-  res.redirect('problems');
+  res.redirect('submission');
 });
 
 
