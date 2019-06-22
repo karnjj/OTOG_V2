@@ -7,7 +7,6 @@ mydb = mysql.connector.connect(
   passwd="0000",
   database="OTOG"
 )
-mycursor = mydb.cursor()
 ioeredirect = " 0<env/input.txt 1>env/output.txt 2>env/error.txt"
 langarr = {
 "C++": {"extension": "cpp", "system": "find /usr/bin/ -name g++", "compile": "g++ uploaded/[codefilename].cpp -O2 -fomit-frame-pointer -o compiled/[codefilename]"+ioeredirect, "execute": "compiled/[exename][inputfile]"}
@@ -35,13 +34,14 @@ def create(codefilename,language):
 	return result
 
 # Program Execution
-def execute(language, exename, testcase, timelimit, memlimit):
+def execute(language, username, filename, testcase, timelimit, memlimit):
+	exename = filename + "_" + username
 	global timediff
-	inputfile = " <source/"+testcase+".in 1>env/output.txt 2>env/error.txt"
+	inputfile = " <source/"+filename+"/"+testcase+".in 1>env/output.txt 2>env/error.txt"
 	cmd = "su otog -c \"ulimit -v " + str(memlimit*1000) + ";"+langarr[language]["execute"]+"; exit;\""
 	cmd = cmd.replace("[exename]", exename)
 	cmd = cmd.replace("[inputfile]", inputfile)
-	print(cmd)
+	#print(cmd)
 	os.system("chmod 777 .")
 	if(os.path.exists("source/"+inputfile+".in")): os.system("chmod 777 source/"+testcase+".in")
 	if(os.path.exists("env/error.txt")): os.system("chmod 777 env/error.txt")
@@ -61,44 +61,63 @@ def execute(language, exename, testcase, timelimit, memlimit):
 	print("Return Code : "+str(t))
 	return t
 
-
-ans = ""
-sumtime = 0
-result = None	
-file_name = "654"
-result = create(file_name,"C++");
-print(result);
-if(result==None) :
-	for x in range(1):
-		t = execute("C++", file_name, 1.0, 248, str(x+1))
-		result_user = file_read("env/output.txt")
-		result_src = file_read("source/"+str(x+1)+".sol")
-		timetaken = 0
-		if t == 124:
-			result = "TLE"
-			#kill(codefilename,run["language"])
-			file_write('env/error.txt', "Time Limit Exceeded - Process killed.")
-			timetaken = timediff
-		elif t == 139:
-			file_write('env/error.txt', 'SIGSEGV||Segmentation fault (core dumped)\n'+file_read("env/error.txt"))
-			timetaken = timediff
-		elif t == 136:
-			file_write('env/error.txt', 'SIGFPE||Floating point exception\n'+file_read("env/error.txt"))
-			timetaken = timediff
-		elif t == 134:
-			file_write('env/error.txt', 'SIGABRT||Aborted\n'+file_read("env/error.txt"))
-			timetaken = timediff
-		elif t != 0:
-			file_write('env/error.txt', 'NZEC||return code : '+str(t)+"\n"+file_read("env/error.txt"))
-			timetaken = timediff
-		else:
-			timetaken = timediff
-		sumtime = sumtime + timetaken
-		if(result == None and t == 0) :
-			if(result_user == result_src): ans = ans + 'P'
-			else : ans = ans + '-' 
-		elif(result == 'TLE') :
-			ans = ans + 'T'
-		else: ans = ans + 'X'
-	print(ans)
-	print("TIME : " + str(sumtime))
+while 1 :
+	mycursor = mydb.cursor()
+	mycursor.execute("SELECT * FROM Result WHERE status = 0 ORDER BY time")
+	myresult = mycursor.fetchone()
+	print(myresult);
+	if(myresult != None) :
+		mycursor.execute("SELECT * FROM Problem WHERE id_Prob = "+str(myresult[3]))
+		myprob = mycursor.fetchone()
+		cnt = 0
+		ans = ""
+		sumtime = 0
+		result = None	
+		file_name = str(myresult[3])
+		user_name = str(myresult[2])
+		time_limit = int(myprob[4])
+		mem_limit = int(myprob[5])
+		result = create(file_name+"_"+user_name,"C++");
+		print(result);
+		if(result==None) :
+			for x in range(10):
+				t = execute("C++", user_name, file_name,str(x+1), time_limit, mem_limit)
+				result_user = file_read("env/output.txt")
+				result_src = file_read("source/"+file_name+"/"+str(x+1)+".sol")
+				timetaken = 0
+				if t == 124:
+					result = "TLE"
+					#kill(codefilename,run["language"])
+					file_write('env/error.txt', "Time Limit Exceeded - Process killed.")
+					timetaken = timediff
+				elif t == 139:
+					file_write('env/error.txt', 'SIGSEGV||Segmentation fault (core dumped)\n'+file_read("env/error.txt"))
+					timetaken = timediff
+				elif t == 136:
+					file_write('env/error.txt', 'SIGFPE||Floating point exception\n'+file_read("env/error.txt"))
+					timetaken = timediff
+				elif t == 134:
+					file_write('env/error.txt', 'SIGABRT||Aborted\n'+file_read("env/error.txt"))
+					timetaken = timediff
+				elif t != 0:
+					file_write('env/error.txt', 'NZEC||return code : '+str(t)+"\n"+file_read("env/error.txt"))
+					timetaken = timediff
+				else:
+					timetaken = timediff
+				sumtime = sumtime + timetaken
+				if(result == None and t == 0) :
+					if(result_user == result_src): 
+						ans = ans + 'P'
+						cnt = cnt + 1
+					else : ans = ans + '-' 
+				elif(result == 'TLE') :
+					ans = ans + 'T'
+				else: ans = ans + 'X'
+			print(ans)
+			print("TIME : " + str(sumtime))
+			score = (cnt/10)*100
+		sql = "UPDATE Result SET result = %s, score = %s, timeuse = %s, status = 1 WHERE idResult = %s"
+		val = (ans, score, sumtime, myresult[0])
+		mycursor.execute(sql, val)
+	mydb.commit()
+	time.sleep(1)
