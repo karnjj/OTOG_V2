@@ -21,7 +21,6 @@
   	$(document).ready(function(){
       $("#submit_modal").hide();
   		var prob = <%-JSON.stringify(problems)%>;
-      var pass_state = <%-JSON.stringify(pass_state)%>;
 			var is_login = "<%= is_login %>";
   		var tr;
   		var sz = prob.length;
@@ -36,8 +35,8 @@
   			var mem = prob[i].memory;
   			//var rating = prob[i].rating;
   			var pass = prob[i].pass;
-        if(pass_state[id] == 1) tr.addClass("item table-success");
-        else if(pass_state[id] == 2) tr.addClass("item table-danger");
+        //if(pass_state[id] == 1) tr.addClass("item table-success");
+        //else if(pass_state[id] == 2) tr.addClass("item table-danger");
   			var path = "problems/docs/" + sname;
         var param = '"' + "show_submit(" + i + ")" + '"';
   			tr.append("<td>" + id + "</td>");
