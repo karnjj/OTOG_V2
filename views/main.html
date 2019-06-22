@@ -23,7 +23,7 @@
  			var allprob = "<%= allprob %>";
  			var passed = "<%= passprob %>";
  			var notpassed = "<%= notpassed %>";
- 			var nosub = allprob - passed - notpassed;
+ 			var nosub = "<%= nosub %>";
  			if(isLogin == "1"){
  				$("#login").attr("href", "logout");
  				$("#login").css("color", "red");
@@ -67,7 +67,7 @@
         "data-toggle = 'modal' data-target='#submit_modal'>Submit</button>" + "</td>");
   			$("#body").append(tr);
   		}
-  	});	
+  	});
  	</script>
 
 </head>
@@ -124,7 +124,7 @@
 						<h3> <code class = "font_gray">ทั้งหมด <%= allprob %></code></h3>
 					</li>
 					<li>
-						<h3> <code class = "font_green">ผ่านแล้ว <%= passed %></code></h3>
+						<h3> <code class = "font_green">ผ่านแล้ว <%= passprob %></code></h3>
 					</li>
 					<li>
 						<h3> <code class = "font_red">ยังไม่ผ่าน <%= notpassed %></code></h3>
