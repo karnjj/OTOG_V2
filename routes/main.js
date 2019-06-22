@@ -18,6 +18,10 @@ router.get('/', function(req, res, next) {
       title: 'main',
       showname: req.session.name_user,
       is_login: req.session.is_login,
+      allprob: result.length,
+      passprob: 0,
+      notpassed: 0,
+      nosub: 0,
       problems : result,
     });
     //console.log(Problems);
@@ -51,6 +55,10 @@ router.post('/', function(req, res){
         title: 'main',
         showname: req.session.name_user,
         is_login: req.session.is_login,
+        allprob: result.length,
+        passprob: 0,
+        notpassed: 0,
+        nosub: 0,
         problems : Problems,
       });
     }
