@@ -37,6 +37,7 @@
         tr.addClass("item");
   			var name = all_user[i].sname;
   			var rating = all_user[i].rating;
+  			var passed = all_user[i].passed;
   			tr.append("<td>" + (i+1) + "</td>");
   			if(rating >= 2000) 
   				tr.append("<td class='grandmaster'>" + name + "</td>");
@@ -46,7 +47,7 @@
   				tr.append("<td class='regular'>" + name + "</td>");
   			//$("tr").append("<td>" + name + "</td>");
   			tr.append("<td>" + rating + "</td>");
-  			tr.append("<td>" + "19" + "</td>");
+  			tr.append("<td>" + passed + "</td>");
   			$("#body").append(tr);
   		}
   	});
@@ -80,7 +81,7 @@
 					<th onclick= "w3.sortHTML('#user', '.item', 'td:nth-child(4)')">Passed</th>
 				</tr>
 			</thead>
-			<tbody class = "item" id = "body"></tbody>
+			<tbody id = "body"></tbody>
 		</table>
 	</table>
 
