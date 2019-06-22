@@ -18,6 +18,7 @@ def file_write(filename,data):
 	f = codecs.open(filename,"w","utf-8"); f.write(data.replace("\r","")); f.close();
 
 def create(codefilename,language):
+	os.system("chmod 777 compiled/"+codefilename)
 	os.system("rm compiled/"+codefilename)
 	if(language not in ('C','C++','C#','Java','Pascal')): return
 	print("Compiling Code File ...")
@@ -38,7 +39,7 @@ def execute(language, username, filename, testcase, timelimit, memlimit):
 	exename = filename + "_" + username
 	global timediff
 	inputfile = " <source/"+filename+"/"+testcase+".in 1>env/output.txt 2>env/error.txt"
-	cmd = "su otog -c \"ulimit -v " + str(memlimit*1000) + ";"+langarr[language]["execute"]+"; exit;\""
+	cmd = "ulimit -v " + str(memlimit*1000) + ";"+langarr[language]["execute"]+"; exit;"
 	cmd = cmd.replace("[exename]", exename)
 	cmd = cmd.replace("[inputfile]", inputfile)
 	#print(cmd)
@@ -50,7 +51,7 @@ def execute(language, username, filename, testcase, timelimit, memlimit):
 	starttime = time.time()
 	proc = subprocess.Popen([cmd], shell=True, preexec_fn=os.setsid)
 	try:
-		print(proc.communicate(timeout=timelimit))
+		proc.communicate(timeout=timelimit)
 		t = proc.returncode
 	except subprocess.TimeoutExpired:
 		t = 124
