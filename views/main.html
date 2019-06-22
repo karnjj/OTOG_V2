@@ -55,19 +55,18 @@
   			var mem = prob[i].memory;
   			var rating = prob[i].rating;
   			var pass = prob[i].pass;
-        //if(pass_state[id] == 1) tr.addClass("item table-success");
-        //else if(pass_state[id] == 2) tr.addClass("item table-danger");
+        //if(pass_state[id] == 1) tr.addClass("table-success");
+        //else if(pass_state[id] == 2) tr.addClass("table-danger");
   			var path = "problems/docs/" + sname;
   			tr.append("<td>" + id + "</td>");
   			tr.append("<td>" + "<a class = 'otogtxt' href =" + path + ">" + name + "<br>"
   			+ "(" + time + " วินาที, " + mem + " MB" + ")" + "</a>" + "</td>");
-  			tr.append("<td>" + "1500" + "</td>");
+  			tr.append("<td>" + rating + "</td>");
   			tr.append("<td>" + pass + "</td>");
   			$("#body").append(tr);
   		}
   	});
  	</script>
-
 </head>
 
 <body>
@@ -168,7 +167,6 @@
 				<th scope="col">Name</th>
 				<th scope="col">Passed</th>
 				<th scope="col">Ratings</th>
-				<th></th>
 			</tr>
 		</thead>
 		<tbody id = body></tbody>
