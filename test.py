@@ -109,8 +109,13 @@ while 1 :
 		mem_limit = int(myprob[5])
 		result = create(file_name+"_"+user_name,"C++");
 		print(result);
+		case = file_read("source/"+full_name+"/script.php")
+		testcase = ''
+		testcase = testcase + case[idx+8]
+		if(case[idx+9] != ';') :testcase = testcase + case[idx+9]
+		print("Testcase : " + testcase)
 		if(result==None) :
-			for x in range(10):
+			for x in range(int(testcase)):
 				t = execute("C++", user_name, full_name, file_name,str(x+1), time_limit, mem_limit)
 				result_user = "env/output.txt"
 				result_src = "source/"+full_name+"/"+str(x+1)+".sol"
@@ -147,7 +152,7 @@ while 1 :
 			ans = result
 		print(ans)
 		print("TIME : " + str(sumtime))
-		score = (cnt/10)*100
+		score = (cnt/int(testcase))*100
 		sql = "UPDATE Result SET result = %s, score = %s, timeuse = %s, status = 1 WHERE idResult = %s"
 		val = (ans, score, sumtime, myresult[0])
 		mycursor.execute(sql, val)
