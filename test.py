@@ -35,16 +35,15 @@ def create(codefilename,language):
 	return result
 
 # Program Execution
-def execute(language, username, filename, testcase, timelimit, memlimit):
+def execute(language, username, fullname, filename, testcase, timelimit, memlimit):
 	exename = filename + "_" + username
 	global timediff
-	inputfile = " <source/"+filename+"/"+testcase+".in 1>env/output.txt 2>env/error.txt"
+	inputfile = " <source/"+fullname+"/"+testcase+".in 1>env/output.txt 2>env/error.txt"
 	cmd = "ulimit -v " + str(memlimit*1000) + ";"+langarr[language]["execute"]+"; exit;"
 	cmd = cmd.replace("[exename]", exename)
 	cmd = cmd.replace("[inputfile]", inputfile)
 	#print(cmd)
 	os.system("chmod 777 .")
-	if(os.path.exists("source/"+inputfile+".in")): os.system("chmod 777 source/"+testcase+".in")
 	if(os.path.exists("env/error.txt")): os.system("chmod 777 env/error.txt")
 	if(os.path.exists("env/output.txt")): os.system("chmod 777 env/output.txt")
 
@@ -104,6 +103,7 @@ while 1 :
 		sumtime = 0
 		result = None	
 		file_name = str(myresult[3])
+		full_name = str(myprob[2])
 		user_name = str(myresult[2])
 		time_limit = int(myprob[4])
 		mem_limit = int(myprob[5])
@@ -111,9 +111,9 @@ while 1 :
 		print(result);
 		if(result==None) :
 			for x in range(10):
-				t = execute("C++", user_name, file_name,str(x+1), time_limit, mem_limit)
+				t = execute("C++", user_name, full_name, file_name,str(x+1), time_limit, mem_limit)
 				result_user = "env/output.txt"
-				result_src = "source/"+file_name+"/"+str(x+1)+".sol"
+				result_src = "source/"+full_name+"/"+str(x+1)+".sol"
 				timetaken = 0
 				if t == 124:
 					result = "TLE"
