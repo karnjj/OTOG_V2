@@ -110,6 +110,7 @@ while 1 :
 		result = create(file_name+"_"+user_name,"C++");
 		print(result);
 		case = file_read("source/"+full_name+"/script.php")
+		idx = case.find("cases = ")
 		testcase = ''
 		testcase = testcase + case[idx+8]
 		if(case[idx+9] != ';') :testcase = testcase + case[idx+9]
