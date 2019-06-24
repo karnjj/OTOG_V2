@@ -24,13 +24,15 @@
  			var passed = "<%= passprob %>";
  			var notpassed = "<%= notpassed %>";
  			var nosub = "<%= nosub %>";
- 			if(isLogin == "1"){
+ 			if(isLogin == 1){
+ 				$("#login").text(logout);
  				$("#login").attr("href", "logout");
  				$("#login").css("color", "red");
  				$("#welcome").show();
  				$("#guest").hide();
  			}
  			else{
+ 				$("#login").text(login);
  				$("#login").attr("href", "login");
  				$("#login").css("color", "rgba(0, 0, 0, 0.7)");
  				$("#welcome").hide();
@@ -114,7 +116,7 @@
 				<a href="register" target="_blank" class="btn btn-lg otogbtn">Sign Up</a>
 			</div>
 			<!-- login -->
-			<div id="Welcome">
+			<div id="welcome">
 				<h2> <code class = "otogtxt"> สวัสดี <%= showname %>!</code></h2>
 				<ul>
 					<li>
