@@ -20,36 +20,35 @@
   <!-- show header -->
   <script type="text/javascript">
   	$(document).ready(function(){
-  		$("#nav").load("head_prob.html");
+  		$("#nav").load("submission/head_prob");
   		var res = <%-JSON.stringify(submission)%>;
-			var is_login = "<%= is_login %>";
   		var tr;
   		var sz = res.length;
   		//alert(sz);
-  		for(var i = 1; i <= sz; i++){
+  		for(var i = 0; i < sz; i++){
   			tr = $("<tr/>");
         //tr.addClass("item");
-  			var id = res[i].id;
-  			var pname = res[i].pname;
+  			var id = res[i].idResult;
+  			var pname = res[i].name;
 				var sname = res[i].sname;
 				var result = res[i].result;
-  			var time = res[i].time;
-  			var mem = res[i].memory;
-  			//var rating = prob[i].rating;
-  			var pass = res[i].pass;
-        if(pass_state[id] == 1) tr.addClass("item table-success");
-        else if(pass_state[id] == 0) tr.addClass("item table-danger");
+  			var time = res[i].timeuse;
+  			var score = res[i].score;
+  			var rating = res[i].rating;
+  			//var pass = res[i].pass;
+        //if(pass_state[id] == 1) tr.addClass("item table-success");
+        //else if(pass_state[id] == 0) tr.addClass("item table-danger");
   			tr.append("<td>" + id + "</td>");
-  			if(rating >= 2000) 
-  				tr.append("<td class='grandmaster'>" + name + "</td>");
+  			if(rating >= 2000)
+  				tr.append("<td class='grandmaster'>" + sname + "</td>");
   			else if(rating >= 1800)
-  				tr.append("<td class='master'>" + name + "</td>");
+  				tr.append("<td class='master'>" + sname + "</td>");
   			else
-  				tr.append("<td class='regular'>" + name + "</td>");
+  				tr.append("<td class='regular'>" + sname + "</td>");
   			tr.append("<td>" + pname + "</td>");
   			tr.append("<td>" + result + "</td>");
   			tr.append("<td>" + time + " วินาที" + "</td>");
-  			tr.append("<td>" + result + " MB"+ "</td>");
+  			tr.append("<td>" + score + "</td>");
   			$("#body").append(tr);
   		}
   	});
@@ -60,19 +59,19 @@
 <body>
 
 	<!-- navigation bar -->
-	
+
 
 	<!-- problem section -->
+	<div id="nav"></div>
 	<div class="container">
-		<div id="nav"></div>
 
 	<!-- search problem -->
 	<div class="row">
 		<h2 class="col-md-9"> <i class ="fa fa-puzzle-piece"></i> Submission </h2>
-		<a href="submission" class="col-md-3 btn otogbtn">View Problem</a>
+		<a href="problems" class="col-md-3 btn otogbtn">View Problem</a>
 	</div>
 	<hr>
-	
+
 	<table class="table table-hover" id = "probs" style="text-align: center;">
 			<thead>
 				<tr style="color: #FF851B">
@@ -81,7 +80,7 @@
 					<th>ชื่อโจทย์</th>
 					<th>ผลตรวจ</th>
 					<th>เวลาที่ใช้</th>
-					<th>เมมโมรี่ที่ใช้</th>
+					<th>คะแนน</th>
 				</tr>
 			</thead>
 			<tbody id = "body"></tbody>
