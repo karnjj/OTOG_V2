@@ -48,13 +48,18 @@
         "data-toggle = 'modal' data-target='#submit_modal'>Submit</button>" + "</td>");
   			$("#body").append(tr);
   		}
-      $('.custom-file-input').on('change',function(){
-       var fileName = document.getElementById("customfile").files[0].name;
-       $(this).next('.form-control-file').addClass("selected").html(fileName);
-      })
   	});
   </script>
-
+	<script>
+		var input = document.getElementById('customfile');
+		var label = document.getElementById('file_name');
+		input.addEventListener( 'change', showFileName );
+		function showFileName( event ) {
+			var input = event.srcElement;
+			var fileName = input.files[0].name;
+			label.textContent = fileName;
+		}
+	</script>
   <script type="text/javascript">
     function show_submit(id){
       //alert("It's (may) work !");
@@ -111,7 +116,7 @@
 
             <div class="custom-file">
               <input type="file" class="custom-file-input" name="customfile" id="customfile">
-              <label class="custom-file-label" for="customfile">Choose file</label>
+              <label class="custom-file-label" for="customfile" id = "file_name">Choose file</label>
             </div><br><br>
 
             <label>Choose Language</label>

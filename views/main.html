@@ -18,23 +18,23 @@
   <!-- action with login -->
  	<script type="text/javascript">
  		$(document).ready(function(){
-
  			var isLogin = "<%= is_login %>";
+			//alert(isLogin);
  			var allprob = "<%= allprob %>";
  			var passed = "<%= passprob %>";
  			var notpassed = "<%= notpassed %>";
  			var nosub = "<%= nosub %>";
- 			if(isLogin == 1){
- 				$("#login").text(logout);
- 				$("#login").attr("href", "logout");
- 				$("#login").css("color", "red");
+ 			if(isLogin == "1"){
+ 				$("#login_but").html("<i class=\"fa fa-sign-in\"></i> Logout");
+ 				$("#login_but").attr("href", "logout");
+ 				$("#login_but").css("color", "red");
  				$("#welcome").show();
  				$("#guest").hide();
  			}
  			else{
- 				$("#login").text(login);
- 				$("#login").attr("href", "login");
- 				$("#login").css("color", "rgba(0, 0, 0, 0.7)");
+ 				$("#login_but").html("<i class=\"fa fa-sign-in\"></i> Login");
+ 				$("#login_but").attr("href", "login");
+ 				$("#login_but").css("color", "rgba(0, 0, 0, 0.7)");
  				$("#welcome").hide();
  				$("#guest").show();
  			}
@@ -98,7 +98,7 @@
 				Ratings</a>
 			</li>
 			<li class="nav-item">
-					<a id = "login" class="nav-link head_typo" href="login">
+					<a id = "login_but" class="nav-link head_typo" href="login">
 					<i class="fa fa-sign-in"></i>
 					Login</a>
 			</li>
