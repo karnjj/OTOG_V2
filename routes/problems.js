@@ -20,6 +20,7 @@ function convert(pass) {
   var arr = new Array(5000);
   arr.fill(0);
   pass.forEach(function(e) {
+    if(arr[e.prob_id] != 0) continue;
     if(e.score == 100) arr[e.prob_id] = 2;
     else arr[e.prob_id] = 1;
   });
@@ -29,7 +30,7 @@ router.get('/prob_table', function(req, res, next) {
 	//res.render("problems.html", {title: 'Problems',});
   var pass = [];
   if(req.session.is_login == 1) {
-    var sql = "SELECT prob_id, score, time FROM Result WHERE user_id = "+req.session.name_id+" GROUP BY prob_id ORDER BY time desc";
+    var sql = "SELECT * FROM Result WHERE user_id = "+req.session.name_id+" ORDER BY time desc";
     //console.log(sql);
     con.query(sql, function (err, rows) {
       //console.log(rows);
