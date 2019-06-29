@@ -20,9 +20,10 @@ function convert(pass) {
   var arr = new Array(5000);
   arr.fill(0);
   pass.forEach(function(e) {
-    if(arr[e.prob_id] != 0) continue;
-    if(e.score == 100) arr[e.prob_id] = 2;
-    else arr[e.prob_id] = 1;
+    if(arr[e.prob_id] == 0) {
+      if(e.score == 100) arr[e.prob_id] = 2;
+      else arr[e.prob_id] = 1;
+    }
   });
   return arr;
 }
