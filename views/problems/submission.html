@@ -1,75 +1,124 @@
 <!DOCTYPE html>
 <html>
 <html lang="en">
-	<head>
- 		<meta charset="utf-8">
-		<title>OTOG - One Tambon One Grader</title>
+
+<head>
+	<meta charset="utf-8">
+	<title>OTOG - One Tambon One Grader</title>
 
 	<!-- bootstrap integral -->
- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  <!-- W3.js -->
-  <script src="https://www.w3schools.com/lib/w3.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<!-- W3.js -->
+	<script src="https://www.w3schools.com/lib/w3.js"></script>
 
-  <!-- main source of custom css -->
-  <link rel="stylesheet" type="text/css" href="style.css">
+	<!-- main source of custom css -->
+	<link rel="stylesheet" type="text/css" href="style.css">
 
-  <!-- include login script-->
-  <script src = "scripts/header.js"></script>
-  
-  <!-- load submission -->
-  <script src = "scripts/load_submission.js"></script>
+	<!-- include login script-->
+	<script>
+		$(document).ready(function() {
+			if (isLogin == "1") {
+				$("#login_but").html("<i class=\"fa fa-sign-in\"></i> Logout");
+				$("#login_but").attr("href", "logout");
+				$("#login_but").css("color", "red");
+				$("#welcome").show();
+				$("#guest").hide();
+			} else {
+				$("#login_but").html("<i class=\"fa fa-sign-in\"></i> Login");
+				$("#login_but").attr("href", "login");
+				$("#login_but").css("color", "rgba(0, 0, 0, 0.7)");
+				$("#welcome").hide();
+				$("#guest").show();
+			}
+		});
+	</script>
+
+	<!-- load submission -->
+	<script>
+		$(document).ready(function() {
+			$("#nav").load("submission/head_prob");
+			var res = <%-JSON.stringify(submission)%>;
+			var tr;
+			var sz = res.length;
+			for (var i = 0; i < sz; i++) {
+				tr = $("<tr/>");
+				var id = res[i].idResult;
+				var pname = res[i].name;
+				var sname = res[i].sname;
+				var result = res[i].result;
+				var time = res[i].timeuse;
+				var score = res[i].score;
+				var rating = res[i].rating;
+				//var pass = res[i].pass;
+				//if(pass_state[id] == 1) tr.addClass("item table-success");
+				//else if(pass_state[id] == 0) tr.addClass("item table-danger");
+				tr.append("<td>" + id + "</td>");
+				if (rating >= 2000)
+					tr.append("<td class='grandmaster'>" + sname + "</td>");
+				else if (rating >= 1800)
+					tr.append("<td class='master'>" + sname + "</td>");
+				else
+					tr.append("<td class='regular'>" + sname + "</td>");
+				tr.append("<td>" + pname + "</td>");
+				tr.append("<td>" + result + "</td>");
+				tr.append("<td>" + time + " วินาที" + "</td>");
+				tr.append("<td>" + score + "</td>");
+				$("#body").append(tr);
+			}
+		});
+	</script>
 
 </head>
 
 <body>
-  <!-- navigation bar -->
-  <nav class="navbar navbar-expand-sm navbar-light justify-content-end" style="background-color: #F1F1F1">
-    <a class="navbar-brand head_typo" href="#">OTOG - One Tambon One Grader</a>
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link head_typo" href="main">
-        <i class="fa fa-home"></i>
-        Main</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link head_typo active" href="problems">
-        <i class="fa fa-puzzle-piece"></i>
-        Problems</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link head_typo" href="contest">
-        <i class="fa fa-trophy"></i>
-        Contest</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link head_typo" href="ratings">
-        <i class="fa fa-bar-chart"></i>
-        Ratings</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link head_typo" href="login">
-        <i class="fa fa-sign-in"></i>
-        Login</a>
-      </li>
-    </ul>
-  </nav><br><br><br>
+	<!-- navigation bar -->
+	<nav class="navbar navbar-expand-sm navbar-light justify-content-end" style="background-color: #F1F1F1">
+		<a class="navbar-brand head_typo" href="#">OTOG - One Tambon One Grader</a>
+		<ul class="navbar-nav">
+			<li class="nav-item">
+				<a class="nav-link head_typo" href="main">
+					<i class="fa fa-home"></i>
+					Main</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link head_typo active" href="problems">
+					<i class="fa fa-puzzle-piece"></i>
+					Problems</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link head_typo" href="contest">
+					<i class="fa fa-trophy"></i>
+					Contest</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link head_typo" href="ratings">
+					<i class="fa fa-bar-chart"></i>
+					Ratings</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link head_typo" href="login">
+					<i class="fa fa-sign-in"></i>
+					Login</a>
+			</li>
+		</ul>
+	</nav><br><br><br>
 
 	<!-- problem section -->
 	<div id="nav"></div>
 	<div class="container">
 
-	<!-- search problem -->
-	<div class="row">
-		<h2 class="col-md-9"> <i class ="fa fa-puzzle-piece"></i> Submission </h2>
-		<a href="problems" class="col-md-3 btn otogbtn">View Problem</a>
-	</div>
-	<hr>
+		<!-- search problem -->
+		<div class="row">
+			<h2 class="col-md-9"> <i class="fa fa-puzzle-piece"></i> Submission </h2>
+			<a href="problems" class="col-md-3 btn otogbtn">View Problem</a>
+		</div>
+		<hr>
 
-	<table class="table table-hover" id = "probs" style="text-align: center;">
+		<table class="table table-hover" id="probs" style="text-align: center;">
 			<thead>
 				<tr style="color: #FF851B">
 					<th>#</th>
@@ -80,19 +129,20 @@
 					<th>คะแนน</th>
 				</tr>
 			</thead>
-			<tbody id = "body"></tbody>
+			<tbody id="body"></tbody>
 		</table>
 		<!-- footer of Phakphum Dev Team -->
-	<hr>
-	<footer>
-		<div class="row">
-			<div class="col-md-6">
-				<p>If you have any problem or suggestion, please <a href="#" style="color: #FF851B"> Contact Us </a></p>
+		<hr>
+		<footer>
+			<div class="row">
+				<div class="col-md-6">
+					<p>If you have any problem or suggestion, please <a href="#" style="color: #FF851B"> Contact Us </a></p>
+				</div>
+				<div class="col-md-6">
+					<span class="float-right"> &copy; 2019 Phakphum Dev Team</span>
+				</div>
 			</div>
-			<div class="col-md-6">
-				<span class="float-right"> &copy; 2019 Phakphum Dev Team</span>
-			</div>
-		</div>
-	</footer>
+		</footer>
 </body>
+
 </html>

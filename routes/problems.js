@@ -2,22 +2,28 @@ var express = require('express');
 var router = express.Router();
 var mysql = require('mysql');
 var fileUpload = require('express-fileupload');
-var con = mysql.createConnection(global.gConfig.mysql);
+var con = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "0000",
+  database: "OTOG"
+});
 /* GET home page. */
 
 router.get('/',function(req, res, next) {
   res.render("problems/problems.html", {
-    title: 'Problems'
+    title: 'Problems',
+    is_login : req.session.is_login,
   });
 });
 
-router.get('/prob_page', function(req, res, next) {
+router.get('/prob_table', function(req, res, next) {
 	//res.render("problems.html", {title: 'Problems',});
 	var sql = "SELECT * FROM Problem WHERE state = 1 ORDER BY id_Prob desc";
 	con.query(sql, function (err, rows) {
     	if (err) throw err;
     	//console.log(rows);
-		res.render("problems/prob_page.html", {
+		res.render("problems/prob_table.html", {
 			title: 'Problems',
 			problems : rows,
       is_login : req.session.is_login,
