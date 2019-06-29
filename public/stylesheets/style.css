@@ -26,6 +26,13 @@
   color: #FF851B;
 }
 
+.AC{
+  background-color: rgb(235,255,235);
+}
+
+.WA{
+  background-color: rgb(255,235,235);
+}
 .cnt_msg{
     font-family: Calibri;
       font-size: 15px;
