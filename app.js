@@ -35,6 +35,8 @@ app.use(session({
     resave: false,
     saveUninitialized: false
 }));
+var favicon = require('serve-favicon');
+app.use(favicon(__dirname + '/public/images/favicon.ico'));
 app.use(fileUpload());
 
 
