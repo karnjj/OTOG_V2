@@ -6,7 +6,7 @@
 		<title>OTOG - One Tambon One Grader</title>
 
 	<!-- bootstrap integral -->
- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/		bootstrap.min.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -15,35 +15,9 @@
   <!-- main source of custom css -->
   <link rel="stylesheet" type="text/css" href="style.css">
 
-  <!-- include login script -->
- 	<script src = "script/header.js"></script>
- 	<script type="text/javascript">
- 		$(document).ready(function(){
- 			var prob = <%-JSON.stringify(problems)%>;
- 			var tr;
-  		var sz = prob.length;
- 			for(var i = 1; i <= sz; i++){
-  			tr = $("<tr/>");
-        //tr.addClass("item");
-  			var id = prob[i].id_Prob;
-  			var name = prob[i].name;
-				var sname = prob[i].sname;
-  			var time = prob[i].time;
-  			var mem = prob[i].memory;
-  			var rating = prob[i].rating;
-  			var pass = prob[i].pass;
-        //if(pass_state[id] == 1) tr.addClass("table-success");
-        //else if(pass_state[id] == 2) tr.addClass("table-danger");
-  			var path = "problems/docs/" + sname;
-  			tr.append("<td>" + id + "</td>");
-  			tr.append("<td>" + "<a class = 'otogtxt' href =" + path + ">" + name + "<br>"
-  			+ "(" + time + " วินาที, " + mem + " MB" + ")" + "</a>" + "</td>");
-  			tr.append("<td>" + rating + "</td>");
-  			tr.append("<td>" + pass + "</td>");
-  			$("#body").append(tr);
-  		}
-  	});
- 	</script>
+  <!-- include login script + load problems in main page-->
+ 	<script src = "scripts/header.js"></script>
+ 	<script src = "scripts/main_prob.js"></script>
 </head>
 
 <body>

@@ -17,10 +17,19 @@
   <!-- main source of custom css -->
   <link rel="stylesheet" type="text/css" href="style.css">
 
+	
+  <!-- include login script + load problems-->
+  <script src = "scripts/header.js"></script>
+  <script src = "scripts/load_prob.js"></script>
+
+  <!-- submission script -->
+  <script src = "scripts/change_file_name.js"></script>
+  <script src = "scripts/show_submit_modal.js"></script>
+  
   <!-- load problem -->
   <script type="text/javascript">
   	$(document).ready(function(){
-  		$("#page").load("problems/prob_page");
+  		$("#page").load("problems/prob_table");
   	});
   </script>
 
