@@ -51,8 +51,8 @@
 				var score = res[i].score;
 				var rating = res[i].rating;
 				//var pass = res[i].pass;
-				//if(pass_state[id] == 1) tr.addClass("item table-success");
-				//else if(pass_state[id] == 0) tr.addClass("item table-danger");
+				if(score == 100) tr.addClass("item AC");
+				else tr.addClass("item WA");
 				tr.append("<td>" + id + "</td>");
 				if (rating >= 2000)
 					tr.append("<td class='grandmaster'>" + sname + "</td>");
