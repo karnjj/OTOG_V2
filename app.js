@@ -4,6 +4,7 @@ var path = require('path');
 var logger = require('morgan');
 const fileUpload = require('express-fileupload');
 const session = require('express-session');
+const config = require('./config/config.js');
 
 var loginRouter = require('./routes/login');
 var mainRouter = require('./routes/main');

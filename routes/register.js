@@ -1,16 +1,11 @@
 var express = require('express');
 var router = express.Router();
 var mysql = require('mysql');
-var con = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "0000",
-  database: "OTOG"
-});
+var con = mysql.createConnection(global.gConfig.mysql);
 con.connect();
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.render("register.html", { title: 'register' });
+  res.render("register/register.html", { title: 'register' });
 });
 /* Register user. */
 router.post('/', function(req, res){

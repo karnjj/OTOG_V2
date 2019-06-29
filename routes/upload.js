@@ -1,12 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var mysql = require('mysql');
-var con = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "0000",
-  database: "OTOG"
-});
+var con = mysql.createConnection(global.gConfig.mysql);
 con.connect();
 /* GET home page. */
 router.post('/', function(req, res, next){

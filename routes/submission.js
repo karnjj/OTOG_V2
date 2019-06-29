@@ -2,12 +2,7 @@ var express = require('express');
 var router = express.Router();
 var mysql = require('mysql');
 var fileUpload = require('express-fileupload');
-var con = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "0000",
-  database: "OTOG"
-});
+var con = mysql.createConnection(global.gConfig.mysql);
 /* GET home page. */
 
 router.get('/', function(req, res, next) {
@@ -18,7 +13,7 @@ router.get('/', function(req, res, next) {
 	con.query(sql, function (err, rows) {
     	if (err) throw err;
     	console.log(rows);
-		res.render("submission.html", {
+		res.render("problems/submission.html", {
 			title: 'Problems',
 			submission : rows,
 		});
