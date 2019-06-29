@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res){
 	var username = req.body.username;
 	var password = req.body.password;
-	var sql = "SELECT password, sname, idUser FROM User WHERE username = ?";
+	var sql = "SELECT * FROM User WHERE username = ?";
 	con.query(sql, [username], function (err, result, fields) {
     if (err) throw err;
 

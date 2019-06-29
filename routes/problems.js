@@ -38,7 +38,7 @@ router.get('/prob_table', function(req, res, next) {
       pass = rows;
     });
   }
-  //console.log(pass);
+  //console.log(req.session.is_admin);
 	if(req.session.is_admin == 0) var sql = "SELECT * FROM Problem ORDER BY id_Prob desc";
   else var sql = "SELECT * FROM Problem WHERE state = 1 ORDER BY id_Prob desc";
 	con.query(sql, function (err, rows) {
