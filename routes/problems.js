@@ -29,7 +29,7 @@ router.get('/prob_table', function(req, res, next) {
 	//res.render("problems.html", {title: 'Problems',});
   var pass = [];
   if(req.session.is_login == 1) {
-    var sql = "SELECT prob_id, score, MAX(time) FROM Result WHERE user_id = "+req.session.name_id+" GROUP BY prob_id";
+    var sql = "SELECT prob_id, score, time FROM Result WHERE user_id = "+req.session.name_id+" GROUP BY prob_id ORDER BY time desc";
     //console.log(sql);
     con.query(sql, function (err, rows) {
       //console.log(rows);
