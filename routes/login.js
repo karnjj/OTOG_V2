@@ -10,12 +10,6 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res){
 	var username = req.body.username;
 	var password = req.body.password;
-  var sql = "SELECT * FROM Problem WHERE state = 1 ORDER BY see_date desc limit 11";
-  con.query(sql, function (err, result, fields) {
-    if (err) throw err;
-    Problems = result;
-    //console.log(Problems);
-  });
 	var sql = "SELECT password, sname, idUser FROM User WHERE username = ?";
 	con.query(sql, [username], function (err, result, fields) {
     if (err) throw err;
