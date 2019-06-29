@@ -19,8 +19,9 @@
 	<!-- include login script + load problems in main page-->
 	<script>
 		$(document).ready(function() {
+			var prob = <%-JSON.stringify(problems)%>;
 			var isLogin = "<%= is_login %>";
-			var allprob = "<%= allprob %>";
+			var allprob = prob.length;
 			var passed = "<%= passprob %>";
 			var notpassed = "<%= notpassed %>";
 			var nosub = "<%= nosub %>";
@@ -42,9 +43,11 @@
 	<script>
 		$(document).ready(function() {
 			var prob = <%-JSON.stringify(problems)%>;
+			var pass_state = <%-JSON.stringify(pass)%>;
 			var tr;
 			var sz = prob.length;
-			for (var i = 1; i <= sz; i++) {
+			var isLogin = "<%= is_login %>";
+			for (var i = 0; i < 10; i++) {
 				tr = $("<tr/>");
 				var id = prob[i].id_Prob;
 				var name = prob[i].name;
@@ -53,6 +56,10 @@
 				var mem = prob[i].memory;
 				var rating = prob[i].rating;
 				var pass = prob[i].pass;
+				if(isLogin == "1") {
+					if(pass_state[id] == 2) tr.addClass("item table-success");
+					else if(pass_state[id] == 1)tr.addClass("item table-danger");
+				}
 				var path = "problems/docs/" + sname;
 				tr.append("<td>" + id + "</td>");
 				tr.append("<td>" + "<a class = 'otogtxt' href =" + path + ">" + name + "<br>" +

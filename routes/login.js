@@ -5,7 +5,7 @@ var con = mysql.createConnection(global.gConfig.mysql);
 con.connect();
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render("login/login.html", { title: 'login' });
+  res.render("login/login.html", { title: 'login',status : true });
 });
 router.post('/', function(req, res){
 	var username = req.body.username;
@@ -20,9 +20,9 @@ router.post('/', function(req, res){
 	con.query(sql, [username], function (err, result, fields) {
     if (err) throw err;
 
-    if(result[0] == null) res.redirect('login');
+    if(result[0] == null) res.render("login/login.html", { title: 'login',status : false });
     else if(result[0].password != password) {
-      res.redirect('login');
+      res.render("login/login.html", { title: 'login',status : false });
     }else {
       req.session.name_user = result[0].sname;
       req.session.name_id = result[0].idUser
