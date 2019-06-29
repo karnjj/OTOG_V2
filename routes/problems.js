@@ -32,7 +32,7 @@ router.get('/prob_table', function(req, res, next) {
     var sql = "SELECT prob_id, score, MAX(time) FROM Result WHERE user_id = "+req.session.name_id+" GROUP BY prob_id";
     console.log(sql);
     con.query(sql, function (err, rows) {
-      //console.log(rows);
+      console.log(rows);
       pass = rows;
     });
   }
