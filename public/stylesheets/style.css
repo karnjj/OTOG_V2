@@ -40,7 +40,7 @@
       margin-bottom:0px;
       text-align: center;
       font-weight:600;
-  } 
+  }
   .cnt_num{
     font-family: Calibri;
       font-size: 50px;
@@ -94,10 +94,8 @@
   color: #ff851b;
 }
 
- a: hover{
+ a:hover{
   color: #FF851B;
-  text-decoration: none;
-  font-weight: none;
  }
 .pagination > li > a{
   background-color: white;
@@ -129,7 +127,7 @@
     background-color: #FF851B;
     border-color: #FF851B;
 }
-  
+
 .otogbtn{
   color: white;
   background-color: #FF851B;
@@ -176,7 +174,7 @@
   white-space: nowrap;
 }
 /* primary setup for element + include custom color */
-@each $name,$color in 
+@each $name,$color in
 (default, #777), (primary, #428bca), (success, #5cb85c), (danger, #d9534f),
 (warning, #f0ad4e), (info, #ff851b), (bdc, #29527a), (otog, #ff851b) {
   .callout-#{$name} {

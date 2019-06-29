@@ -5,7 +5,7 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   res.render("contest/contest.html", {
     title: 'Contest',
-    is_login: req.session.is_login, 
+    is_login: req.session.is_login,
 });
 });
 
@@ -16,4 +16,5 @@ router.get('/unshow_contest', function(req, res, next) {
 router.get('/show_contest', function(req, res, next) {
   res.render("contest/show_contest.html", { title: 'Contest' });
 });
+
 module.exports = router;
