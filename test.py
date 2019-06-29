@@ -105,7 +105,7 @@ while 1 :
 		file_name = str(myresult[3])
 		full_name = str(myprob[2])
 		user_name = str(myresult[2])
-		time_limit = int(myprob[4])
+		time_limit = float(myprob[4])
 		mem_limit = int(myprob[5])
 		result = create(file_name+"_"+user_name,"C++");
 		print(result);
