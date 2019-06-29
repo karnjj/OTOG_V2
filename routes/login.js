@@ -19,7 +19,8 @@ router.post('/', function(req, res){
       res.render("login/login.html", { title: 'login',status : false });
     }else {
       req.session.name_user = result[0].sname;
-      req.session.name_id = result[0].idUser
+      req.session.name_id = result[0].idUser;
+      req.session.is_admin = result[0].state;
       req.session.is_login = 1;
       //console.log(name_user);
       res.redirect('main');
