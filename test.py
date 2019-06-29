@@ -28,7 +28,7 @@ def create(codefilename,language):
 	#print(compilecmd)
 	os.system(compilecmd)
 	if not os.path.exists("compiled/"+codefilename):
-		result="CE"
+		result="Compilation Error"
 
 	if result==None: print("Code File Compiled to Executable.")
 	else: print("Compilation Error")
@@ -75,7 +75,7 @@ def cmpfunc(fname1,fname2) :
 	    # Strip the leading whitespaces
 	    f1_line = f1_line.rstrip()
 	    f2_line = f2_line.rstrip()
-	    
+
 	    # Compare the lines from both file
 	    if f1_line != f2_line:
 	    	f1.close()
@@ -101,7 +101,7 @@ while 1 :
 		cnt = 0
 		ans = ""
 		sumtime = 0
-		result = None	
+		result = None
 		file_name = str(myresult[3])
 		full_name = str(myprob[2])
 		user_name = str(myresult[2])
@@ -142,10 +142,10 @@ while 1 :
 					timetaken = timediff
 				sumtime = sumtime + timetaken
 				if(result == None and t == 0) :
-					if(cmpfunc(result_user,result_src)): 
+					if(cmpfunc(result_user,result_src)):
 						ans = ans + 'P'
 						cnt = cnt + 1
-					else : ans = ans + '-' 
+					else : ans = ans + '-'
 				elif(result == 'TLE') :
 					ans = ans + 'T'
 				else: ans = ans + 'X'
