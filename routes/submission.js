@@ -16,13 +16,8 @@ router.get('/', function(req, res, next) {
 		res.render("problems/submission.html", {
 			title: 'Problems',
 			submission : rows,
+			is_login: req.session.is_login,
 		});
 	});
-});
-router.get('/head_prob', function(req, res, next) {
-	//res.render("problems.html", {title: 'Problems',});
-		res.render("head_prob.html", {
-			title: 'Problems',
-		});
 });
 module.exports = router;

@@ -11,6 +11,7 @@ router.get('/rating_table', function(req, res, next) {
 		res.render("rating/rating_table.html", {
 			title: 'ratings',
 			users : rows,
+			is_login: req.session.is_login,
 		});
 	});
   	//res.render("ratings.html", { title: 'ratings' });

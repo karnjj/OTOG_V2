@@ -3,7 +3,10 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render("contest/contest.html", { title: 'Contest' });
+  res.render("contest/contest.html", {
+    title: 'Contest',
+    is_login: req.session.is_login, 
+});
 });
 
 router.get('/unshow_contest', function(req, res, next) {

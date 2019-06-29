@@ -23,6 +23,18 @@
   		else $("#contest_section").load("contest/show_contest");
   	});
   </script>
+	<script>
+		var isLogin = "<%= is_login %>";
+		if (isLogin == "1") {
+			$("#login_but").html("<i class=\"fa fa-sign-in\"></i> Logout");
+			$("#login_but").attr("href", "logout");
+			$("#login_but").css("color", "red");
+		} else {
+			$("#login_but").html("<i class=\"fa fa-sign-in\"></i> Login");
+			$("#login_but").attr("href", "login");
+			$("#login_but").css("color", "rgba(0, 0, 0, 0.7)");
+		}
+	</script>
 </head>
 
 <body>
@@ -52,7 +64,7 @@
 				Ratings</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link head_typo" href="login">
+				<a id = "login_but" class="nav-link head_typo" href="login">
 				<i class="fa fa-sign-in"></i>
 				Login</a>
 			</li>
