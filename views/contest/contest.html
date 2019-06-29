@@ -18,7 +18,7 @@
   <!-- js for show contest -->
   <script>
   	$(document).ready(function(){ // onload
-  		var is_contest = 1; // 0 = no contest, 1 = contest mode
+  		var is_contest = 0; // 0 = no contest, 1 = contest mode
   		if(is_contest == 0) $("#contest_section").load("contest/unshow_contest");
   		else $("#contest_section").load("contest/show_contest");
   	});

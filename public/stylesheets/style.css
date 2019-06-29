@@ -1,20 +1,97 @@
 
+/* user type */
+.legendary{ /* 2500 */
+  color: #FF851B;
+}
+.grandmaster{ /* 2000 */
+  color: #fd971f;
+}
+.master{  /* 1800 */
+  color: #ae81ff;
+}
+.professional{ /*1700 */
+  color: #f92672;
+}
+.regular{ /* 1500 */
+  color: #a6e22e;
+}
+.pupil { /* 1400 */
+ color: #66d9ef;
+}
+.admin{
+  color: black;
+}
+
+.otogtxt{
+  color: #FF851B;
+}
+
+.cnt_msg{
+    font-family: Calibri;
+      font-size: 15px;
+      margin-top:10px;
+      margin-bottom:0px;
+      text-align: center;
+      font-weight:600;
+  } 
+  .cnt_num{
+    font-family: Calibri;
+      font-size: 50px;
+      margin-top:-5px;
+      font-weight:100;
+      text-align: center;
+  }
+  .font_white {
+    color: #FFFFFF;
+  }
+  .font_gray {
+    color: #111111;
+  }
+  .font_green {
+    color: #41E241;
+  }
+  .font_red{
+    color: #FF4D4D;
+  }
+  .font_org{
+    color: #FFAD33;
+  }
+  .count_btn {
+    border-radius: 6px;
+    display: inline-block;
+    height: 86px;
+    margin: 0 0px;
+      padding: 0px 0 0;
+      width: 115px;
+      margin-top:10px;
+      opacity: 0.8;
+  }
+  .count_btn.blue{
+    background-color:#17B4E9;
+  }
+  .count_btn.green{
+    background-color:#41E241;
+  }
+  .count_btn.red{
+    background-color:#FF4D4D;
+  }
+  .count_btn.org{
+    background-color:#FFAD33;
+  }
+  .count_btn.gray{
+    background-color:rgb(200,200,200);
+  }
+
 .head_typo, .nav-link:hover{
-	font-size: 18px;
+  font-size: 18px;
   color: #ff851b;
 }
-/*
-.navbar-brand{
-	font-size: 23px;
-	padding-left: 50px;
-	padding-right: 50px;
-}
-.navbar-nav > li{
-	color: white;
-	padding-left: 80px;
-	padding-right: 80px;
-}*/
 
+ a: hover{
+  color: #FF851B;
+  text-decoration: none;
+  font-weight: none;
+ }
 .pagination > li > a{
   background-color: white;
   color: #FF851B
@@ -40,16 +117,16 @@
 }
 
 #drop{
-		margin-left: 100px;
-		color: white;
-		background-color: #FF851B;
- 	 	border-color: #FF851B;
+    margin-left: 100px;
+    color: white;
+    background-color: #FF851B;
+    border-color: #FF851B;
 }
-	
+  
 .otogbtn{
-	color: white;
- 	background-color: #FF851B;
- 	border-color: #FF851B;
+  color: white;
+  background-color: #FF851B;
+  border-color: #FF851B;
 }
 .callout {
   padding: 20px;
@@ -72,6 +149,25 @@
   }
 }
 
+#customFile .custom-file-control:lang(en)::after {
+  content: "Select file...";
+}
+
+#customFile .custom-file-control:lang(en)::before {
+  content: "Browse";
+}
+
+/*when a value is selected, this class removes the content */
+.custom-file-control.selected:lang(en)::after {
+  content: "" !important;
+}
+
+.custom-file {
+  overflow: hidden;
+}
+.custom-file-control {
+  white-space: nowrap;
+}
 /* primary setup for element + include custom color */
 @each $name,$color in 
 (default, #777), (primary, #428bca), (success, #5cb85c), (danger, #d9534f),
@@ -83,7 +179,7 @@
     }
   }
   .btn-#{$name}{
-  	background-color: $color;
+    background-color: $color;
   }
 
 }
