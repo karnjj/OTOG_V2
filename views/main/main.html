@@ -57,8 +57,8 @@
 				var rating = prob[i].rating;
 				var pass = prob[i].pass;
 				if(isLogin == "1") {
-					if(pass_state[id] == 2) tr.addClass("item table-success");
-					else if(pass_state[id] == 1)tr.addClass("item table-danger");
+					if(pass_state[id] == 2) tr.addClass("item AC");
+					else if(pass_state[id] == 1)tr.addClass("item WA");
 				}
 				var path = "problems/docs/" + sname;
 				tr.append("<td>" + id + "</td>");
