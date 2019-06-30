@@ -15,7 +15,7 @@ router.post('/', function(req, res) {
       res.send(contents);
     } catch(err) {
       console.log(err);
-      res.send(err);
+      res.send("Error code ENOENT.");
     }
     //console.log(contents);
   });
