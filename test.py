@@ -155,7 +155,7 @@ while 1 :
 		print("TIME : " + str(sumtime))
 		score = (cnt/int(testcase))*100
 		sql = "UPDATE Result SET result = %s, score = %s, timeuse = %s, status = 1 WHERE idResult = %s"
-		val = (ans, score, sumtime, myresult[0])
+		val = (ans, score, round(sumtime,2), myresult[0])
 		mycursor.execute(sql, val)
 	mydb.commit()
 	time.sleep(1)
