@@ -19,7 +19,7 @@
 	<link rel="stylesheet" type="text/css" href="stylesheets/style.css">
 
 	<link rel="stylesheet"
-  href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/styles/monokai-sublime.min.css">
+  href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/styles/default.min.css">
 	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
 	<script>hljs.initHighlightingOnLoad();</script>
 	<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
@@ -42,8 +42,9 @@
 	</script>
 <!-- load submission -->
 	<script>
+		var isLogin = "<%= is_login %>";
+		var id_user = "<%= id_user %>";
 		$(document).ready(function() {
-			$("#nav").load("submission/head_prob");
 			var res = <%-JSON.stringify(submission)%>;
 			var tr;
 			var sz = res.length;
@@ -56,7 +57,7 @@
 				var time = res[i].timeuse;
 				var score = res[i].score;
 				var rating = res[i].rating;
-				var param = '"' + "show_code(" + i + ")" + '"';
+				var param = '"' + "show_code(" + id + ")" + '"';
 				if(score == 100) tr.addClass("AC");
 				tr.append("<td>" + id + "</td>");
 				if (rating >= 2000)
@@ -69,7 +70,7 @@
 				tr.append("<td>" + result + "</td>");
 				tr.append("<td>" + time + " วินาที" + "</td>");
 				tr.append("<td>" + score + "</td>");
-				if (is_login == "1") tr.append("<td>" + "<button class='btn otogbtn' onclick=" + param +
+				if (isLogin == "1" && id_user == res[i].user_id) tr.append("<td>" + "<button class='btn otogbtn' onclick=" + param +
 					"data-toggle = 'modal' data-target='#scmodal'>View Code</button>" + "</td>");
 				$("#body").append(tr);
 			}
@@ -79,7 +80,9 @@
 		function show_code(id){
 			var str = "Submission : " + id;
 			$("#schead").text(str);
-			$("code").load("request_sc.id", {id : id});
+			$("#sc").load("request_sc", {id : id}, function(response, status, xhr) {
+				$("#sc").text(response)
+			});
 		}
 	</script>
 	<!-- load submission -->
@@ -157,9 +160,8 @@
 
         <!-- Modal body -->
         <div class="modal-body">
-					<pre>
-						<code class="c++">
-						</code>
+					<pre class="prettyprint linenums">
+						<code class="cpp" id = "sc"></code>
 					</pre>
         </div>
       </div>

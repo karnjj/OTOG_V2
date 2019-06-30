@@ -18,6 +18,7 @@ var Logout = require('./routes/logout');
 var UploadRouter = require('./routes/upload');
 var SubmissionRouter = require('./routes/submission');
 var scoreboardRouter = require('./routes/scoreboard');
+var request_scRouter = require('./routes/request_sc');
 
 var app = express();
 
@@ -54,6 +55,7 @@ app.use('/logout', Logout);
 app.use('/upload', UploadRouter);
 app.use('/submission', SubmissionRouter);
 app.use('/scoreboard', scoreboardRouter);
+app.use('/request_sc', request_scRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
