@@ -118,6 +118,7 @@ while 1 :
 		print("Testcase : " + testcase)
 		if(result==None) :
 			for x in range(int(testcase)):
+				result = None
 				t = execute("C++", user_name, full_name, file_name,str(x+1), time_limit, mem_limit,that_time)
 				result_user = "env/output.txt"
 				result_src = "source/"+full_name+"/"+str(x+1)+".sol"
