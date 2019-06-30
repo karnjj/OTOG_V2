@@ -11,7 +11,7 @@ router.post('/', function(req, res) {
     //console.log(__dir);
     file_name = rows[0].prob_id + "_" + rows[0].user_id + "_" + rows[0].time + ".cpp";
     var contents = fs.readFileSync('./uploaded/'+file_name,'utf8');
-    console.log(contents);
+    //console.log(contents);
     res.send(contents);
   });
 });
