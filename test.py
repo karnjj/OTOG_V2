@@ -102,7 +102,7 @@ while 1 :
 		ans = ""
 		sumtime = 0
 		result = None
-        that_time = str(myresult[1])
+		that_time = str(myresult[1])
 		file_name = str(myresult[3])
 		full_name = str(myprob[2])
 		user_name = str(myresult[2])
