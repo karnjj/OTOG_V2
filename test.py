@@ -36,7 +36,7 @@ def create(codefilename,language):
 
 # Program Execution
 def execute(language, username, fullname, filename, testcase, timelimit, memlimit, that_time):
-	exename = filename + "_" + username
+	exename = filename + "_" + username + "_" + that_time
 	global timediff
 	inputfile = " <source/"+fullname+"/"+testcase+".in 1>env/output.txt 2>env/error.txt"
 	cmd = "ulimit -v " + str(memlimit*1000) + ";"+langarr[language]["execute"]+"; exit;"
@@ -108,7 +108,7 @@ while 1 :
 		user_name = str(myresult[2])
 		time_limit = float(myprob[4])
 		mem_limit = int(myprob[5])
-		result = create(file_name+"_"+user_name,"C++");
+		result = create(file_name+"_"+user_name+"_"+that_time,"C++");
 		print(result);
 		case = file_read("source/"+full_name+"/script.php")
 		idx = case.find("cases = ")
