@@ -30,12 +30,11 @@
 				}
 				var path = "problems/docs/" + sname;
 				var param = '"' + "show_submit(" + i + ")" + '"';
-				tr.append("<td class='row'>" + id + "</td>");
-				tr.append("<td class='row'>" + 
-					"<a class = 'otogtxt' href =" + path + ">" + name + "<br>" +
+				tr.append("<td>" + id + "</td>");
+				tr.append("<td>" + "<a class = 'otogtxt' href =" + path + ">" + name + "<br>" +
 					"(" + time + " วินาที, " + mem + " MB" + ")" + "</a>" + "</td>");
-				tr.append("<td class = 'row'>" + "1500" + "</td>");
-				tr.append("<td class = 'row'>" + pass + "</td>");
+				tr.append("<td>" + "1500" + "</td>");
+				tr.append("<td>" + pass + "</td>");
 				if (is_login == "1") tr.append("<td>" + "<button class='btn otogbtn' onclick=" + param +
 					"data-toggle = 'modal' data-target='#submit_modal'>Submit</button>" + "</td>");
 				$("#body").append(tr);
@@ -82,10 +81,10 @@
 	<table class="table table-hover" id = "probs" style="text-align: center;">
 			<thead>
 				<tr style="color: #FF851B">
-					<th onclick = "w3.sortHTML('#probs', '.row', 'td:nth-child(1)')">#</th>
-					<th onclick= "w3.sortHTML('#probs', '.row', 'td:nth-child(2)')">Name</th>
-					<th onclick= "w3.sortHTML('#probs', '.row', 'td:nth-child(3)')">Rating</th>
-					<th onclick= "w3.sortHTML('#probs', '.row', 'td:nth-child(4)')">Passed</th>
+					<th onclick = "w3.sortHTML('#probs', '.item', 'td:nth-child(1)')">#</th>
+					<th onclick= "w3.sortHTML('#probs', '.item', 'td:nth-child(2)')">Name</th>
+					<th onclick= "w3.sortHTML('#probs', '.item', 'td:nth-child(3)')">Rating</th>
+					<th onclick= "w3.sortHTML('#probs', '.item', 'td:nth-child(4)')">Passed</th>
 					<th></th>
 				</tr>
 			</thead>
