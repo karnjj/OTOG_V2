@@ -195,6 +195,10 @@ while 1:
                     ans = ans + 'T'
                 else:
                     ans = ans + 'X'
+                sql = "UPDATE Result SET result = %s WHERE idResult = %s"
+                val = ('Running in testcase ' + str(x+1) , myresult[0])
+                mycursor.execute(sql, val)
+                mydb.commit()
         else:
             ans = result
         print(ans)
