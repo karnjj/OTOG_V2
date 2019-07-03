@@ -1,3 +1,4 @@
+const config = require('./config/config.js');
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -5,10 +6,11 @@ var logger = require('morgan');
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
+var mysql = require('mysql');
+var con = mysql.createConnection(global.gConfig.mysql);
 
 const fileUpload = require('express-fileupload');
 const session = require('express-session');
-const config = require('./config/config.js');
 
 var loginRouter = require('./routes/login');
 var mainRouter = require('./routes/main');
@@ -78,6 +80,25 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
+});
+
+io.on('connection',function(client){
+  console.log('Client connected..');
+  client.on('join',function(data){
+      console.log(data);
+  });
+  setInterval(function() {
+      var sql = "SELECT Result.idResult,Problem.name,User.sname,Result.result,Result.score,Result.timeuse,User.rating,Result.user_id,Result.status FROM Result "
+                +"INNER JOIN Problem ON Result.prob_id=Problem.id_Prob "
+                +"INNER JOIN User ON Result.user_id=User.idUser ORDER BY Result.time desc";
+      con.query(sql, function (err, rows) {
+        if (err) throw err;
+        //console.log(rows);
+        io.sockets.emit('submission',{submission:rows});
+      });
+      con.commit();
+  },1000);
+  //con.end();
 });
 
 module.exports = {app: app, server: server};

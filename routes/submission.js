@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var mysql = require('mysql');
 var fileUpload = require('express-fileupload');
+var mysql = require('mysql');
 var con = mysql.createConnection(global.gConfig.mysql);
 module.exports = function(io) {
 	/* GET home page. */
@@ -21,6 +21,7 @@ module.exports = function(io) {
 			});
 		});
 	});
+	/*
 	io.on('connection',function(client){
     console.log('Client connected..');
     client.on('join',function(data){
@@ -37,7 +38,8 @@ module.exports = function(io) {
 				});
 				con.commit();
     },1000);
-		con.end();
+		//con.end();
 	});
+	*/
 	return router;
 };
