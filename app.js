@@ -2,6 +2,10 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var logger = require('morgan');
+var app = express();
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
+
 const fileUpload = require('express-fileupload');
 const session = require('express-session');
 const config = require('./config/config.js');
@@ -16,11 +20,9 @@ var RatingsRouter = require('./routes/ratings');
 var ConfigRouter = require('./routes/config');
 var Logout = require('./routes/logout');
 var UploadRouter = require('./routes/upload');
-var SubmissionRouter = require('./routes/submission');
+var SubmissionRouter = require('./routes/submission')(io);
 var scoreboardRouter = require('./routes/scoreboard');
 var request_scRouter = require('./routes/request_sc');
-
-var app = express();
 
 
 // view engine setup
@@ -56,7 +58,12 @@ app.use('/upload', UploadRouter);
 app.use('/submission', SubmissionRouter);
 app.use('/scoreboard', scoreboardRouter);
 app.use('/request_sc', request_scRouter);
-
+/*
+app.use(function(req, res, next){
+  res.io = io;
+  next();
+});
+*/
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
@@ -73,4 +80,4 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-module.exports = app;
+module.exports = {app: app, server: server};

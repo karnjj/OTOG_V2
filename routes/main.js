@@ -21,7 +21,6 @@ function convert(pass) {
   });
   return arr;
 }
-
 /* GET home page. */
 router.get('/', function(req, res, next) {
   total_pass = 0;

@@ -4,10 +4,9 @@
  * Module dependencies.
  */
 var fs = require('fs');
-var app = require('../app');
+var app = require('../app').app;
 var debug = require('debug')('myapp:server');
 var http = require('http');
-var https = require('https');
 var privateKey  = fs.readFileSync('bin/server.key', 'utf8');
 var certificate = fs.readFileSync('bin/server.cert', 'utf8');
 
@@ -24,7 +23,7 @@ app.set('port', port);
  * Create HTTP server.
  */
 
-var server = http.createServer(app);
+ var server = require('../app').server;
 
 /**
  * Listen on provided port, on all network interfaces.

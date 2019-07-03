@@ -6,6 +6,8 @@
 	<meta charset="utf-8">
 	<title>OTOG - One Tambon One Grader</title>
 
+	<!-- socket io-->
+	<script src="/socket.io/socket.io.js"></script>
 	<!-- bootstrap integral -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
@@ -40,12 +42,21 @@
 			}
 		});
 	</script>
+	<script>
+		var socket = io.connect('http://localhost:80');
+    socket.on('connect',function(data) {
+      socket.emit('join','Req submission_table');
+    });
+    socket.on('submission',function(data){
+      load_table(data.submission);
+    });
+	</script>
 <!-- load submission -->
 	<script>
-		var isLogin = "<%= is_login %>";
-		var id_user = "<%= id_user %>";
-		$(document).ready(function() {
-			var res = <%-JSON.stringify(submission)%>;
+		function load_table(res) {
+			$("#body").html("");
+			var isLogin = "<%= is_login %>";
+			var id_user = "<%= id_user %>";
 			var tr;
 			var sz = res.length;
 			for (var i = 0; i < sz; i++) {
@@ -75,7 +86,7 @@
 				else tr.append("<td></td>");
 				$("#body").append(tr);
 			}
-		});
+		}
 	</script>
 	<script>
 		function show_code(id){
