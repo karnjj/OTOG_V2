@@ -48,7 +48,7 @@
       socket.emit('join','Hello world from client');
     });
     socket.on('submission',function(data){
-      load_table(data.submission);
+      if(load_table(data.submission)) socket.disconnect();
     });
 	</script>
 <!-- load submission -->
@@ -58,8 +58,10 @@
 			var isLogin = "<%= is_login %>";
 			var id_user = "<%= id_user %>";
 			var tr;
+			var is_complete = true;
 			var sz = res.length;
 			for (var i = 0; i < sz; i++) {
+				if(res[i].status == 0) is_complete = false;
 				tr = $("<tr/>");
 				var id = res[i].idResult;
 				var pname = res[i].name;
@@ -86,6 +88,7 @@
 				else tr.append("<td></td>");
 				$("#body").append(tr);
 			}
+			return is_complete;
 		}
 	</script>
 	<script>
