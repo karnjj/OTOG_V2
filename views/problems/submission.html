@@ -43,7 +43,7 @@
 		});
 	</script>
 	<script>
-		var socket = io.connect('localhost');
+		var socket = io.connect('165.22.49.81');
     socket.on('connect',function(data) {
       socket.emit('join','Hello world from client');
     });
