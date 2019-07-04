@@ -81,27 +81,25 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
 io.on('connection',function(client){
+  var Interval = null;
   console.log('Client connected..');
   client.on('join',function(data){
       console.log(data);
   });
   client.on("disconnect", () => {
     console.log("Client disconnected");
+    clearInterval(Interval);
   });
   var sql = "SELECT Result.idResult,Problem.name,User.sname,Result.result,Result.score,Result.timeuse,User.rating,Result.user_id,Result.status FROM Result "
   +"INNER JOIN Problem ON Result.prob_id=Problem.id_Prob "
   +"INNER JOIN User ON Result.user_id=User.idUser ORDER BY Result.time desc";
-  setInterval(function() {
+  Interval = setInterval(function() {
       con.query(sql, function (err, rows) {
         if (err) throw err;
-        //console.log(rows);
         io.sockets.emit('submission',{submission:rows});
       });
       con.commit();
-  },1000);
-  //con.end();
+  },500);
 });
-
 module.exports = {app: app, server: server};
