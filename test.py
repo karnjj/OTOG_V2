@@ -88,7 +88,7 @@ def execute(language, username, fullname, filename, testcase, timelimit, memlimi
     endtime = time.time()
     timediff = endtime - starttime
     os.system("chmod 777 .")
-    if(os.path.exists("/proc/"+proc.pid)) :
+    if(os.path.exists("/proc/"+str(proc.pid))) :
         os.killpg(os.getpgid(proc.pid), signal.SIGTERM)
     print("Return Code : " + str(t))
     return t
