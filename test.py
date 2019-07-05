@@ -200,6 +200,7 @@ while 1:
                 val = ('Running in testcase ' + str(x+1) , myresult[0])
                 mycursor.execute(sql, val)
                 mydb.commit()
+                time.sleep(0.1)
         else:
             ans = result
         print(ans)
