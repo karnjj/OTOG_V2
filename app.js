@@ -84,22 +84,22 @@ app.use(function(err, req, res, next) {
 io.on('connection',function(client){
   var Interval = null;
   console.log('Client connected..');
-  client.on('join',function(data){
+  client.on('req_table',function(data){
       console.log(data);
+      var sql = "SELECT Result.idResult,Problem.name,User.sname,Result.result,Result.score,Result.timeuse,User.rating,Result.user_id,Result.status FROM Result "
+      +"INNER JOIN Problem ON Result.prob_id=Problem.id_Prob "
+      +"INNER JOIN User ON Result.user_id=User.idUser ORDER BY Result.time desc";
+      Interval = setInterval(function() {
+        con.query(sql, function (err, rows) {
+          if (err) throw err;
+          io.sockets.emit('submission',{submission:rows});
+        });
+        con.commit();
+      },500);
   });
-  client.on("disconnect", () => {
-    console.log("Client disconnected");
+  client.on("stop_req", () => {
+    console.log("stop_req");
     clearInterval(Interval);
   });
-  var sql = "SELECT Result.idResult,Problem.name,User.sname,Result.result,Result.score,Result.timeuse,User.rating,Result.user_id,Result.status FROM Result "
-  +"INNER JOIN Problem ON Result.prob_id=Problem.id_Prob "
-  +"INNER JOIN User ON Result.user_id=User.idUser ORDER BY Result.time desc";
-  Interval = setInterval(function() {
-      con.query(sql, function (err, rows) {
-        if (err) throw err;
-        io.sockets.emit('submission',{submission:rows});
-      });
-      con.commit();
-  },500);
 });
 module.exports = {app: app, server: server};

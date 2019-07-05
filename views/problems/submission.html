@@ -45,10 +45,10 @@
 	<script>
 		var socket = io();
     socket.on('connect',function(data) {
-      socket.emit('join','Hello world from client');
+      socket.emit('req_table','req_table from client');
     });
     socket.on('submission',function(data){
-      if(load_table(data.submission)) socket.disconnect();
+      if(load_table(data.submission)) socket.emit('stop_req','stop_req from client');
     });
 	</script>
 <!-- load submission -->
