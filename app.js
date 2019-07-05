@@ -81,15 +81,16 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+var Interval = null;
 io.on('connection',function(client){
-  var Interval = null;
   console.log('Client connected..');
   client.on('req_table',function(data){
-      console.log(data);
+      //console.log(data);
       var sql = "SELECT Result.idResult,Problem.name,User.sname,Result.result,Result.score,Result.timeuse,User.rating,Result.user_id,Result.status FROM Result "
       +"INNER JOIN Problem ON Result.prob_id=Problem.id_Prob "
       +"INNER JOIN User ON Result.user_id=User.idUser ORDER BY Result.time desc";
       Interval = setInterval(function() {
+        console.log("pass");
         con.query(sql, function (err, rows) {
           if (err) throw err;
           io.sockets.emit('submission',{submission:rows});
@@ -97,8 +98,8 @@ io.on('connection',function(client){
         con.commit();
       },500);
   });
-  client.on("stop_req", () => {
-    console.log("stop_req");
+  client.on("stop_req", function(data){
+    console.log(data);
     clearInterval(Interval);
   });
 });
