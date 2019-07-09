@@ -36,11 +36,12 @@ $(document).ready(function(){
 			tr.append("<td>" + "<a class = 'otogtxt' href =" + path + ">" + name + "</a>" + "</td>");
 			tr.append("<td>" + time + "</td>");
 			tr.append("<td>" + mem + "</td>");
-			tr.append("<td>" + "<button class='btn btn-info' data-toggle='tooltip' title='Edit'>" +
+			tr.append("<td>" + "<div class = 'btn-group'>" + "<button class='btn btn-info' data-toggle='tooltip' title='Edit'>" +
 			"<i class='fa fa-pencil'></i></button>" +
 			"<button class='btn btn-warning' data-toggle='tooltip' title='Rejudge'>" +
 			"<i class='fa fa-refresh'></i></button>" + "<button class='btn btn-light' data-toggle='tooltip' title='Toggle Show/Hide'>" +
-			"<i class='fa fa-eye'></i></button>" + "<button class='btn btn-danger' data-toggle='tooltip' title='Delete'>" +"<i class='fa fa-trash'></i></button>"+"</td>");
+			"<i class='fa fa-eye'></i></button>" + "<button class='btn btn-danger' data-toggle='tooltip' title='Delete'>" +"<i class='fa fa-trash'></i></button>"+
+			"</div>" + "</td>");
 			$("#task").append(tr);
 		}
 	});
