@@ -33,28 +33,41 @@ $(document).ready(function(){
 			var mem = prob[i].memory;
 			var see = prob[i].stat;
 			var path = "problems/docs/" + sname;
-			var param = '"' + "show_submit(" + i + ")" + '"';
+			var param = '"' + "toggle(" + i + ")" + '"';
+
+			// button group
 			var toggle;
+			var edit = "<button class='btn btn-info' data-toggle='tooltip' title='Edit'>" +
+			"<i class='fa fa-pencil'></i></button>";
+			var rejudge = "<button class='btn btn-warning' data-toggle='tooltip' title='Rejudge'>" +
+			"<i class='fa fa-refresh'></i></button>";
+			var del = "<button class='btn btn-danger' data-toggle='tooltip' title='Delete'>" +
+			"<i class='fa fa-trash'></i></button>"
+
 			tr.append("<td>" + id + "</td>");
 			tr.append("<td>" + "<a class = 'otogtxt' href =" + path + ">" + name + "</a>" + "</td>");
 			tr.append("<td>" + time + "</td>");
 			tr.append("<td>" + mem + "</td>");
 
+			// check see status
 			if(see == 1) toggle = "<button class='btn btn-dark' data-toggle='tooltip' title='Toggle Show/Hide'>" + "<i class='fa fa-eye-slash'></i></button>";
 			else toggle = "<button class='btn btn-light' data-toggle='tooltip' title='Toggle Show/Hide'>" + "<i class='fa fa-eye'></i></button>";
 
-			tr.append("<td>" + "<div class = 'btn-group'>" + "<button class='btn btn-info' data-toggle='tooltip' title='Edit'>" +
-			"<i class='fa fa-pencil'></i></button>" +
-			"<button class='btn btn-warning' data-toggle='tooltip' title='Rejudge'>" +
-			"<i class='fa fa-refresh'></i></button>" + toggle + "<button class='btn btn-danger' data-toggle='tooltip' title='Delete'>" +"<i class='fa fa-trash'></i></button>"+
-			"</div>" + "</td>");
+			// add button group
+			tr.append("<td>" + "<div class = 'btn-group'>" + edit +
+			rejudge + toggle + del +"</div>" + "</td>");
 			$("#task").append(tr);
 		}
 	});
+
 	</script>
 	<!-- toggle problem -->
 	<script>
-		
+		function toggle(id){
+			var prob = <%-JSON.stringify(problems)%>;
+			prob[id].stat ^= 1;
+			location.reload(true);
+		}
 	</script>
 </head>
 <body>
