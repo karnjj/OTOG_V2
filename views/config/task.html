@@ -9,12 +9,11 @@ bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="stylesheets/style.css">
 
 <!-- tooltip script -->
 <script>
 $(document).ready(function(){
-  $('[data-toggle="tooltip"]').tooltip();   
+  $('[data-toggle="tooltip"]').tooltip();
 });
 </script>
 
@@ -22,8 +21,6 @@ $(document).ready(function(){
 <script>
 	$(document).ready(function() {
 		var prob = <%-JSON.stringify(problems)%>;
-		var pass_state = <%-JSON.stringify(pass)%>;
-		var is_login = "<%= is_login %>";
 		var tr;
 		var sz = prob.length;
 		for (var i = 0; i < sz; i++) {
@@ -40,14 +37,14 @@ $(document).ready(function(){
 			tr.append("<td>" + time + "</td>");
 			tr.append("<td>" + mem + "</td>");
 			tr.append("<td>" + "<button class='btn btn-info' data-toggle='tooltip' title='Edit'>" +
-			"<i class='fa fa-pencil'></i></button>" + 
+			"<i class='fa fa-pencil'></i></button>" +
 			"<button class='btn btn-warning' data-toggle='tooltip' title='Rejudge'>" +
 			"<i class='fa fa-refresh'></i></button>");
 			tr.append("<button class='btn btn-light' data-toggle='tooltip' title='Toggle Show/Hide'>" +
 			"<i class='fa fa-eye'></i></button>");
 			tr.append("<button class='btn btn-danger' data-toggle='tooltip' title='Delete'>" +
-			"<i class='fa fa-trash'></i></button>");
-			$("#body").append(tr);
+			"<i class='fa fa-trash'></i></button>"+"</td>");
+			$("#task").append(tr);
 		}
 	});
 	</script>
@@ -72,7 +69,7 @@ $(document).ready(function(){
 
 	<div class="container">
 		<div class="row">
-			<div class="col-md-3">
+			<div class="col-md-2">
 				<button class='btn btn-success btn-lg'
 				data-toggle = "modal" data-target = "#newprob">
    			<i class="fa fa-plus-circle"></i> New Problem
@@ -86,14 +83,13 @@ $(document).ready(function(){
 					</div>
 				</div>
 			</div>
-			<div class="col-md-9">
+			<div class="col-md-10">
 
 				<table class="table">
 					<thead class="thead-light">
 						<tr>
 							<th>#</th>
 							<th>Name</th>
-							<th>Showname</th>
 							<th>Time</th>
 							<th>Memory</th>
 							<th></th>
@@ -116,10 +112,10 @@ $(document).ready(function(){
         <!-- Modal body -->
         <div class="modal-body">
           <form action="upload" method="post" enctype="multipart/form-data">
-						
+
 						<label>Problem Description :</label>
 						<div class="input-group">
-  						<input type="text" aria-label="pname" 
+  						<input type="text" aria-label="pname"
   						class="form-control" placeholder="Problem Name">
   						<input type="text" aria-label="sname"
   						class="form-control" placeholder="Short Name">
@@ -137,13 +133,13 @@ $(document).ready(function(){
 
             <label>Problem Constraint :</label>
 						<div class="input-group">
-  						<input type="text" aria-label="timelim" 
+  						<input type="text" aria-label="timelim"
   						class="form-control" placeholder="Time limit (second)">
   						<input type="text" aria-label="mlim"
   						class="form-control" placeholder="Memory limit (MB)">
 						</div><br>
 						<div class="input-group">
-  						<input type="text" aria-label="tcnum" 
+  						<input type="text" aria-label="tcnum"
   						class="form-control" placeholder="Number of testcases">
   						<input type="text" aria-label="mlim"
   						class="form-control" placeholder="Problem Author">
@@ -159,7 +155,7 @@ $(document).ready(function(){
     </div>
   </div>
   </div>
-	</div>	
+	</div>
 
 </body>
 </html>
