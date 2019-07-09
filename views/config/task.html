@@ -33,7 +33,7 @@ $(document).ready(function(){
 			var mem = prob[i].memory;
 			var see = prob[i].stat;
 			var path = "problems/docs/" + sname;
-			var param = '"' + "toggle(" + i + ")" + '"';
+			var param = '"' + "toggle(" + id + ")" + '"';
 
 			// button group
 			var toggle;
@@ -50,7 +50,7 @@ $(document).ready(function(){
 			tr.append("<td>" + mem + "</td>");
 
 			// check see status
-			if(see == 1) toggle = "<button class='btn btn-dark' data-toggle='tooltip' title='Toggle Show/Hide'>" + "<i class='fa fa-eye-slash'></i></button>";
+			if(see == 1) toggle = "<button class='btn btn-dark' data-toggle='tooltip' title='Toggle Show/Hide' onclick = " + param + ">" + "<i class='fa fa-eye-slash'></i></button>";
 			else toggle = "<button class='btn btn-light' data-toggle='tooltip' title='Toggle Show/Hide'>" + "<i class='fa fa-eye'></i></button>";
 
 			// add button group
@@ -66,6 +66,13 @@ $(document).ready(function(){
 		function toggle(id){
 			var prob = <%-JSON.stringify(problems)%>;
 			prob[id].stat ^= 1;
+			 $.post("toggle.js",
+  		{
+      problems: prob
+    	},
+    	function(status){
+      alert("Toggle Status: " + status);
+    	});
 			location.reload(true);
 		}
 	</script>
