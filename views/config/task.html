@@ -18,8 +18,40 @@ $(document).ready(function(){
 });
 </script>
 
+<!-- load task -->
+<script>
+	$(document).ready(function() {
+		var prob = <%-JSON.stringify(problems)%>;
+		var pass_state = <%-JSON.stringify(pass)%>;
+		var is_login = "<%= is_login %>";
+		var tr;
+		var sz = prob.length;
+		for (var i = 0; i < sz; i++) {
+			tr = $("<tr/>");
+			var id = prob[i].id_Prob;
+			var name = prob[i].name;
+			var sname = prob[i].sname;
+			var time = prob[i].time;
+			var mem = prob[i].memory;
+			var path = "problems/docs/" + sname;
+			var param = '"' + "show_submit(" + i + ")" + '"';
+			tr.append("<td>" + id + "</td>");
+			tr.append("<td>" + "<a class = 'otogtxt' href =" + path + ">" + name + "</a>" + "</td>");
+			tr.append("<td>" + time + "</td>");
+			tr.append("<td>" + mem + "</td>");
+			tr.append("<td>" + "<button class='btn btn-info' data-toggle='tooltip' title='Edit'>" +
+			"<i class='fa fa-pencil'></i></button>" + 
+			"<button class='btn btn-warning' data-toggle='tooltip' title='Rejudge'>" +
+			"<i class='fa fa-refresh'></i></button>");
+			tr.append("<button class='btn btn-light' data-toggle='tooltip' title='Toggle Show/Hide'>" +
+			"<i class='fa fa-eye'></i></button>");
+			tr.append("<button class='btn btn-danger' data-toggle='tooltip' title='Delete'>" +
+			"<i class='fa fa-trash'></i></button>");
+			$("#body").append(tr);
+		}
+	});
+	</script>
 </head>
-
 <body>
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
   <ul class="navbar-nav">
@@ -67,30 +99,7 @@ $(document).ready(function(){
 							<th></th>
 						</tr>
 					</thead>
-					<tbody>
-						<tr>
-							<td>1</td>
-							<td>test</td>
-							<td>test1</td>
-							<td>1</td>
-							<td>512</td>
-							<td>
-									<button class="btn btn-info" data-toggle="tooltip" title="Edit">
-										<i class="fa fa-pencil"></i>
-									</button>
-									<button class="btn btn-warning" data-toggle="tooltip" title="Rejudge">
-										<i class="fa fa-refresh"></i>
-									</button>
-									<button class="btn btn-light" data-toggle="tooltip" title="Toggle Show/Hide">
-										<i class="fa fa-eye"></i>
-									</button>
-									<button class="btn btn-danger" data-toggle="tooltip" title="Delete">
-										<i class="fa fa-trash"></i>
-									</button>
-
-							</td>
-						</tr>
-					</tbody>
+					<tbody id="task"></tbody>
 				</table>
 			</div>
 			<!-- submit form -->
