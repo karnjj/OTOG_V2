@@ -79,7 +79,9 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  //res.render('error');
+  console.log(res.locals.error);
+  res.redirect("/main");
 });
 var Interval = null;
 io.on('connection',function(client){
