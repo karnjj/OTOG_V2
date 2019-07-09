@@ -33,7 +33,7 @@ $(document).ready(function(){
 			var mem = prob[i].memory;
 			var see = prob[i].state;
 			var path = "problems/docs/" + sname;
-			var param = '"' + "toggle(" + id + ")" + '"';
+			var param = '"' + "ptoggle(" + i + ")" + '"';
 
 			// button group
 			var toggle;
@@ -51,7 +51,7 @@ $(document).ready(function(){
 
 			// check see status
 			if(see == 0) toggle = "<button class='btn btn-dark' data-toggle='tooltip' title='Toggle Show/Hide' onclick = " + param + ">" + "<i class='fa fa-eye-slash'></i></button>";
-			else toggle = "<button class='btn btn-light' data-toggle='tooltip' title='Toggle Show/Hide'>" + "<i class='fa fa-eye'></i></button>";
+			else toggle = "<button class='btn btn-light' data-toggle='tooltip' title='Toggle Show/Hide' onclick = " + param + ">" + "<i class='fa fa-eye'></i></button>";
 
 			// add button group
 			tr.append("<td>" + "<div class = 'btn-group'>" + edit +
@@ -62,19 +62,18 @@ $(document).ready(function(){
 
 	</script>
 	<!-- toggle problem -->
-	<script>
-		function toggle(id){
-			var prob = <%-JSON.stringify(problems)%>;
-			var see = prob[id].stat;
-			see ^= 1;
-			alert("edit!");
-			 $.post("toggle.js",
-  		{
-      	id: id,
-      	state : see
-    	});
-		}
-	</script>
+  <script>
+  function ptoggle(i){
+    var prob = <%-JSON.stringify(problems)%>;
+    var see = prob[i].state;
+    see ^= 1;
+    $.post("/config/toggle",
+    {
+      id: prob[i].id_Prob,
+      state : see
+    });
+  }
+</script>
 </head>
 <body>
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">

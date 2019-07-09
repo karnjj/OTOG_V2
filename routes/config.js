@@ -31,4 +31,14 @@ router.get('/task', function(req, res, next) {
 		});
 	});
 });
+router.post('/toggle', function(req, res, next) {
+  if(!is_admin(req)) {res.redirect('/main'); return 0;}
+  var millis = Date.now();
+  var time_now = Math.floor(millis/1000);
+	var sql = "UPDATE Problem SET state = ?, see_date = ? WHERE id_Prob = ?";
+	con.query(sql, [req.body.state,time_now,req.body.id], function (err, rows) {
+    	if (err) throw err;
+    	res.redirect('/config/task');
+	});
+});
 module.exports = router;
