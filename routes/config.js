@@ -9,9 +9,21 @@ function is_admin(req) {
 }
 router.get('/', function(req, res, next) {
   if(!is_admin(req)) {res.redirect('/main'); return 0;}
-  res.render("config/config.html", {
-    title: 'config',
+  var sql = "SELECT * FROM Config";
+  con.query(sql, function (err, rows) {
+      if (err) throw err;
+      res.render("config/config.html", {
+        title: 'config',
+        config: rows,
+      });
   });
+});
+router.post('/config', function(req, res, next) {
+  if(!is_admin(req)) {res.redirect('/main'); return 0;}
+  var sql = "UPDATE Config SET mode = ?";
+	con.query(sql, [req.body.mode], function (err, rows) {
+    	if (err) throw err;
+	});
 });
 router.get('/contest', function(req, res, next) {
   if(!is_admin(req)) {res.redirect('/main'); return 0;}
@@ -38,7 +50,7 @@ router.post('/toggle', function(req, res, next) {
 	var sql = "UPDATE Problem SET state = ?, see_date = ? WHERE id_Prob = ?";
 	con.query(sql, [req.body.state,time_now,req.body.id], function (err, rows) {
     	if (err) throw err;
-    	res.redirect('/config/task');
+    	//res.redirect('/config/task');
 	});
 });
 module.exports = router;

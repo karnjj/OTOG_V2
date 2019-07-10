@@ -13,12 +13,38 @@ bootstrap.min.css">
 
 <!-- contest form -->
 <script>
-	 $(document).ready(function() {
-   	$('#contest').hide();
-    $('#modeform').submit(function(){
-    	$('#contest').show();
-    });
-   });
+	var config = <%-JSON.stringify(config)%>;
+	$(document).ready(function() {
+		var temp = config[0].mode;
+		if(temp != "No Contest") $('#contest').show();
+		else $('#contest').hide();
+		var mySelect = document.getElementById('mode_grader');
+		for(var i, j = 0; i = mySelect.options[j]; j++) {
+		    if(i.value == temp) {
+		        mySelect.selectedIndex = j;
+		        break;
+		    }
+		}
+	});
+</script>
+<script>
+	var config = <%-JSON.stringify(config)%>;
+	var mode = config[0].mode;
+	var contest_start = config[0].contest_start;
+	var contest_end = config[0].contest_end;
+	function save_config() {
+		$.post("/config/config",
+		{
+			mode: mode,
+			contest_start: contest_start,
+			contest_end: contest_end,
+		});
+	}
+	function show_contest(selectedValue) {
+		if(selectedValue != "No Contest") $('#contest').show();
+		else $('#contest').hide();
+		mode = selectedValue;
+	}
 </script>
 </head>
 
@@ -43,6 +69,7 @@ bootstrap.min.css">
 		<div class="row">
 			<div class="col-md-3">
 				<h2> GOTO </h2>
+				<button class='btn btn-info btn-lg' onclick="save_config();">Save</button><hr>
 			</div>
 			<div class="col-md-6">
 					<!-- grader mode -->
@@ -53,25 +80,20 @@ bootstrap.min.css">
 								<option selected>Online</option>
 								<option>Close</option>
 							</select>
-							<div class="input-group-append">
-								<button class="btn btn-info" type="submit">Save</button>
-							</div>
 						</div>
 					</form><br>
 				<!-- mode form -->
-				<form id = "modeform" class="form-group" action="#">
-					<label for="mode">Choose Mode : </label>
-					<div class="input-group mb-3">
-					<select class="custom-select" id="mode">
-						<option selected>No Contest</option>
-						<option>Unrated Contest</option>
-						<option>Rated Contest</option>
-					</select>
-					<div class="input-group-append">
-						<button class="btn btn-info" type="submit">Save</button>
-					</div>
-					</div>
-				</form><br>
+				<label for="mode_grader">Choose Mode : </label>
+				<div class="input-group mb-3">
+				<select class="custom-select" id="mode_grader" onchange="show_contest(this.value)">
+					<option>No Contest</option>
+					<option>Unrated Contest</option>
+					<option>Rated Contest</option>
+				</select>
+				<div class="input-group-append">
+				</div>
+				</div>
+				<br>
 				<!-- contest form -->
 				<div id = "contest">
 					<form class="form-group" action="#">
@@ -83,9 +105,6 @@ bootstrap.min.css">
 						<option disabled>OTOG Mode</option>
 						<option disabled>Blind Mode</option>
 					</select>
-					<div class="input-group-append">
-						<button class="btn btn-info" type="submit">Save</button>
-					</div>
 					</div>
 				</form><br>
 
@@ -96,10 +115,9 @@ bootstrap.min.css">
   			<input type="text" aria-label="start" class="form-control" placeholder="start time">
   			<input type="text" aria-label="finish" class="form-control" placeholder="finish time">
   			<div class="input-group-append">
-					<button class="btn btn-info" type="submit">Save</button>
   			</div>
 				</div>
-			</form>
+			</form><br>
 			</div>
 			</div>
 
