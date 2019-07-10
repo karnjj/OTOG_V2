@@ -20,8 +20,10 @@ router.get('/', function(req, res, next) {
 });
 router.post('/config', function(req, res, next) {
   if(!is_admin(req)) {res.redirect('/main'); return 0;}
-  var sql = "UPDATE Config SET mode = ?";
-	con.query(sql, [req.body.mode], function (err, rows) {
+  var millis = Date.now();
+  time_now = Math.floor(millis/1000);
+  var sql = "UPDATE Config SET mode = ?, click_time = ?";
+	con.query(sql, [req.body.mode,time_now], function (err, rows) {
     	if (err) throw err;
 	});
 });

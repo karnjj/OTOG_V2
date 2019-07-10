@@ -10,7 +10,63 @@
 
   <!-- main source of custom css -->
   <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+  <!-- load contest table -->
+  <script>
+		$(document).ready(function() {
+			var prob = <%-JSON.stringify(problems)%>;
+			var pass_state = <%-JSON.stringify(pass)%>;
+			var tr;
+			var sz = prob.length;
+			var isLogin = "<%= is_login %>";
+			for (var i = 0; i < sz; i++) {
+				tr = $("<tr/>");
+				var id = prob[i].id_Prob;
+				var name = prob[i].name;
+				var sname = prob[i].sname;
+				var time = prob[i].time;
+				var mem = prob[i].memory;
+				var rating = prob[i].rating;
+				var pass = prob[i].pass;
+        var param = '"' + "show_submit(" + i + ")" + '"';
+				if(isLogin == "1") {
+					if(pass_state[id] == 2) tr.addClass("item AC");
+					else if(pass_state[id] == 1)tr.addClass("item WA");
+				}
+				var path = "problems/docs/" + sname;
+				tr.append("<td>" + id + "</td>");
+				tr.append("<td>" + "<a class = 'otogtxt' href =" + path + ">" + name + "</a>" + "</td>");
+				tr.append("<td>" + time + " วินาที" + "</td>");
+        tr.append("<td>" + mem + " MB" + "</td>");
+        tr.append("<td>" + "100" + "</td>");
+				tr.append("<td>" + pass + "</td>");
+        if (isLogin == "1") tr.append("<td>" + "<button class='btn otogbtn' onclick=" + param +
+					"data-toggle = 'modal' data-target='#submit_modal'>Submit</button>" + "</td>");
+				$("#body").append(tr);
+			}
+		});
+	</script>
+  <script>
+    function show_submit(id) {
+      //alert("It's (may) work !");
+      var prob = <%-JSON.stringify(problems)%>;
+      var pname = prob[id].name;
+      //alert(pname);
+      $("#prob_head").text(pname);
+      $("#send_id").attr("value", prob[id].id_Prob);
+    }
+  </script>
+  <!-- submission script -->
+  <script>
+    var input = document.getElementById('customfile');
+    var label = document.getElementById('file_name');
+    input.addEventListener('change', showFileName);
 
+    function showFileName(event) {
+      var input = event.srcElement;
+      var fileName = input.files[0].name;
+      label.textContent = fileName;
+    }
+  </script>
 </head>
 <body>
 <div class="container">
@@ -36,33 +92,43 @@
 				<th scope="col">ผ่านแล้ว</th>
 			</tr>
 		</thead>
-		<tbody class="justify-content-center">
-				<tr>
-					<td>1</td>
-					<td><a href="#" style="color: #FF851B">TOI_14 Logistic</a></td>
-					<td>1 วินาที</td>
-					<td>512 MB</td>
-					<td>100</td>
-					<td>19</td>
-				</tr>
-				<tr>
-					<td>2</td>
-					<td><a href="#" style="color: #FF851B">TOI_14 BlockChain</a></td>
-					<td>1 วินาที</td>
-					<td>512 MB</td>
-					<td>100</td>
-					<td>13</td>
-				</tr>
-				<tr>
-					<td>3</td>
-					<td><a href="#" style="color: #FF851B">TOI_14 NBK48</a></td>
-					<td>1 วินาที</td>
-					<td>512 MB</td>
-					<td>100</td>
-					<td>31</td>
-				</tr>
-			</tbody>
+		<tbody id=body class="justify-content-center"></tbody>
 	</table>
+</div>
+<!-- submit form -->
+<div class="modal fade" id="submit_modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 id = "prob_head" class="modal-title"> Modal Header </h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <form action="upload" method="post" enctype="multipart/form-data">
+
+          <div class="custom-file">
+            <input type="file" class="custom-file-input" name="customfile" id="customfile">
+            <label class="custom-file-label" for="customfile" id = "file_name">Choose file</label>
+          </div><br><br>
+
+          <label>Choose Language</label>
+          <select class="custom-select">
+            <option selected value="c">C</option>
+            <option selected value="cpp">C++</option>
+          </select><br><br>
+          <input type="hidden" value = "#" name="prod_id" id = "send_id">
+          <div class="modal-footer">
+          <button type="submit" class="btn otogbtn">Submit</button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
 </body>
 </html>
