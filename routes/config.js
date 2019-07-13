@@ -29,8 +29,14 @@ router.post('/config', function(req, res, next) {
 });
 router.get('/contest', function(req, res, next) {
   if(!is_admin(req)) {res.redirect('/main'); return 0;}
-  res.render("config/contest.html", {
-    title: 'config',
+  var sql = "SELECT * FROM Problem ORDER BY id_Prob desc";
+	con.query(sql, function (err, rows) {
+    	if (err) throw err;
+    	//console.log(rows);
+      res.render("config/contest.html", {
+        title: 'config',
+        problems: rows,
+      });
   });
 });
 router.get('/task', function(req, res, next) {
