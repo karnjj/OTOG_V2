@@ -7,6 +7,7 @@ function is_admin(req) {
     if(req.session.is_admin == 0) return true;
     else return false;
 }
+//main config
 router.get('/', function(req, res, next) {
   if(!is_admin(req)) {res.redirect('/main'); return 0;}
   var sql = "SELECT * FROM Config";
@@ -27,38 +28,63 @@ router.post('/config', function(req, res, next) {
     	if (err) throw err;
 	});
 });
-router.get('/contest', function(req, res, next) {
-  if(!is_admin(req)) {res.redirect('/main'); return 0;}
-  var sql = "SELECT * FROM Problem ORDER BY id_Prob desc";
-	con.query(sql, function (err, rows) {
-    	if (err) throw err;
-    	//console.log(rows);
-      res.render("config/contest.html", {
-        title: 'config',
-        problems: rows,
-      });
-  });
-});
+//edit task
 router.get('/task', function(req, res, next) {
   if(!is_admin(req)) {res.redirect('/main'); return 0;}
-	var sql = "SELECT * FROM Problem ORDER BY id_Prob desc";
-	con.query(sql, function (err, rows) {
-    	if (err) throw err;
-    	//console.log(rows);
-		res.render("config/task.html", {
-			title: 'task',
-			problems : rows,
-		});
-	});
+  var sql = "SELECT * FROM Problem ORDER BY id_Prob desc";
+  con.query(sql, function (err, rows) {
+    if (err) throw err;
+    res.render("config/task.html", {
+      title: 'task',
+      problems : rows,
+    });
+  });
 });
 router.post('/toggle', function(req, res, next) {
   if(!is_admin(req)) {res.redirect('/main'); return 0;}
   var millis = Date.now();
   var time_now = Math.floor(millis/1000);
-	var sql = "UPDATE Problem SET state = ?, see_date = ? WHERE id_Prob = ?";
-	con.query(sql, [req.body.state,time_now,req.body.id], function (err, rows) {
+  var sql = "UPDATE Problem SET state = ?, see_date = ? WHERE id_Prob = ?";
+  con.query(sql, [req.body.state,time_now,req.body.id], function (err, rows) {
+    if (err) throw err;
+  });
+});
+//config contest
+router.get('/contest', function(req, res, next) {
+  if(!is_admin(req)) {res.redirect('/main'); return 0;}
+  var sql = "SELECT * FROM Problem ORDER BY id_Prob desc";
+	con.query(sql, function (err, prob) {
     	if (err) throw err;
-    	//res.redirect('/config/task');
+      var sql = "SELECT * FROM Contest";
+      con.query(sql, function (err, contest) {
+        res.render("config/contest.html", {
+          title: 'config',
+          problems: prob,
+          contest_ls: contest,
+        });
+      });
+  });
+});
+router.post('/contest/new', function(req, res, next) {
+  var data = req.body;
+  if(!is_admin(req)) {res.redirect('/main'); return 0;}
+  var sql = "INSERT INTO Contest (name,mode_grader,judge,time_start,time_end) VALUES ?"
+  var values = [
+    [data.name,data.mode_grader,data.judge,0,0],
+  ]
+  con.query(sql, [values], function (err, rows) {
+      if (err) throw err;
+  });
+  console.log(req.body);
+  res.redirect('/config/contest');
+});
+router.post('/contest/update', function(req, res, next) {
+  if(!is_admin(req)) {res.redirect('/main'); return 0;}
+  var sql = "UPDATE Contest SET problems = ? WHERE name = ?";
+  //console.log(req.body);
+	con.query(sql, [req.body.problem, req.body.name], function (err, rows) {
+    	if (err) throw err;
 	});
 });
+
 module.exports = router;

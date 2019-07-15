@@ -25,17 +25,59 @@ $(document).ready(function(){
 <!-- date time picker -->
 <script type="text/javascript">
 	$(function () {
-  	$('#datetimepicker1').datetimepicker();
+  	$('#start').datetimepicker();
   	$('#finish').datetimepicker();
-
   });
 </script>
-
+<!-- fucking back-end script -->
+<script>
+var idx_contest = 0;
+var contest;
+var old_prob = [];
+var new_prob = [];
+$(document).ready(function(){
+  contest = <%-JSON.stringify(contest_ls)%>;
+});
+function clear(id,state) {
+  state^=1;
+  var param = '"' + "ptoggle(" + id +","+ state + ")" + '"';
+  $("#prob_"+id).html("<button class='btn btn-dark' data-toggle='tooltip' title='Toggle Show/Hide' onclick = " + param + ">" + "<i class='fa fa-eye-slash'></i></button>");
+}
+function ptoggle(id,state){
+  state^=1;
+  var param = '"' + "ptoggle(" + id +","+ state + ")" + '"';
+  if(state == 1) $("#prob_"+id).html("<button class='btn btn-light' data-toggle='tooltip' title='Toggle Show/Hide' onclick = " + param + ">" + "<i class='fa fa-eye'></i></button>");
+  else $("#prob_"+id).html("<button class='btn btn-dark' data-toggle='tooltip' title='Toggle Show/Hide' onclick = " + param + ">" + "<i class='fa fa-eye-slash'></i></button>");
+  if(state == 1) new_prob.push(id);
+  else {
+    var pos = new_prob.indexOf(id);
+    new_prob.splice(pos, 1);
+  }
+}
+function select_contest(selectvalue) {
+  for (var i = 0; i < new_prob.length; i++) clear(new_prob[i],1);
+  new_prob = [];
+  idx_contest = selectvalue;
+  old_prob = JSON.parse(contest[idx_contest].problems);
+  for (var i = 0; i < old_prob.length; i++) {
+    ptoggle(old_prob[i],0);
+  }
+}
+function save_contest() {
+  var data = JSON.stringify(new_prob);
+  contest[idx_contest].problems = data;
+  $.post("/config/contest/update",
+  {
+    name: contest[idx_contest].name,
+    problem: data,
+  });
+}
+</script>
 <!-- load task -->
 <script>
+var prob = <%-JSON.stringify(problems)%>;
+var contest_ls = <%-JSON.stringify(contest_ls)%>;
 	$(document).ready(function() {
-		/*
-		var prob = <%-JSON.stringify(problems)%>;
 		var tr;
 		var sz = prob.length;
 		for (var i = 0; i < sz; i++) {
@@ -47,7 +89,7 @@ $(document).ready(function(){
 			var mem = prob[i].memory;
 			var see = prob[i].state;
 			var path = "problems/docs/" + sname;
-			var param = '"' + "ptoggle(" + i + ")" + '"';
+			var param = '"' + "ptoggle(" + id + ",0)" + '"';
 
 			// button group
 			var toggle;
@@ -64,19 +106,29 @@ $(document).ready(function(){
 			tr.append("<td>" + mem + "</td>");
 
 			// check see status
-			if(see == 0) toggle = "<button class='btn btn-dark' data-toggle='tooltip' title='Toggle Show/Hide' onclick = " + param + ">" + "<i class='fa fa-eye-slash'></i></button>";
-			else toggle = "<button class='btn btn-light' data-toggle='tooltip' title='Toggle Show/Hide' onclick = " + param + ">" + "<i class='fa fa-eye'></i></button>";
+			toggle = "<button class='btn btn-dark' data-toggle='tooltip' title='Toggle Show/Hide' onclick = " + param + ">" + "<i class='fa fa-eye-slash'></i></button>";
+			//else toggle = "<button class='btn btn-light' data-toggle='tooltip' title='Toggle Show/Hide' onclick = " + param + ">" + "<i class='fa fa-eye'></i></button>";
 
 			// add button group
-			tr.append("<td>" + "<div class = 'btn-group'>" + edit +
-			rejudge + toggle + del +"</div>" + "</td>");
+			tr.append("<td>" + "<div class = 'btn-group' id='prob_"+id+"'>" + toggle +"</div>" + "</td>");
 			$("#task").append(tr);
 		}
-		*/
 	});
-
+  $("#contest").prop("selectedIndex", -1);
 	</script>
-
+  <script>
+  $(document).ready(function() {
+    var contest_ls = <%-JSON.stringify(contest_ls)%>;
+		var sz = contest_ls.length;
+    for(var i = 0; i < sz; i++) {
+      var tr = $("<option value='"+i+"'>");;
+      tr.append(contest_ls[i].name + "</option>");
+      $("#contest").append(tr);
+    }
+  })
+  </script>
+  <script>
+  </script>
 </head>
 <body>
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
@@ -105,7 +157,13 @@ $(document).ready(function(){
 				<button class='btn btn-success btn-lg'
 				data-toggle = "modal" data-target = "#newprob">
    			<i class="fa fa-plus-circle"></i> New Contest
-				</button><hr>
+      </button><br><br>
+        <label for="contest">Contest : </label>
+        <select class="custom-select" id="contest" onchange="select_contest(this.value);">
+          <option disabled selected value> -- select a contest -- </option>
+        </select>
+        <button class='btn btn-info btn-lg' onclick="save_contest();">Save
+        </button><hr>
 				<div class="card">
 					<div class="card-header bg-info"><b>Guide</b></div>
 					<div class="card-body">
@@ -144,24 +202,26 @@ $(document).ready(function(){
 
         <!-- Modal body -->
         <div class="modal-body">
- 					<form>
+ 					<form action="/config/contest/new" method="post">
+          <label for="Name_contest">Name Contest : </label>
+          <input type="text" name="name" class="form-control"><br>
  					<label for="mode_grader">Choose Mode : </label>
- 					<select class="custom-select" id="mode_grader">
-						<option>Unrated Contest</option>
-						<option>Rated Contest</option>
+ 					<select class="custom-select" id="mode_grader" name="mode_grader">
+						<option value="unrated">Unrated Contest</option>
+						<option value="rated">Rated Contest</option>
 					</select><br><br>
 
-					<label for="mode">Judge Mode : </label>
-					<select class="custom-select" id="judge">
-						<option selected>Classic (Time based)</option>
-						<option>ACM Mode</option>
+					<label for="judge">Judge Mode : </label>
+					<select class="custom-select" id="judge" name="judge">
+						<option selected value="classic">Classic (Time based)</option>
+						<option value="acm">ACM Mode</option>
 						<option disabled>OTOG Mode</option>
 						<option disabled>Blind Mode</option>
 					</select><br><br>
 
  					<label for="start">Start Time : </label>
 					<div class="input-group date" id="start" data-target-input="nearest">
-           	<input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1"/>
+           	<input type="text" name="time_start" class="form-control datetimepicker-input" data-target="#datetimepicker1"/>
             <div class="input-group-append" data-target="#start" data-toggle="datetimepicker">
             	<button class="btn btn-info" type="button">
             		<i class="fa fa-calendar"></i>
@@ -171,18 +231,17 @@ $(document).ready(function(){
 
 					<label for="start">Finish Time : </label>
 					<div class="input-group date" id="finish" data-target-input="nearest">
-           	<input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1"/>
+           	<input type="text" name="time_end" class="form-control datetimepicker-input" data-target="#datetimepicker1"/>
             <div class="input-group-append" data-target="#finish" data-toggle="datetimepicker">
             	<button class="btn btn-info" type="button">
             		<i class="fa fa-calendar"></i>
             	</button>
             </div>
           </div><br>
-
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-success btn-block">Submit</button>
+          </div>
  					</form>
-        </div>
-        <div class="modal-footer">
-        	<button type="submit" class="btn btn-success btn-block">Submit</button>
         </div>
       </div>
     </div>
