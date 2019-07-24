@@ -67,10 +67,12 @@ router.get('/contest', function(req, res, next) {
 });
 router.post('/contest/new', function(req, res, next) {
   var data = req.body;
+  var time_start = Date.parse(data.time_start)/1000;
+  var time_end = Date.parse(data.time_end)/1000;
   if(!is_admin(req)) {res.redirect('/main'); return 0;}
   var sql = "INSERT INTO Contest (name,mode_grader,judge,time_start,time_end) VALUES ?"
   var values = [
-    [data.name,data.mode_grader,data.judge,0,0],
+    [data.name,data.mode_grader,data.judge,time_start,time_end],
   ]
   con.query(sql, [values], function (err, rows) {
       if (err) throw err;
