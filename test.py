@@ -20,6 +20,7 @@ mydb = mysql.connector.connect(
 )
 ioeredirect = " 0<env/input.txt 1>env/output.txt 2>env/error.txt"
 langarr = {
+    "C" : {"extension":"c", "system":"find /usr/bin/ -name gcc", "compile":"gcc uploaded/[codefilename].c -O2 -fomit-frame-pointer -o compiled/[codefilename]" + ioeredirect, "execute":"compiled/[exename][inputfile]"},
     "C++": {"extension": "cpp", "system": "find /usr/bin/ -name g++", "compile": "g++ uploaded/[codefilename].cpp -O2 -fomit-frame-pointer -o compiled/[codefilename]" + ioeredirect, "execute": "compiled/[exename][inputfile]"}
 }
 
@@ -38,17 +39,16 @@ def file_write(filename, data):
     f.write(data.replace("\r", ""))
     f.close()
 
-
+# Program Compiled
 def create(codefilename, language):
     os.system("chmod 777 compiled/" + codefilename)
     os.system("rm compiled/" + codefilename)
-    if(language not in ('C', 'C++', 'C#', 'Java', 'Pascal')):
+    if(language not in ('C', 'C++')):
         return
     print("Compiling Code File ...")
     result = None
     compilecmd = langarr[language]["compile"]
     compilecmd = compilecmd.replace("[codefilename]", codefilename)
-    # print(compilecmd)
     os.system(compilecmd)
     if not os.path.exists("compiled/" + codefilename):
         result = "Compilation Error"
@@ -60,18 +60,15 @@ def create(codefilename, language):
     return result
 
 # Program Execution
-
-
-def execute(language, username, fullname, filename, testcase, timelimit, memlimit, that_time):
-    exename = filename + "_" + username + "_" + that_time
+def execute(language, userid, probname, probid, testcase, timelimit, memlimit, that_time):
+    exename = probid + "_" + userid + "_" + that_time
     global timediff
-    inputfile = " <source/" + fullname + "/" + \
+    inputfile = " <source/" + probname + "/" + \
         testcase + ".in 1>env/output.txt 2>env/error.txt"
-    cmd = "ulimit -v " + str(memlimit * 1000) + ";" + \
+    cmd = "ulimit -v " + str(memlimit) + ";" + \
         langarr[language]["execute"] + "; exit;"
     cmd = cmd.replace("[exename]", exename)
     cmd = cmd.replace("[inputfile]", inputfile)
-    # print(cmd)
     os.system("chmod 777 .")
     if(os.path.exists("env/error.txt")):
         os.system("chmod 777 env/error.txt")
@@ -95,32 +92,19 @@ def execute(language, username, fullname, filename, testcase, timelimit, memlimi
 
 
 def cmpfunc(fname1, fname2):
-    # Open file for reading in text mode (default mode)
     f1 = open(fname1)
     f2 = open(fname2)
-
-    # Read the first line from the files
     f1_line = f1.readline()
     f2_line = f2.readline()
-
-    # Loop if either file1 or file2 has not reached EOF
     while f1_line != '' or f2_line != '':
-
-        # Strip the leading whitespaces
         f1_line = f1_line.rstrip()
         f2_line = f2_line.rstrip()
-
-        # Compare the lines from both file
         if f1_line != f2_line:
             f1.close()
             f2.close()
             return False
-
-        # Read the next line from the file
         f1_line = f1.readline()
         f2_line = f2.readline()
-
-    # Close the files
     f1.close()
     f2.close()
     return True
@@ -140,27 +124,31 @@ while 1:
         sumtime = 0
         result = None
         that_time = str(myresult[1])
-        file_name = str(myresult[3])
-        full_name = str(myprob[2])
-        user_name = str(myresult[2])
+        id_prob = str(myresult[3])
+        name_prob = str(myprob[2])
+        id_user = str(myresult[2])
         time_limit = float(myprob[4])
         mem_limit = int(myprob[5])
-        result = create(file_name + "_" + user_name + "_" + that_time, "C++")
+        result = create(id_prob + "_" + id_user + "_" + that_time, "C++")
         print(result)
-        case = file_read("source/" + full_name + "/script.php")
-        idx = case.find("cases = ")
-        testcase = ''
-        testcase = testcase + case[idx + 8]
-        if(case[idx + 9] != ';'):
-            testcase = testcase + case[idx + 9]
-        print("Testcase : " + testcase)
+        if(os.path.exists("source/" + name_prob + "/script.php")) :
+            case = file_read("source/" + name_prob + "/script.php")
+            idx = case.find("cases = ")
+            testcase = ''
+            testcase = testcase + case[idx + 8]
+            if(case[idx + 9] != ';'):
+                testcase = testcase + case[idx + 9]
+            print("Testcase : " + testcase)
+        else :
+            testcase = '-1'
+            result = "No Testcases."
         if(result == None):
             for x in range(int(testcase)):
                 result = None
-                t = execute("C++", user_name, full_name, file_name,
+                t = execute("C++", id_user, name_prob, id_prob,
                             str(x + 1), time_limit, mem_limit, that_time)
                 result_user = "env/output.txt"
-                result_src = "source/" + full_name + "/" + str(x + 1) + ".sol"
+                result_src = "source/" + name_prob + "/" + str(x + 1) + ".sol"
                 timetaken = 0
                 if t == 124:
                     result = "TLE"
