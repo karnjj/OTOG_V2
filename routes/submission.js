@@ -11,6 +11,7 @@ module.exports = function(io) {
 				title: 'Problems',
 				is_login: req.session.is_login,
 				id_user: req.session.name_id,
+				is_admin: req.session.is_admin,
 			});
 	});
 	return router;

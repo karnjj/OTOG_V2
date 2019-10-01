@@ -56,7 +56,9 @@
 		function load_table(res) {
 			$("#body").html("");
 			var isLogin = "<%= is_login %>";
+			var isAdmin = "<%= is_admin %>";
 			var id_user = "<%= id_user %>";
+			alert(isAdmin);
 			var tr;
 			var is_complete = true;
 			var sz = res.length;
@@ -83,8 +85,7 @@
 				tr.append("<td>" + result + "</td>");
 				tr.append("<td>" + time + " วินาที" + "</td>");
 				tr.append("<td>" + score + "</td>");
-				if (isLogin == "1" && id_user == res[i].user_id) tr.append("<td>" + "<button class='btn otogbtn' onclick=" + param +
-					"data-toggle = 'modal' data-target='#scmodal'>View Code</button>" + "</td>");
+				if (isLogin == "1" && id_user == res[i].user_id || isAdmin == "0") tr.append("<td>" + "<button class='btn otogbtn' onclick=" + param + "data-toggle = 'modal' data-target='#scmodal'>View Code</button>" + "</td>");
 				else tr.append("<td></td>");
 				$("#body").append(tr);
 			}
