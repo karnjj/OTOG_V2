@@ -65,7 +65,7 @@ def execute(language, userid, probname, probid, testcase, timelimit, memlimit, t
     global timediff
     inputfile = " <source/" + probname + "/" + \
         testcase + ".in 1>env/output.txt 2>env/error.txt"
-    cmd = "ulimit -v " + str(memlimit) + ";" + \
+    cmd = "sudo ulimit -v " + str(memlimit) + ";" + \
         langarr[language]["execute"] + "; exit;"
     cmd = cmd.replace("[exename]", exename)
     cmd = cmd.replace("[inputfile]", inputfile)
