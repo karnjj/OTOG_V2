@@ -74,7 +74,7 @@ def execute(language, userid, probname, probid, testcase, timelimit, memlimit, t
         os.system("chmod 777 env/error.txt")
     if(os.path.exists("env/output.txt")):
         os.system("chmod 777 env/output.txt")
-
+    print(cmd)
     starttime = time.time()
     proc = subprocess.Popen([cmd], shell=True, preexec_fn=os.setsid)
     try:
