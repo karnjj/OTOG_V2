@@ -148,7 +148,7 @@ while 1:
             for x in range(int(testcase)):
                 result = None
                 t = execute("C++", id_user, name_prob, id_prob,
-                            str(x + 1), time_limit, mem_limit, that_time)
+                            str(x + 1), time_limit, mem_limit*1024, that_time)
                 result_user = "env/output.txt"
                 result_src = "source/" + name_prob + "/" + str(x + 1) + ".sol"
                 timetaken = 0
