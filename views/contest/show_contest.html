@@ -12,61 +12,62 @@
   <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
   <!-- load contest table -->
   <script>
+    function timeConverter(timestamp){
+      var a = new Date(timestamp * 1000);
+      var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      var year = a.getFullYear();
+      var month = months[a.getMonth()];
+      var date = a.getDate();
+      var hour = a.getHours().toString();
+      var min = a.getMinutes().toString();
+      if(hour.length == 1) hour = '0' + hour;
+      if(min.length == 1) min = '0' + min;
+      var time = date + '/' + month + '/' + year + ' ' + hour + ':' + min;
+      return time;
+    }
+    function difftime(timestamp){
+      timestamp = Math.floor(timestamp/60);
+      var int_hours = Math.floor(timestamp / 60);
+      var hours = int_hours.toString();
+      var minutes = (timestamp % 60).toString();
+      if(hours.length == 1) hours = '0' + hours;
+      if(minutes.length == 1) minutes = '0' + minutes;
+      if(int_hours > 23) return (Math.floor(int_hours/24)).toString() + " days";
+      else return hours+":"+minutes;
+    }
+  </script>
+  <script>
 		$(document).ready(function() {
-			var prob = <%-JSON.stringify(problems)%>;
-			var pass_state = <%-JSON.stringify(pass)%>;
+			var con = <%-JSON.stringify(contest)%>;
 			var tr;
-			var sz = prob.length;
+			var sz = con.length;
 			var isLogin = "<%= is_login %>";
 			for (var i = 0; i < sz; i++) {
 				tr = $("<tr/>");
-				var id = prob[i].id_Prob;
-				var name = prob[i].name;
-				var sname = prob[i].sname;
-				var time = prob[i].time;
-				var mem = prob[i].memory;
-				var rating = prob[i].rating;
-				var pass = prob[i].pass;
-        var param = '"' + "show_submit(" + i + ")" + '"';
-				if(isLogin == "1") {
-					if(pass_state[id] == 2) tr.addClass("item AC");
-					else if(pass_state[id] == 1)tr.addClass("item WA");
-				}
-				var path = "problems/docs/" + sname;
+				var id = con[i].idContest;
+				var name = con[i].name;
+				var mode = con[i].mode_grader;
+        var judge = con[i].judge;
+        var time_start = Number(con[i].time_start);
+				var start = timeConverter(con[i].time_start);
+				var length = difftime(Number(con[i].time_end)-time_start);
+				var problems = con[i].problems;
+        //var number = (JSON.parse(con[i].problems)).length;
+				var path = "problems/docs/" + name;
 				tr.append("<td>" + id + "</td>");
-				tr.append("<td>" + "<a class = 'otogtxt' href =" + path + ">" + name + "</a>" + "</td>");
-				tr.append("<td>" + time + " วินาที" + "</td>");
-        tr.append("<td>" + mem + " MB" + "</td>");
-        tr.append("<td>" + "100" + "</td>");
-				tr.append("<td>" + pass + "</td>");
-        if (isLogin == "1") tr.append("<td>" + "<button class='btn otogbtn' onclick=" + param +
-					"data-toggle = 'modal' data-target='#submit_modal'>Submit</button>" + "</td>");
+				tr.append("<td>" + name + "</td>");
+				//tr.append("<td>" + number + "</td>");
+        tr.append("<td>" + start + "</td>");
+        tr.append("<td>" + length + "</td>");
+				tr.append("<td>" + mode + "(" + judge + ")" + "</td>");
+        tr.append("<td>" + "0" + "</td>");
+        if (time_start <= (Date.now()/1000)) tr.append("<td>" + "<button class='btn otogbtn' onclick=" +
+					"data-toggle = 'modal' data-target='#submit_modal'>Enter >></button>" + "</td>");
+        else tr.append("<td>" + "Before start "+ difftime(time_start-Date.now()/1000) + "</td>");
 				$("#body").append(tr);
 			}
 		});
 	</script>
-  <script>
-    function show_submit(id) {
-      //alert("It's (may) work !");
-      var prob = <%-JSON.stringify(problems)%>;
-      var pname = prob[id].name;
-      //alert(pname);
-      $("#prob_head").text(pname);
-      $("#send_id").attr("value", prob[id].id_Prob);
-    }
-  </script>
-  <!-- submission script -->
-  <script>
-    var input = document.getElementById('customfile');
-    var label = document.getElementById('file_name');
-    input.addEventListener('change', showFileName);
-
-    function showFileName(event) {
-      var input = event.srcElement;
-      var fileName = input.files[0].name;
-      label.textContent = fileName;
-    }
-  </script>
 </head>
 <body>
 <div class="container">
@@ -85,14 +86,15 @@
 		<thead>
 			<tr style="color: #FF851B">
 				<th scope="col">#</th>
-				<th scope="col">ชื่อโจทย์</th>
-				<th scope="col">เวลา</th>
-				<th scope="col">หน่วยความจำ</th>
-				<th scope="col">คะแนนเต็ม</th>
-				<th scope="col">ผ่านแล้ว</th>
+				<th scope="col">Name</th>
+				<th scope="col">Start</th>
+				<th scope="col">Length</th>
+        <th scope="col">Mode</th>
+        <th scope="col">Registered</th>
+        <th></th>
 			</tr>
 		</thead>
-		<tbody id=body class="justify-content-center"></tbody>
+		<tbody id= "body" class="justify-content-center"></tbody>
 	</table>
 </div>
 <!-- submit form -->

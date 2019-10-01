@@ -162,6 +162,8 @@ var contest_ls = <%-JSON.stringify(contest_ls)%>;
         <select class="custom-select" id="contest" onchange="select_contest(this.value);">
           <option disabled selected value> -- select a contest -- </option>
         </select>
+        <button class='btn btn-warning btn-lg' data-toggle = "modal" data-target = "#newprob">Edit
+        </button>
         <button class='btn btn-info btn-lg' onclick="save_contest();">Save
         </button><hr>
 				<div class="card">
