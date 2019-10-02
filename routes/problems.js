@@ -16,6 +16,8 @@ router.get('/',function(req, res, next) {
     is_login : req.session.is_login,
   });
 });
+
+
 function convert(pass) {
   var arr = new Array(5000);
   arr.fill(0);
@@ -27,9 +29,30 @@ function convert(pass) {
   });
   return arr;
 }
+
+function cnt(rows,passcnt) {
+  var arr = new Array(1000);
+  arr.fill(0);
+  passcnt.forEach(function(e) {
+    arr[e.prob_id]++;
+  });
+  rows.forEach(function(part, index) {
+    this[index].pass = arr[part.id_Prob];
+  }, rows);
+  return rows;
+}
+
 router.get('/prob_table', function(req, res, next) {
 	//res.render("problems.html", {title: 'Problems',});
   var pass = [];
+  var passcnt = [];
+  var sql = "SELECT User.sname,Result.prob_id FROM Result INNER JOIN User ON Result.user_id=User.idUser "
+          +"WHERE state = 1 and score = 100 group by prob_id";
+    //console.log(sql);
+    con.query(sql, function (err, rows) {
+      //console.log(rows);
+      passcnt = rows;
+    });
   if(req.session.is_login == 1) {
     var sql = "SELECT * FROM Result WHERE user_id = "+req.session.name_id+" ORDER BY time desc";
     //console.log(sql);
@@ -46,7 +69,7 @@ router.get('/prob_table', function(req, res, next) {
     	//console.log(rows);
 		res.render("problems/prob_table.html", {
 			title: 'Problems',
-			problems : rows,
+			problems : cnt(rows,passcnt),
       pass : convert(pass),
       is_login : req.session.is_login,
 		});
