@@ -37,16 +37,19 @@ router.get('/', function(req, res, next) {
   var sql = "SELECT * FROM Problem WHERE state = 1 ORDER BY see_date desc";
   con.query(sql, function (err, result, fields) {
     if (err) throw err;
-    res.render("main/main.html", {
-      title: 'main',
-      showname: req.session.name_user,
-      is_login: req.session.is_login,
-      pass : convert(pass),
-      allprob: result.length,
-      passprob: total_pass,
-      notpassed: total_nopass,
-      nosub: result.length-(total_pass+total_nopass),
-      problems : result,
+    req.sessionStore.length(function(err, len) {
+      res.render("main/main.html", {
+        title: 'main',
+        showname: req.session.name_user,
+        is_login: req.session.is_login,
+        pass : convert(pass),
+        allprob: result.length,
+        passprob: total_pass,
+        notpassed: total_nopass,
+        nosub: result.length-(total_pass+total_nopass),
+        problems : result,
+        online : len
+      });
     });
     //console.log(Problems);
   });

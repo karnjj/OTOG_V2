@@ -8,10 +8,17 @@ var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var mysql = require('mysql');
 var con = mysql.createConnection(global.gConfig.mysql);
-
 const fileUpload = require('express-fileupload');
 const session = require('express-session');
-
+var MySQLStore = require('express-mysql-session')(session);
+var options = {
+  host: 'localhost',
+  port: 3306,
+  user: 'root',
+  password: '0000',
+  database: 'OTOG'
+};
+var sessionStore = new MySQLStore(options);
 var loginRouter = require('./routes/login');
 var mainRouter = require('./routes/main');
 var problemsRouter = require('./routes/problems');
@@ -39,6 +46,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
     secret: "phakphum",
     resave: false,
+    store: sessionStore,
     saveUninitialized: false,
     cookie: { maxAge: 3600000 }
 }));
