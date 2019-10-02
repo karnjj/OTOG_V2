@@ -4,7 +4,7 @@ var mysql = require('mysql');
 var con = mysql.createConnection(global.gConfig.mysql);
 /* GET home page. */
 router.get('/rating_table', function(req, res, next) {
-	var sql = "SELECT * FROM User ORDER BY rating desc";
+	var sql = "SELECT sname,rating FROM User ORDER BY rating desc";
 	con.query(sql, function (err, rows) {
     	if (err) throw err;
     	//console.log(rows);
