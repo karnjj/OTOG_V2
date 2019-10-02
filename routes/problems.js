@@ -50,7 +50,7 @@ router.get('/prob_table', function(req, res, next) {
           +"WHERE state = 1 and score = 100 group by CONCAT(prob_id, '_', user_id)";
     //console.log(sql);
     con.query(sql, function (err, rows) {
-      //console.log(rows);
+      console.log(rows);
       passcnt = rows;
     });
   if(req.session.is_login == 1) {
