@@ -1,1 +1,3 @@
-Time Limit Exceeded - Process killed.
+uploaded/383_750_1569994957.cpp:1:1: error: ‘sfewfewfewf’ does not name a type
+ sfewfewfewf
+ ^~~~~~~~~~~
