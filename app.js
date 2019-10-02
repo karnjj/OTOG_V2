@@ -83,8 +83,8 @@ app.use(function(err, req, res, next) {
   console.log(res.locals.error);
   res.redirect("/main");
 });
-var Interval = null;
 io.on('connection',function(client){
+  var Interval = null;
   console.log('Client connected..');
   client.on('req_table',function(data){
       console.log(data);

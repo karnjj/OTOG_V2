@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var mysql = require('mysql');
+var sha256 = require('js-sha256');
 var con = mysql.createConnection(global.gConfig.mysql);
 con.connect();
 /* GET users listing. */
@@ -9,6 +10,7 @@ router.get('/', function(req, res, next) {
 });
 /* Register user. */
 router.post('/', function(req, res){
+  var hash = sha256.create();
 	var username = req.body.username;
 	var password = req.body.password;
 	var showname = req.body.showname;
@@ -17,6 +19,8 @@ router.post('/', function(req, res){
       //console.log(result);
     if(old_user[0] != null) {res.render("register/register.html", { title: 'register',status: false });
     }else {
+      hash.update(password);
+      password = hash.hex();
       var sql = "INSERT INTO User (username, password, sname) VALUES ?"
       var values = [
       		[username, password, showname],
