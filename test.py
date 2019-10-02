@@ -111,7 +111,7 @@ def cmpfunc(fname1, fname2):
 
 
 while 1:
-    mycursor = mydb.cursor()
+    mycursor = mydb.cursor(buffered=True)
     mycursor.execute("SELECT * FROM Config")
     configs = mycursor.fetchone()
     mycursor.execute("SELECT * FROM Result WHERE status = 0 ORDER BY time")
