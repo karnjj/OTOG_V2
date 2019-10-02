@@ -34,7 +34,7 @@ function cnt(rows,passcnt) {
   var arr = new Array(1000);
   arr.fill(0);
   passcnt.forEach(function(e) {
-    arr[e.prob_id]++;
+    arr[e.prob_id] = arr[e.prob_id] + 1;
   });
   rows.forEach(function(part, index) {
     this[index].pass = arr[part.id_Prob];
