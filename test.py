@@ -193,10 +193,11 @@ while 1:
         else:
             ans = result
         print(ans)
+        errmsg = file_read("env/error.txt")
         print("TIME : " + str(sumtime))
         score = (cnt / int(testcase)) * 100
-        sql = "UPDATE Result SET result = %s, score = %s, timeuse = %s, status = 1 WHERE idResult = %s"
-        val = (ans, score, round(sumtime, 2), myresult[0])
+        sql = "UPDATE Result SET result = %s, score = %s, timeuse = %s, status = 1, errmsg = %s WHERE idResult = %s"
+        val = (ans, score, round(sumtime, 2), errmsg, myresult[0])
         mycursor.execute(sql, val)
     mydb.commit()
     time.sleep(1)

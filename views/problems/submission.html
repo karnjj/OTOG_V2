@@ -72,6 +72,7 @@
 				var score = res[i].score;
 				var rating = res[i].rating;
 				var param = '"' + "show_code(" + id + ")" + '"';
+				var errortxt = '"' + "errortxt(" + id + ")" + '"';
 				if(score == 100) tr.addClass("AC");
 				tr.append("<td>" + id + "</td>");
 				if (rating >= 2000)
@@ -81,7 +82,9 @@
 				else
 					tr.append("<td class='regular'>" + sname + "</td>");
 				tr.append("<td>" + pname + "</td>");
-				tr.append("<td>" + result + "</td>");
+				if(result != "Compilation Error") tr.append("<td>" + result + "</td>");
+				else if(isLogin == "1" && id_user == res[i].user_id || isAdmin == "0")tr.append("<td>" + "<p id='demo' class = 'otogtxt' onclick=" + errortxt + "data-toggle = 'modal' data-target='#scmodal'>" + result + "</p>" + "</td>");
+				else tr.append("<td>" + result + "</td>");
 				tr.append("<td>" + time + " วินาที" + "</td>");
 				tr.append("<td>" + score + "</td>");
 				if (isLogin == "1" && id_user == res[i].user_id || isAdmin == "0") tr.append("<td>" + "<button class='btn otogbtn' onclick=" + param + "data-toggle = 'modal' data-target='#scmodal'>View Code</button>" + "</td>");
@@ -96,6 +99,13 @@
 			var str = "Submission : " + id;
 			$("#schead").text(str);
 			$("#sc").load("request_sc", {id : id}, function(response, status, xhr) {
+				$("#sc").text(response)
+			});
+		}
+		function errortxt(id) {
+			var str = "Error : " + id;
+			$("#schead").text(str);
+			$("#sc").load("request_sc/error", {id : id}, function(response, status, xhr) {
 				$("#sc").text(response)
 			});
 		}

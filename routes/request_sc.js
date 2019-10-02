@@ -20,4 +20,13 @@ router.post('/', function(req, res) {
     //console.log(contents);
   });
 });
+router.post('/error', function(req, res) {
+  var sql = "SELECT errmsg FROM Result WHERE idResult = ?";
+  console.log(req.body.id);
+  con.query(sql, [req.body.id], function (err, rows, fields) {
+    //console.log(__dir);
+    res.send(rows[0].errmsg);
+    //console.log(contents);
+  });
+});
 module.exports = router;
