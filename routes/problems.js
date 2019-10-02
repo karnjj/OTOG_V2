@@ -47,7 +47,7 @@ router.get('/prob_table', function(req, res, next) {
   var pass = [];
   var passcnt = [];
   var sql = "SELECT User.sname,Result.prob_id FROM Result INNER JOIN User ON Result.user_id=User.idUser "
-          +"WHERE state = 1 and score = 100 group by prob_id";
+          +"WHERE state = 1 and score = 100 group by CONCAT(prob_id, '_', user_id)";
     //console.log(sql);
     con.query(sql, function (err, rows) {
       //console.log(rows);
