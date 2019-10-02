@@ -90,7 +90,7 @@ io.on('connection',function(client){
       console.log(data);
       var sql = "SELECT Result.idResult,Problem.name,User.sname,Result.result,Result.score,Result.timeuse,User.rating,Result.user_id,Result.status FROM Result "
       +"INNER JOIN Problem ON Result.prob_id=Problem.id_Prob "
-      +"INNER JOIN User ON Result.user_id=User.idUser ORDER BY Result.time desc";
+      +"INNER JOIN User ON Result.user_id=User.idUser ORDER BY Result.time desc LIMIT 100";
       Interval = setInterval(function() {
         //console.log("pass");
         con.query(sql, function (err, rows) {
@@ -98,7 +98,7 @@ io.on('connection',function(client){
           io.sockets.emit('submission',{submission:rows});
         });
         con.commit();
-      },500);
+      },1000);
   });
   client.on("stop_req", function(data){
     console.log(data);
