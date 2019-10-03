@@ -92,14 +92,13 @@ app.use(function(err, req, res, next) {
   res.redirect("/main");
 });
 io.on('connection',function(client){
-  var Interval = null;
   console.log('Client connected..');
   client.on('req_table',function(data){
       console.log(data);
       var sql = "SELECT Result.idResult,Problem.name,User.sname,Result.result,Result.score,Result.timeuse,User.rating,Result.user_id,Result.status FROM Result "
       +"INNER JOIN Problem ON Result.prob_id=Problem.id_Prob "
       +"INNER JOIN User ON Result.user_id=User.idUser ORDER BY Result.time desc LIMIT 100";
-      Interval = setInterval(function() {
+      io.serverInterval = setInterval(function() {
         //console.log("pass");
         con.query(sql, function (err, rows) {
           if (err) throw err;
@@ -110,7 +109,7 @@ io.on('connection',function(client){
   });
   client.on("stop_req", function(data){
     console.log(data);
-    clearInterval(Interval);
+    clearInterval(io.serverInterval);
   });
 });
 module.exports = {app: app, server: server};

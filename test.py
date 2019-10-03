@@ -193,7 +193,10 @@ while 1:
         else:
             ans = result
         print(ans)
-        errmsg = file_read("env/error.txt")
+        try:
+            errmsg = file_read("env/error.txt")
+        except:
+            errmsg = "Something wrong."
         print("TIME : " + str(sumtime))
         score = (cnt / int(testcase)) * 100
         sql = "UPDATE Result SET result = %s, score = %s, timeuse = %s, status = 1, errmsg = %s WHERE idResult = %s"
