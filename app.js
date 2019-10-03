@@ -93,23 +93,27 @@ app.use(function(err, req, res, next) {
 });
 io.on('connection',function(client){
   console.log('Client connected..');
+  var sql = "SELECT Result.idResult,Problem.name,User.sname,Result.result,Result.score,Result.timeuse,User.rating,Result.user_id,Result.status FROM Result "
+  +"INNER JOIN Problem ON Result.prob_id=Problem.id_Prob "
+  +"INNER JOIN User ON Result.user_id=User.idUser ORDER BY Result.time desc LIMIT 100";
+  var serverInterval = setInterval(function() {
+    //console.log("pass");
+    if(io.senddata == true) {
+      con.query(sql, function (err, rows) {
+        if (err) throw err;
+        io.sockets.emit('submission',{submission:rows});
+      });
+      con.commit();
+    }
+  },1000);
   client.on('req_table',function(data){
       console.log(data);
-      var sql = "SELECT Result.idResult,Problem.name,User.sname,Result.result,Result.score,Result.timeuse,User.rating,Result.user_id,Result.status FROM Result "
-      +"INNER JOIN Problem ON Result.prob_id=Problem.id_Prob "
-      +"INNER JOIN User ON Result.user_id=User.idUser ORDER BY Result.time desc LIMIT 100";
-      io.serverInterval = setInterval(function() {
-        //console.log("pass");
-        con.query(sql, function (err, rows) {
-          if (err) throw err;
-          io.sockets.emit('submission',{submission:rows});
-        });
-        con.commit();
-      },1000);
+      io.senddata = true;
   });
   client.on("stop_req", function(data){
     console.log(data);
-    clearInterval(io.serverInterval);
+    io.senddata = false;
+    //clearInterval(io.serverInterval);
   });
 });
 module.exports = {app: app, server: server};
