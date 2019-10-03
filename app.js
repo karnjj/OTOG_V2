@@ -21,6 +21,7 @@ var options = {
 var sessionStore = new MySQLStore(options);
 var loginRouter = require('./routes/login');
 var mainRouter = require('./routes/main');
+var chatRouter = require('./routes/chat');
 var problemsRouter = require('./routes/problems');
 var registerRouter = require('./routes/register');
 var contestRouter = require('./routes/contest');
@@ -57,6 +58,7 @@ app.use(fileUpload());
 
 app.use('/', IndexRouter);
 app.use('/main', mainRouter);
+app.use('/chat', chatRouter);
 app.use('/problems', problemsRouter);
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);
@@ -97,7 +99,8 @@ io.on('connection',function(client){
   +"INNER JOIN Problem ON Result.prob_id=Problem.id_Prob "
   +"INNER JOIN User ON Result.user_id=User.idUser ORDER BY Result.time desc LIMIT 100";
   var serverInterval = setInterval(function() {
-    //console.log("pass");
+    if(io.onload != true) {clearInterval(serverInterval)};
+    console.log("pass");
     if(io.senddata == true) {
       con.query(sql, function (err, rows) {
         if (err) throw err;
@@ -108,12 +111,44 @@ io.on('connection',function(client){
   },1000);
   client.on('req_table',function(data){
       console.log(data);
+      io.onload = true;
       io.senddata = true;
   });
   client.on("stop_req", function(data){
     console.log(data);
     io.senddata = false;
     //clearInterval(io.serverInterval);
+  });
+  /*
+  client.on("typing", data => {
+    client.broadcast.emit("notifyTyping", {
+      user: data.user,
+      message: data.message
+    });
+  });*/
+  client.on("chat message", function(msg) {
+    console.log("message: "  +  msg);
+    //broadcast message to everyone in port:5000 except yourself.
+    client.broadcast.emit("received", { message: msg  });
+
+    //save chat to the database
+    var millis = Date.now();
+    var time_now = Math.floor(millis/1000);
+    var sql = "INSERT INTO Chat (msg, user, time) VALUES ?"
+    var values = [
+        [msg, "otog", time_now],
+     ];
+    con.query(sql, [values], function (err, result) {
+      if (err) throw err;
+    });
+    /*
+    connect.then(db  =>  {
+      console.log("connected correctly to the server");
+
+      let  chatMessage  =  new Chat({ message: msg, sender: "Anonymous"});
+      chatMessage.save();
+    });
+    */
   });
 });
 module.exports = {app: app, server: server};
