@@ -63,6 +63,20 @@
 			label.textContent = fileName;
 		}
 	</script>
+	<script>
+		function OnUploadCheck()
+		{
+			var extall="c,cpp";
+			file = document.form1.customfile.value;
+			ext = file.split('.').pop().toLowerCase();
+			if(parseInt(extall.indexOf(ext)) < 0)
+			{
+				alert('Extension support : ' + extall);
+				return false;
+			}
+			return true;
+		}
+	</script>
 </head>
 
 <body>
@@ -104,7 +118,7 @@
 
         <!-- Modal body -->
         <div class="modal-body">
-          <form action="upload" method="post" enctype="multipart/form-data">
+          <form name="form1"action="upload" method="post" enctype="multipart/form-data" onSubmit="return OnUploadCheck();">
 
             <div class="custom-file">
               <input type="file" class="custom-file-input" name="customfile" id="customfile">
