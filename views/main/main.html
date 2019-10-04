@@ -5,6 +5,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>OTOG - One Tambon One Grader</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<!-- bootstrap integral -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/		bootstrap.min.css">
@@ -15,12 +16,12 @@
 
 	<!-- main source of custom css -->
 	<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
-
+	
 	<style type="text/css">
         a.configlink {text-decoration: none;}
 				a.configlink {color: #000000;}
 				a.configlink {cursor: default;}
-  </style>
+	</style>
 
 	<!-- include login script + load problems in main page-->
 	<script>
@@ -32,13 +33,13 @@
 			var notpassed = "<%= notpassed %>";
 			var nosub = "<%= nosub %>";
 			if (isLogin == "1") {
-				$("#login_but").html("<i class=\"fa fa-sign-in\"></i> Logout");
+				$("#login_but").html("<i class=\"fa fa-sign-in\"></i> <span>Logout</span>");
 				$("#login_but").attr("href", "logout");
 				$("#login_but").css("color", "red");
 				$("#welcome").show();
 				$("#guest").hide();
 			} else {
-				$("#login_but").html("<i class=\"fa fa-sign-in\"></i> Login");
+				$("#login_but").html("<i class=\"fa fa-sign-in\"></i> <span>Login</span>");
 				$("#login_but").attr("href", "login");
 				$("#login_but").css("color", "rgba(0, 0, 0, 0.7)");
 				$("#welcome").hide();
@@ -79,69 +80,81 @@
 </head>
 
 <body>
-
 	<!-- navigation bar -->
-	<nav class="navbar navbar-expand-sm navbar-light justify-content-end" style="background-color: #F1F1F1">
-		<a class="navbar-brand head_typo" href="main">OTOG - One Tambon One Grader</a>
+	<nav class="navbar navbar-expand-sm navbar-light justify-content-between" style="background-color: #F1F1F1">
+		<a class="navbar-brand head_typo" href="main">OTOG<span> - One Tambon One Grader</span></a>
 		<ul class="navbar-nav">
 			<li class="nav-item">
 				<a class="nav-link head_typo active" href="main">
 					<i class="fa fa-home"></i>
-					Main</a>
+					<span>Main</span>
+				</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link head_typo" href="problems">
 					<i class="fa fa-puzzle-piece"></i>
-					Problems</a>
+					<span>Problems</span>
+				</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link head_typo" href="contest">
 					<i class="fa fa-trophy"></i>
-					Contest</a>
+					<span>Contest</span>
+				</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link head_typo" href="ratings">
 					<i class="fa fa-bar-chart"></i>
-					Ratings</a>
+					<span>Ratings</span>
+				</a>
 			</li>
 			<li class="nav-item">
 				<a id="login_but" class="nav-link head_typo" href="login">
 					<i class="fa fa-sign-in"></i>
-					Login</a>
+					<span>Login</span>
+				</a>
 			</li>
 		</ul>
 	</nav>
 	<!-- end navigation bar -->
-	<h5 style="color : #33cc33"><center> &#11088; Online : <%= online %> &#11088;</center></h5>
+	<!--h5 style="color : #33cc33"><center> &#11088; Online : <%= online %> &#11088;</center></h5-->
 	<div class="jumbotron">
 		<div class="container">
 			<!-- not login -->
 			<div id="guest">
-				<h1>Welcome to
+				<h1>Welcome to<b>
 					<code class="font_green">O</code>
-    			<code class="font_red">T</code>
-    			<code class="font_org">O</code>
-    			<code style="color : #17b4e9">G</code>
-				</h1>
-				<h1>Become a god of competitive programming.</code></h1>
+    				<code class="font_red">T</code>
+    				<code class="font_org">O</code>
+					<code class="font_blue">G</code>
+				</b></h1>
+				<h1>Become a god of competitive programming.</h1>
 				<h3>Learn how to code and build algorithms efficiently.</h3><br>
 				<a href="register" target="_blank" class="btn btn-lg otogbtn">Sign Up</a>
 			</div>
 			<!-- login -->
 			<div id="welcome">
-				<h2> <code class="otogtxt"> สวัสดี <%= showname %>!</code></h2>
-				<ul>
-					<li>
-						<h3> <code class="font_gray">ทั้งหมด <%= allprob %></code></h3>
+				<h4 class="text-center"> <code class="font_gray">สวัสดี <%= showname %></code></h4>
+				<ul class="d-flex justify-content-center">
+					<li class="count_button gray">
+						<h5 class="font_white cnt_msg">ทั้งหมด</h5>
+						<code class="font_white cnt_num"> <%= allprob %></code>
 					</li>
-					<li>
-						<h3> <code class="font_green">ผ่านแล้ว <%= passprob %></code></h3>
+					<li class="count_button green">
+						<h5 class="font_white cnt_msg">ผ่านแล้ว</h5>
+						<code class="font_white cnt_num"><%= passprob %></code>
 					</li>
-					<li>
-						<h3> <code class="font_red">ยังไม่ผ่าน <%= notpassed %></code></h3>
+					<li class="count_button red">
+						<h5 class="font_white cnt_msg">ยังไม่ผ่าน</h5> 
+						<code class="font_white cnt_num"><%= notpassed %></code>
 					</li>
-					<li>
-						<h3> <code class="font_org">ยังไม่ส่ง <%= nosub %></code></h3>
+					<li class="count_button org">
+						<h5 class="font_white cnt_msg">ยังไม่ส่ง </h5>
+						<code class="font_white cnt_num"><%= nosub %></code>
+					</li>
+					<li class="count_button blue">
+						<h5 class="font_white cnt_msg">โจทย์วันนี้</h5>
+						<code class="font_white cnt_num"><%= todayprob %></code>
 					</li>
 				</ul>
 			</div>
@@ -150,42 +163,45 @@
 	<!-- 3 main path -->
 	<div class="container">
 		<div class="row">
-			<div class="col-md-4">
+			<div class="col-md-4 suggest">
 				<h2><i class="fa fa-question"></i> FAQ</h2>
 				<p> ไม่รู้ว่าจะเริ่มต้นอย่างไร ทุกอย่างดูงงไปหมด ถ้าหากคุณมีปัญหาเหล่านี้สามารถ หาคำตอบได้จาก คำถามยอดนิยมที่ผู้ใช้ส่วนใหญ่มักจะถามเป็นประจำ </p>
 				<a href="#" target="_blank" class="btn btn-lg otogbtn">Learn More</a>
+				<br><br>
 			</div>
-			<div class="col-md-4">
+			<div class="col-md-4 suggest">
 				<h2><i class="fa fa-flag-checkered"></i> Get started</h2>
 				<p> เพิ่งเริ่มการเดินทาง อาจจะอยากได้การต้อนรับที่ดี ด้วยโจทย์ที่คัดสรรว่าเหมาะสำหรับผู้เริ่มต้นใน competitive programming </p>
 				<a href="problems" target="_blank" class="btn btn-lg otogbtn">View Problem</a>
+				<br><br>
 			</div>
-			<div class="col-md-4">
+			<div class="col-md-4 suggest">
 				<h2><i class="fa fa-trophy"></i> Contest</h2>
 				<p> ทำโจทย์คนเดียวมันอาจจะเหงา ลองมาเข้า contest การแข่งขันอันทรงเกียรติ(?) เพื่อจะได้มีเพื่อนทำโจทย์และแข่งขันไปพร้อมๆกันกับเรา </p>
 				<a href="contest" target="_blank" class="btn btn-lg otogbtn">Join Contest</a>
+				<br><br>
 			</div>
 		</div>
 		<!-- example of table use for refer only -->
-		<br><br><br>
 		<div>
 			<i class="glyphicon glyphicon-asterisk"></i>
 			<h2><i class="fa fa-puzzle-piece"></i> โจทย์ใหม่</h2>
 		</div>
 		<hr>
 		<!-- fetch new problem (maybe top 10) -->
-		<table class="table table-hover" style="text-align: center;">
-			<thead>
-				<tr style="color: #FF851B">
-					<th scope="col">#</th>
-					<th scope="col">Name</th>
-					<th scope="col">Passed</th>
-					<th scope="col">Ratings</th>
-				</tr>
-			</thead>
-			<tbody id=body></tbody>
-		</table>
-
+		<div class="table-responsive">
+			<table class="table table-hover" style="text-align: center;">
+				<thead>
+					<tr style="color: #FF851B">
+						<th scope="col">#</th>
+						<th scope="col">Name</th>
+						<th scope="col">Passed</th>
+						<th scope="col">Ratings</th>
+					</tr>
+				</thead>
+				<tbody id=body></tbody>
+			</table>
+		</div>
 		<!-- footer of Phakphum Dev Team -->
 		<hr>
 		<footer>

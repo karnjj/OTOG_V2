@@ -25,6 +25,7 @@ function convert(pass) {
 function cnt(rows,passcnt) {
   var millis = Date.now();
   var time_now = Math.floor(millis/1000);
+  console.log(time_now);
   var arr = new Array(1000);
   arr.fill(0);
   passcnt.forEach(function(e) {
@@ -32,8 +33,12 @@ function cnt(rows,passcnt) {
   });
   rows.forEach(function(part, index) {
     this[index].pass = arr[part.id_Prob];
-    if(this[index].see_date > (time_now - 86400)) prob_today++;
+    if(this[index].see_date > (time_now - 86400)) {
+      prob_today++;
+    }
   }, rows);
+  console.log(prob_today);
+  
   return rows;
 }
 /* GET home page. */
@@ -69,7 +74,7 @@ router.get('/', function(req, res, next) {
         allprob: result.length,
         passprob: total_pass,
         notpassed: total_nopass,
-        prob_today: prob_today,
+        todayprob: prob_today,
         nosub: result.length-(total_pass+total_nopass),
         problems : cnt(result,passcnt),
         online : len
