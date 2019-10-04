@@ -21,11 +21,30 @@ function convert(pass) {
   });
   return arr;
 }
+function cnt(rows,passcnt) {
+  var arr = new Array(1000);
+  arr.fill(0);
+  passcnt.forEach(function(e) {
+    arr[e.prob_id] = arr[e.prob_id] + 1;
+  });
+  rows.forEach(function(part, index) {
+    this[index].pass = arr[part.id_Prob];
+  }, rows);
+  return rows;
+}
 /* GET home page. */
 router.get('/', function(req, res, next) {
   total_pass = 0;
   total_nopass = 0;
   var pass = [];
+  var passcnt = [];
+  var sql = "SELECT User.sname,Result.prob_id FROM Result INNER JOIN User ON Result.user_id=User.idUser "
+          +"WHERE state = 1 and score = 100 group by CONCAT(prob_id, '_', user_id)";
+    //console.log(sql);
+  con.query(sql, function (err, rows) {
+    console.log(err);
+    passcnt = rows;
+  });
   if(req.session.is_login == 1) {
     var sql = "SELECT * FROM Result WHERE user_id = "+req.session.name_id+" ORDER BY time desc";
     //console.log(sql);
@@ -47,7 +66,7 @@ router.get('/', function(req, res, next) {
         passprob: total_pass,
         notpassed: total_nopass,
         nosub: result.length-(total_pass+total_nopass),
-        problems : result,
+        problems : cnt(result,passcnt),
         online : len
       });
     });

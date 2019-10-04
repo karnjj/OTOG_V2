@@ -60,7 +60,7 @@
 				var sname = prob[i].sname;
 				var time = prob[i].time;
 				var mem = prob[i].memory;
-				var rating = prob[i].rating;
+				var rating = 1500;
 				var pass = prob[i].pass;
 				if(isLogin == "1") {
 					if(pass_state[id] == 2) tr.addClass("item AC");
@@ -70,8 +70,8 @@
 				tr.append("<td>" + id + "</td>");
 				tr.append("<td>" + "<a class = 'otogtxt' href =" + path + ">" + name + "<br>" +
 					"(" + time + " วินาที, " + mem + " MB" + ")" + "</a>" + "</td>");
-				tr.append("<td>" + rating + "</td>");
 				tr.append("<td>" + pass + "</td>");
+				tr.append("<td>" + rating + "</td>");
 				$("#body").append(tr);
 			}
 		});
