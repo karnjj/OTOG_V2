@@ -120,19 +120,9 @@ io.on('connection',function(client){
     io.senddata = false;
     //clearInterval(io.serverInterval);
   });
-  /*
-  client.on("typing", data => {
-    client.broadcast.emit("notifyTyping", {
-      user: data.user,
-      message: data.message
-    });
-  });*/
   client.on("chat message", function(data) {
     //console.log("message: "  +  data.msg);
-    //broadcast message to everyone in port:5000 except yourself.
     client.broadcast.emit("received", { message: data.msg,user : data.user  });
-
-    //save chat to the database
     var millis = Date.now();
     var time_now = Math.floor(millis/1000);
     var sql = "INSERT INTO Chat (msg, user, time) VALUES ?"
@@ -142,14 +132,6 @@ io.on('connection',function(client){
     con.query(sql, [values], function (err, result) {
       if (err) throw err;
     });
-    /*
-    connect.then(db  =>  {
-      console.log("connected correctly to the server");
-
-      let  chatMessage  =  new Chat({ message: msg, sender: "Anonymous"});
-      chatMessage.save();
-    });
-    */
   });
 });
 module.exports = {app: app, server: server};
