@@ -26,7 +26,7 @@ function cnt(rows,passcnt) {
   prob_today = 0;
   var millis = Date.now();
   var time_now = Math.floor(millis/1000);
-  console.log(time_now);
+  //console.log(time_now);
   var arr = new Array(1000);
   arr.fill(0);
   passcnt.forEach(function(e) {
@@ -37,10 +37,10 @@ function cnt(rows,passcnt) {
     if(this[index].see_date > (time_now - 86400)) {
       prob_today = prob_today + 1;
     }
-    console.log(prob_today);
+    //console.log(prob_today);
     
   }, rows);
-  console.log(prob_today);
+  //console.log(prob_today);
   
   return rows;
 }
