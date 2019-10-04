@@ -15,7 +15,8 @@
 
   <!-- main source of custom css -->
   <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
-
+  <link rel="stylesheet" type="text/css" href="/stylesheets/chat_button.css">
+  
   <!-- js for show contest -->
   <script>
   	$(document).ready(function(){ // onload
@@ -81,6 +82,12 @@
 	<div class="container table-responsive">
 	<div id="contest_section"></div>
 
+	<!-- Live Chat -->
+	<div class="btn-chat" id="livechat-compact-container" style="visibility: visible; opacity: 1;">
+		<div class="btn-holder">
+			<a onclick="window.open('/chat','name','width=350,height=500')" href="/chat" target="popup" class="link">Live Chat</a>
+		</div>
+	</div>
 		<!-- footer of Phakphum Dev Team -->
 	<hr>
 	<footer>

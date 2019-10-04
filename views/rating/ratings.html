@@ -16,7 +16,7 @@
 
 	<!-- main source of custom css -->
 	<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
-
+	<link rel="stylesheet" type="text/css" href="/stylesheets/chat_button.css">
 	<!-- W3.js -->
 	<script src="https://www.w3schools.com/lib/w3.js"></script>
 
@@ -95,19 +95,25 @@
 		<div class="table-responsive">
 			<div id="page"></div>
 		</div>
-			<!-- footer of Phakphum Dev Team -->
-			<hr>
-			<footer>
-				<div class="row">
-					<div class="col-md-6">
-						<p>If you have any problem or suggestion, please <a href="#" style="color: #FF851B"> Contact Us </a></p>
-					</div>
-					<div class="col-md-6">
-						<span class="float-right"> &copy; 2019 Phakphum Dev Team</span>
-					</div>
-				</div>
-			</footer>
+	<!-- Live Chat -->
+	<div class="btn-chat" id="livechat-compact-container" style="visibility: visible; opacity: 1;">
+		<div class="btn-holder">
+			<a onclick="window.open('/chat','name','width=350,height=500')" href="/chat" target="popup" class="link">Live Chat</a>
 		</div>
+	</div>
+	<!-- footer of Phakphum Dev Team -->
+	<hr>
+	<footer>
+		<div class="row">
+			<div class="col-md-6">
+				<p>If you have any problem or suggestion, please <a href="#" style="color: #FF851B"> Contact Us </a></p>
+			</div>
+			<div class="col-md-6">
+				<span class="float-right"> &copy; 2019 Phakphum Dev Team</span>
+			</div>
+		</div>
+	</footer>
+	</div>
 </body>
 
 </html>
