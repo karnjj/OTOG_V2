@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>OTOG - One Tambon One Grader</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- bootstrap integral -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<!-- W3.js -->
+	<script src="https://www.w3schools.com/lib/w3.js"></script>
+
+	<!-- main source of custom css -->
+	<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+	<link rel="stylesheet" type="text/css" href="/stylesheets/chat_button.css">
+
+	<!-- include login script + load problems-->
+	<script>
+		$(document).ready(function() {
+			var isLogin = "<%= is_login %>";
+			if (isLogin == "1") {
+				$("#login_but").html("<i class=\"fa fa-sign-in\"></i> <span>Logout</span>");
+				$("#login_but").attr("href", "logout");
+				$("#login_but").css("color", "red");
+			} else {
+				$("#login_but").html("<i class=\"fa fa-sign-in\"></i> <span>Login</span>");
+				$("#login_but").attr("href", "login");
+				$("#login_but").css("color", "rgba(0, 0, 0, 0.7)");
+			}
+		});
+	</script>
+	<!-- load problem -->
+	<script>
+		$(document).ready(function() {
+			$("#submit_modal").hide();
+			var prob = <%-JSON.stringify(problems)%>;
+			var pass_state = <%-JSON.stringify(pass)%>;
+			var is_login = "<%= is_login %>";
+			var tr;
+			var sz = prob.length;
+			//alert(sz);
+			for (var i = 0; i < sz; i++) {
+				tr = $("<tr/>");
+				tr.addClass("item");
+				var id = prob[i].id_Prob;
+				var name = prob[i].name;
+				var sname = prob[i].sname;
+				var time = prob[i].time;
+				var mem = prob[i].memory;
+				//var rating = prob[i].rating;
+				var pass = prob[i].pass;
+				if(is_login == "1") {
+					if(pass_state[id] == 2) tr.addClass("item AC");
+					else if(pass_state[id] == 1)tr.addClass("item WA");
+				}
+				var path = "problems/docs/" + sname;
+				var param = '"' + "show_submit(" + i + ")" + '"';
+				tr.append("<td>" + id + "</td>");
+				tr.append("<td>" + "<a class = 'otogtxt' href =" + path + ">" + name + "<br>" +
+					"(" + time + " วินาที, " + mem + " MB" + ")" + "</a>" + "</td>");
+				tr.append("<td>" + "1500" + "</td>");
+				tr.append("<td>" + pass + "</td>");
+				if (is_login == "1") tr.append("<td>" + "<button class='btn otogbtn' onclick=" + param +
+					"data-toggle = 'modal' data-target='#submit_modal'>Submit</button>" + "</td>");
+				$("#body").append(tr);
+			}
+		});
+	</script>
+	<script>
+		function show_submit(id) {
+			//alert("It's (may) work !");
+			var prob = <%-JSON.stringify(problems)%>;
+			var pname = prob[id].name;
+			//alert(pname);
+			$("#prob_head").text(pname);
+			$("#send_id").attr("value", prob[id].id_Prob);
+		}
+	</script>
+	<!-- submission script -->
+	<script>
+		var input = document.getElementById('customfile');
+		var label = document.getElementById('file_name');
+		input.addEventListener('change', showFileName);
+
+		function showFileName(event) {
+			var input = event.srcElement;
+			var fileName = input.files[0].name;
+			label.textContent = fileName;
+		}
+	</script>
+	<script>
+		function OnUploadCheck()
+		{
+			var extall="c,cpp";
+			file = document.form1.customfile.value;
+			ext = file.split('.').pop().toLowerCase();
+			if(parseInt(extall.indexOf(ext)) < 0)
+			{
+				alert('Extension support : ' + extall);
+				return false;
+			}
+			return true;
+		}
+	</script>
+</head>
+
+<body>
+
+	<!-- navigation bar -->
+	<nav class="navbar navbar-expand-sm navbar-light justify-content-between" style="background-color: #F1F1F1">
+		<a class="navbar-brand head_typo" href="#">OTOG<span> - One Tambon One Grader</span></a>
+		<ul class="navbar-nav">
+			<li class="nav-item">
+				<a class="nav-link head_typo" href="/main">
+					<i class="fa fa-home"></i>
+					<span>Main</span>		
+				</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link head_typo" href="/problems">
+					<i class="fa fa-puzzle-piece"></i>
+					<span>Problems</span>
+				</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link head_typo active" href="/contest">
+					<i class="fa fa-trophy"></i>
+					<span>Contest</span>
+				</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link head_typo" href="/ratings">
+					<i class="fa fa-bar-chart"></i>
+					<span>Ratings</span>
+				</a>
+			</li>
+			<li class="nav-item">
+				<a id = "login_but" class="nav-link head_typo" href="/login">
+					<i class="fa fa-sign-in"></i>
+					<span>Login</span>
+				</a>
+			</li>
+		</ul>
+	</nav><br><br><br>
+
+	<!-- problem section -->
+	<div class="container">
+	<!-- search problem -->
+	<h2> <i class ="fa fa-trophy"></i> Contest </h2><br>
+	<div class="row">
+    <input class ="col-md-8 form-control"
+    oninput="w3.filterHTML('#probs', '.item', this.value)" placeholder="ค้นหาโจทย์">
+    <div class="col-md-2"></div>
+    <a href="/submission" class="col-md-2 btn otogbtn">View Submission</a>
+	</div>
+	<hr>
+
+	<table class="table table-hover" id = "probs" style="text-align: center;">
+			<thead>
+				<tr style="color: #FF851B">
+					<th onclick = "w3.sortHTML('#probs', '.item', 'td:nth-child(1)')">#</th>
+					<th onclick= "w3.sortHTML('#probs', '.item', 'td:nth-child(2)')">Name</th>
+					<th onclick= "w3.sortHTML('#probs', '.item', 'td:nth-child(3)')">Rating</th>
+					<th onclick= "w3.sortHTML('#probs', '.item', 'td:nth-child(4)')">Passed</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody id = "body"></tbody>
+	</table>
+
+  <!-- submit form -->
+  <div class="modal fade" id="submit_modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 id = "prob_head" class="modal-title"> Modal Header </h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+          <form name="form1"action="upload" method="post" enctype="multipart/form-data" onSubmit="return OnUploadCheck();">
+
+            <div class="custom-file">
+              <input type="file" class="custom-file-input" name="customfile" id="customfile">
+              <label class="custom-file-label" for="customfile" id = "file_name">Choose file</label>
+            </div><br><br>
+
+            <label>Choose Language</label>
+            <select class="custom-select">
+              <option selected value="c">C</option>
+              <option selected value="cpp">C++</option>
+            </select><br><br>
+            <input type="hidden" value = "#" name="prod_id" id = "send_id">
+            <div class="modal-footer">
+            <button type="submit" class="btn otogbtn">Submit</button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+	<!-- Live Chat -->
+	<div class="btn-chat" id="livechat-compact-container" style="visibility: visible; opacity: 1;">
+		<div class="btn-holder">
+			<a onclick="window.open('/chat','name','width=350,height=500')" href="/chat" target="popup" class="link">Live Chat</a>
+		</div>
+	</div>
+	<!-- footer of Phakphum Dev Team -->
+	<hr>
+	<footer>
+		<div class="row">
+			<div class="col-md-6">
+				<p>If you have any problem or suggestion, please <a href="#" style="color: #FF851B"> Contact Us </a></p>
+			</div>
+			<div class="col-md-6">
+				<span class="float-right"> &copy; 2019 Phakphum Dev Team</span>
+			</div>
+		</div>
+	</footer>
+	</div>
+</body>
+
+</html>

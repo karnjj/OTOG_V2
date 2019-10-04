@@ -53,7 +53,6 @@
 				var length = difftime(Number(con[i].time_end)-time_start);
 				var problems = con[i].problems;
         //var number = (JSON.parse(con[i].problems)).length;
-				var path = "problems/docs/" + name;
 				tr.append("<td>" + id + "</td>");
 				tr.append("<td>" + name + "</td>");
 				//tr.append("<td>" + number + "</td>");
@@ -61,8 +60,8 @@
         tr.append("<td>" + length + "</td>");
 				tr.append("<td>" + mode + "(" + judge + ")" + "</td>");
         tr.append("<td>" + "0" + "</td>");
-        if (time_start <= (Date.now()/1000)) tr.append("<td>" + "<button class='btn otogbtn' onclick=" +
-					"data-toggle = 'modal' data-target='#submit_modal'>Enter >></button>" + "</td>");
+        if (time_start <= (Date.now()/1000)) tr.append("<td>" + "<a class='btn otogbtn' "+
+          "href='/contest/id/"+ id +"' >Enter >></a>" + "</td>");
         else tr.append("<td>" + "Before start "+ difftime(time_start-Date.now()/1000) + "</td>");
 				$("#body").append(tr);
 			}
