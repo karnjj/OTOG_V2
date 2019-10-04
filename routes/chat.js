@@ -11,7 +11,10 @@ router.get('/history', function(req, res, next) {
 	sql = "SELECT * FROM Chat ORDER BY idChat";
 	con.query(sql, function (err, result) {
 		if (err) throw err;
-		res.json(result);
+		res.send({
+			chat : result,
+			showname : req.session.name_user
+		});
 	});
 })
 module.exports = router;

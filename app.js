@@ -33,7 +33,7 @@ var UploadRouter = require('./routes/upload');
 var SubmissionRouter = require('./routes/submission')(io);
 var scoreboardRouter = require('./routes/scoreboard');
 var request_scRouter = require('./routes/request_sc');
-
+var scriptsRouter = require('./routes/scripts');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -70,6 +70,7 @@ app.use('/upload', UploadRouter);
 app.use('/submission', SubmissionRouter);
 app.use('/scoreboard', scoreboardRouter);
 app.use('/request_sc', request_scRouter);
+//app.use('/scripts', scriptsRouter);
 /*
 app.use(function(req, res, next){
   res.io = io;
@@ -100,7 +101,7 @@ io.on('connection',function(client){
   +"INNER JOIN User ON Result.user_id=User.idUser ORDER BY Result.time desc LIMIT 100";
   var serverInterval = setInterval(function() {
     if(io.onload != true) {clearInterval(serverInterval)};
-    console.log("pass");
+    //console.log("pass");
     if(io.senddata == true) {
       con.query(sql, function (err, rows) {
         if (err) throw err;
@@ -126,17 +127,17 @@ io.on('connection',function(client){
       message: data.message
     });
   });*/
-  client.on("chat message", function(msg) {
-    console.log("message: "  +  msg);
+  client.on("chat message", function(data) {
+    //console.log("message: "  +  data.msg);
     //broadcast message to everyone in port:5000 except yourself.
-    client.broadcast.emit("received", { message: msg  });
+    client.broadcast.emit("received", { message: data.msg,user : data.user  });
 
     //save chat to the database
     var millis = Date.now();
     var time_now = Math.floor(millis/1000);
     var sql = "INSERT INTO Chat (msg, user, time) VALUES ?"
     var values = [
-        [msg, "otog", time_now],
+        [data.msg, data.user, time_now],
      ];
     con.query(sql, [values], function (err, result) {
       if (err) throw err;

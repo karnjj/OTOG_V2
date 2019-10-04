@@ -1,6 +1,7 @@
 var socket = io();
 var messages = document.getElementById("messages");
-function timeConverter(timestamp){
+var showname = "";
+function timeConverter(timestamp){  
   var a = new Date(timestamp * 1000);
   var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   var year = a.getFullYear();
@@ -15,16 +16,22 @@ function timeConverter(timestamp){
 }
 (function() {
   $("form").submit(function(e) {
+    if(showname == undefined) showname = "Guest";
     let li = document.createElement("li");
     e.preventDefault(); // prevents page reloading
-    socket.emit("chat message", $("#message").val());
+    var data = {
+      msg : $("#message").val(),
+      user : showname
+    }
+    socket.emit("chat message", data);
 
     messages.appendChild(li).append($("#message").val());
     let span = document.createElement("span");
-    messages.appendChild(span).append("by " + "Anonymous" + ": " + "just now");
+    messages.appendChild(span).append("by " + showname + ": " + "just now");
 
     $("#message").val("");
-
+    var xH = messages.scrollHeight; 
+    messages.scrollTo(0, xH);
     return false;
   });
 
@@ -33,7 +40,7 @@ function timeConverter(timestamp){
     let span = document.createElement("span");
     var messages = document.getElementById("messages");
     messages.appendChild(li).append(data.message);
-    messages.appendChild(span).append("by " + "otog" + ": " + "just now");
+    messages.appendChild(span).append("by " + data.user + ": " + "just now");
     console.log("Hello bingo!");
   });
 })();
@@ -46,13 +53,16 @@ function timeConverter(timestamp){
     })
     .then(json => {
       console.log(json);
-      json.map(data => {
+      showname = json.showname;
+      json.chat.map(data => {
         let li = document.createElement("li");
         let span = document.createElement("span");
         messages.appendChild(li).append(data.msg);
         messages
           .appendChild(span)
           .append("by " + data.user + ": " + timeConverter(data.time));
+        var xH = messages.scrollHeight; 
+        messages.scrollTo(0, xH);
       });
     });
 })();
