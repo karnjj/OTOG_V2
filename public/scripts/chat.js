@@ -41,7 +41,8 @@ function timeConverter(timestamp){
     var messages = document.getElementById("messages");
     messages.appendChild(li).append(data.message);
     messages.appendChild(span).append("by " + data.user + ": " + "just now");
-    console.log("Hello bingo!");
+    var xH = messages.scrollHeight; 
+    messages.scrollTo(0, xH);
   });
 })();
 
