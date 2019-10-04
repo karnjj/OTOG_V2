@@ -58,7 +58,7 @@ app.use(fileUpload());
 
 app.use('/', IndexRouter);
 app.use('/main', mainRouter);
-//app.use('/chat', chatRouter);
+app.use('/chat', chatRouter);
 app.use('/problems', problemsRouter);
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);
