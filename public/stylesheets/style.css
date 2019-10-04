@@ -66,16 +66,6 @@
   .font_blue{
     color : #17b4e9;
   }
-  .count_btn {
-    border-radius: 6px;
-    display: inline-block;
-    height: 86px;
-    margin: 0 0px;
-      padding: 0px 0 0;
-      width: 115px;
-      margin-top:10px;
-      opacity: 0.8;
-  }
   .count_btn.blue{
     background-color:#17B4E9;
   }
@@ -198,34 +188,39 @@ a:hover{
   align-items: center;
   justify-content: center;
   background: rgb(200,200,200);
-  padding: 20px;
-  width: 145px;
-  margin: 2px;
-  height: 110px;
   border-radius: 1rem;
+  width: 128px;
+  height: 100px;
+  padding: 20px;
+  margin: 3px;
   opacity: 0.8;
 }
-
+:root {
+  --btn_blue: #17B4E9;
+  --btn_green:#41E241;
+  --btn_red:  #FF4D4D;
+  --btn_orng: #FFAD33;
+  --btn_gray: #111111;
+}
 .count_button.blue:hover{
   transition: background-color 0.2;
-  background-color:#17B4E9;
+  background-color: var(--btn_blue);
 }
 .count_button.green:hover{
   transition: background-color 0.2s;
-  background-color:#41E241;
+  background-color: var(--btn_green);
 }
 .count_button.red:hover{
   transition: background-color 0.2s;
-  background-color:#FF4D4D;
+  background-color: var(--btn_red);
 }
 .count_button.org:hover{
   transition: background-color 0.2s;
-  box-shadow: rgb(200,200,200);
-  background-color:#FFAD33;
+  background-color: var(--btn_orng);
 }
 .count_button.gray:hover{
   transition: background-color 0.2s;
-  background-color: #111111;
+  background-color: var(--btn_gray);
 }
 .count_button:active{
   transition: opacity 0.1s;
