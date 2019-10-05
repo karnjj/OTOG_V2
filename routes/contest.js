@@ -41,6 +41,8 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/id/:idContest', async function(req, res, next) {
+  var millis = Date.now();
+  var time_now = Math.floor(millis/1000);
   var pass = [];
   var passcnt = [];
   /*
@@ -52,12 +54,16 @@ router.get('/id/:idContest', async function(req, res, next) {
   });
   */
   var sql = "SELECT * FROM Contest WHERE idContest = ?";
-  var problem = await new Promise((resolve, reject) => con.query(sql, [req.params.idContest], function(err,result){
+  var res1 = await new Promise((resolve, reject) => con.query(sql, [req.params.idContest], function(err,result){
     if (err) reject(err)
-    else resolve(JSON.parse(result[0].problems));
+    else resolve(result[0]);
   }));
-  var sql = "SELECT User.sname,Result.prob_id FROM Result INNER JOIN User ON Result.user_id=User.idUser "
-          +"WHERE state = 1 and score = 100 group by CONCAT(prob_id, '_', user_id)";
+  var problem = JSON.parse(res1.problems);
+  var time_end = res1.time_end;
+  if(time_end < time_now) res.redirect('/contest');
+  else {
+    var sql = "SELECT User.sname,Result.prob_id FROM Result INNER JOIN User ON Result.user_id=User.idUser "
+    +"WHERE state = 1 and score = 100 group by CONCAT(prob_id, '_', user_id)";
     //console.log(sql);
     con.query(sql, function (err, rows) {
       if(err) throw err;
@@ -84,6 +90,7 @@ router.get('/id/:idContest', async function(req, res, next) {
       idContest : req.params.idContest,
 		});
 	});
+  } 
 });
 
 router.get('/submission', function(req, res, next) {
