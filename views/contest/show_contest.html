@@ -49,6 +49,7 @@
 				var mode = con[i].mode_grader;
         var judge = con[i].judge;
         var time_start = Number(con[i].time_start);
+        var time_end = Number(con[i].time_end);
 				var start = timeConverter(con[i].time_start);
 				var length = difftime(Number(con[i].time_end)-time_start);
 				var problems = con[i].problems;
@@ -60,7 +61,8 @@
         tr.append("<td>" + length + "</td>");
 				tr.append("<td>" + mode + "(" + judge + ")" + "</td>");
         tr.append("<td>" + "0" + "</td>");
-        if (time_start <= (Date.now()/1000)) tr.append("<td>" + "<a class='btn otogbtn' "+
+        if (time_end <= (Date.now()/1000)) tr.append("<td>" + "Closed " + "</td>");
+        else if (time_start <= (Date.now()/1000)) tr.append("<td>" + "<a class='btn otogbtn' "+
           "href='/contest/id/"+ id +"' >Enter >></a>" + "</td>");
         else tr.append("<td>" + "Before start "+ difftime(time_start-Date.now()/1000) + "</td>");
 				$("#body").append(tr);
