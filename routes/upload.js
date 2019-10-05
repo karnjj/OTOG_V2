@@ -5,6 +5,7 @@ var con = mysql.createConnection(global.gConfig.mysql);
 con.connect();
 /* GET home page. */
 router.post('/', function(req, res, next){
+  let idContest = req.body.contest_id;
   if(!req.files || req.session.is_login != 1) {
     res.send({
       status: false,
@@ -19,14 +20,16 @@ router.post('/', function(req, res, next){
     console.log(prob_id);
     //Use the mv() method to place the file in upload directory (i.e. "uploads")
     upload_file.mv('./uploaded/' + prob_id + "_" + req.session.name_id + "_" +time_now+".cpp");
-    var sql = "INSERT INTO Result (time, user_id, prob_id, status) VALUES ?";
-    var values = [[time_now,req.session.name_id,Number(prob_id),0],];
+    if(idContest == undefined) idContest = null;
+    var sql = "INSERT INTO Result (time, user_id, prob_id, status,contestmode) VALUES ?";
+    var values = [[time_now,req.session.name_id,Number(prob_id),0,idContest],];
     con.query(sql, [values], function (err, result) {
       if (err) throw err;
     });
     //send response
   }
-  res.redirect('submission');
+  if(idContest == null) res.redirect('/submission');
+  else res.redirect('/contest/submission');
 });
 
 

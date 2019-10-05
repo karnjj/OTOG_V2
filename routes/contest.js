@@ -81,8 +81,20 @@ router.get('/id/:idContest', async function(req, res, next) {
 			problems : cnt(rows,passcnt),
       pass : convert(pass),
       is_login : req.session.is_login,
+      idContest : req.params.idContest,
 		});
 	});
+});
+
+router.get('/submission', function(req, res, next) {
+  //res.render("problems.html", {title: 'Problems',});
+    res.render("contest/contest_submission.html", {
+      title: 'Submission',
+      is_login: req.session.is_login,
+      id_user: req.session.name_id,
+      is_admin: req.session.is_admin,
+      idContest: req.params.idContest
+    });
 });
 
 router.get('/unshow_contest', function(req, res, next) {

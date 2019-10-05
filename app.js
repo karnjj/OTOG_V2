@@ -115,6 +115,15 @@ io.on('connection',function(client){
       io.onload = true;
       io.senddata = true;
   });
+  client.on('req_table_WithID',function(id){
+      var sql = "SELECT Result.idResult,Problem.name,User.sname,Result.result,Result.score,Result.timeuse,User.rating,Result.user_id,Result.status FROM Result "
+          +"INNER JOIN Problem ON Result.prob_id=Problem.id_Prob "
+          +"INNER JOIN User ON Result.user_id=User.idUser where user_id = ? and contestmode is not null ORDER BY Result.time desc LIMIT 100";
+      con.query(sql, [id], function (err, rows) {
+        if (err) throw err;
+        io.sockets.emit('submission_WithID',{submission:rows});
+      });
+  });
   client.on("stop_req", function(data){
     console.log(data);
     io.senddata = false;

@@ -26,11 +26,11 @@
 			var isLogin = "<%= is_login %>";
 			if (isLogin == "1") {
 				$("#login_but").html("<i class=\"fa fa-sign-in\"></i> <span>Logout</span>");
-				$("#login_but").attr("href", "logout");
+				$("#login_but").attr("href", "/logout");
 				$("#login_but").css("color", "red");
 			} else {
 				$("#login_but").html("<i class=\"fa fa-sign-in\"></i> <span>Login</span>");
-				$("#login_but").attr("href", "login");
+				$("#login_but").attr("href", "/login");
 				$("#login_but").css("color", "rgba(0, 0, 0, 0.7)");
 			}
 		});
@@ -77,9 +77,11 @@
 			//alert("It's (may) work !");
 			var prob = <%-JSON.stringify(problems)%>;
 			var pname = prob[id].name;
+			var idContest = <%-idContest%>;
 			//alert(pname);
 			$("#prob_head").text(pname);
 			$("#send_id").attr("value", prob[id].id_Prob);
+			$("#contest_id").attr("value", idContest);
 		}
 	</script>
 	<!-- submission script -->
@@ -155,7 +157,7 @@
 	<h2> <i class ="fa fa-trophy"></i> Contest </h2><br>
 	<div class="row">
     <div class="col-md-10"></div>
-    <a href="/submission" class="col-md-2 btn otogbtn">View Submission</a>
+    <a href="/contest/submission" class="col-md-2 btn otogbtn">View Submission</a>
 	</div>
 	<hr>
 
@@ -185,7 +187,7 @@
 
         <!-- Modal body -->
         <div class="modal-body">
-          <form name="form1"action="upload" method="post" enctype="multipart/form-data" onSubmit="return OnUploadCheck();">
+          <form name="form1"action="/upload" method="post" enctype="multipart/form-data" onSubmit="return OnUploadCheck();">
 
             <div class="custom-file">
               <input type="file" class="custom-file-input" name="customfile" id="customfile">
@@ -197,7 +199,8 @@
               <option selected value="c">C</option>
               <option selected value="cpp">C++</option>
             </select><br><br>
-            <input type="hidden" value = "#" name="prod_id" id = "send_id">
+			<input type="hidden" value = "#" name="prod_id" id = "send_id">
+			<input type="hidden" value = "#" name="contest_id" id = "contest_id">
             <div class="modal-footer">
             <button type="submit" class="btn otogbtn">Submit</button>
             </div>
