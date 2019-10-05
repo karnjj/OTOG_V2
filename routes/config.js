@@ -31,7 +31,7 @@ router.post('/config', function(req, res, next) {
 //edit task
 router.get('/task', function(req, res, next) {
   if(!is_admin(req)) {res.redirect('/main'); return 0;}
-  var sql = "SELECT * FROM Problem ORDER BY id_Prob desc";
+  var sql = "SELECT * FROM Problem ORDER BY state desc,id_prob desc";
   con.query(sql, function (err, rows) {
     if (err) throw err;
     res.render("config/task.html", {
