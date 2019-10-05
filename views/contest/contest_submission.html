@@ -50,7 +50,7 @@
       socket.emit('req_table_WithID', id_user);
     });
     socket.on('submission_WithID',function(data){
-      if(load_table(data.submission)) socket.emit('stop_req','stop_req from client');
+      load_table(data.submission)
     });
 	</script>
 <!-- load submission -->
