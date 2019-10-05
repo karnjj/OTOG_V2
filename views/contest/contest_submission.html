@@ -107,7 +107,7 @@
 		function errortxt(id) {
 			var str = "Error : " + id;
 			$("#schead").text(str);
-			$("#sc").load("request_sc/error", {id : id}, function(response, status, xhr) {
+			$("#sc").load("/request_sc/error", {id : id}, function(response, status, xhr) {
 				$("#sc").text(response)
 			});
 		}
