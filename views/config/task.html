@@ -26,7 +26,7 @@ $(document).ready(function(){
 		var tr;
 		var sz = prob.length;
 		for (var i = 0; i < sz; i++) {
-			tr = $("<tr/>");
+			tr = $("<tr class=\"d-flex flex-wrap justify-content-between d-md-table-row\"/>");
 			var id = prob[i].id_Prob;
 			var name = prob[i].name;
 			var sname = prob[i].sname;
@@ -45,17 +45,17 @@ $(document).ready(function(){
 			var del = "<button class='btn btn-danger' data-toggle='tooltip' title='Delete'>" +
 			"<i class='fa fa-trash'></i></button>"
 
-			tr.append("<td>" + id + "</td>");
-			tr.append("<td>" + "<a class = 'otogtxt' href =" + path + ">" + name + "</a>" + "</td>");
-			tr.append("<td>" + time + "</td>");
-			tr.append("<td>" + mem + "</td>");
+			tr.append("<td class=\"d-md-table-cell\">" + id + "</td>");
+			tr.append("<td class=\"w-50 d-md-table-cell\" >" + "<a class = 'otogtxt' href =" + path + ">" + name + "</a>" + "</td>");1
+			tr.append("<td class=\"col\">" + time + "</td>");
+			tr.append("<td class=\"col\">" + mem + "</td>");
 
 			// check see status
 			if(see == 0) toggle = "<button class='btn btn-dark' data-toggle='tooltip' title='Toggle Show/Hide' onclick = " + param + ">" + "<i class='fa fa-eye-slash'></i></button>";
 			else toggle = "<button class='btn btn-light' data-toggle='tooltip' title='Toggle Show/Hide' onclick = " + param + ">" + "<i class='fa fa-eye'></i></button>";
 
 			// add button group
-			tr.append("<td>" + "<div class = 'btn-group'>" + edit +
+			tr.append("<td class=\"col text-right\">" + "<div class = 'btn-group'>" + edit +
 			rejudge + toggle + del +"</div>" + "</td>");
 			$("#task").append(tr);
 		}
@@ -98,12 +98,11 @@ $(document).ready(function(){
   </ul>
 	</nav><br><br><br>
 
-	<div class="container table-responsive">
+	<div class="container">
 		<div class="row">
 			<div class="col-lg-3">
-				<button class='btn btn-success btn-lg'
-				data-toggle = "modal" data-target = "#newprob">
-   			<i class="fa fa-plus-circle"></i> New Problem
+				<button class='btn btn-success btn-lg' data-toggle = "modal" data-target = "#newprob">
+   					<i class="fa fa-plus-circle"></i> New Problem
 				</button><hr>
 				<div class="card">
 					<div class="card-header bg-info"><b>Guide</b></div>
@@ -113,17 +112,17 @@ $(document).ready(function(){
 						3. In add feature you <b>must</b> fill every form carefully.
 					</div>
 				</div>
+				<br>
 			</div>
-			<div class="col-lg-9">
-
+			<div class="col-lg-9 table-responsive">
 				<table class="table">
 					<thead class="thead-light">
-						<tr>
-							<th>#</th>
-							<th>Name</th>
-							<th>Time</th>
-							<th>Memory</th>
-							<th></th>
+						<tr class="d-flex d-md-table-row">
+							<th class="d-none d-md-table-cell">#</th>
+							<th class="col-12 text-center d-md-table-cell text-md-left">Name</th>
+							<th class="d-none d-md-table-cell">Time</th>
+							<th class="d-none d-md-table-cell">Memory</th>
+							<th class="d-none d-md-table-cell"></th>
 						</tr>
 					</thead>
 					<tbody id="task"></tbody>
