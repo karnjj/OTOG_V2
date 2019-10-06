@@ -43,10 +43,7 @@ router.get('/', async function(req, res, next) {
   await con.query(sql, await function(err,results) {
     if(err) throw err;
     result = make_scoreboard(results);
-    result.sort(function(a,b){
-      if(a.score == b.score) return a.timeuse>b.timeuse;
-      else return a.score<b.score;
-    })
+    result.sort((a,b) => {return b.score-a.score;})
     console.log(result);
     var sql = "SELECT * FROM Problem WHERE id_Prob IN (?)";
     con.query(sql, [problem], function (err, rows) {
