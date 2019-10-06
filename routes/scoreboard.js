@@ -47,7 +47,7 @@ router.get('/', async function(req, res, next) {
       if(a.score == b.score) return a.timeuse>b.timeuse;
       else return a.score<b.score;
     })
-    //console.log(result);
+    console.log(result);
     var sql = "SELECT * FROM Problem WHERE id_Prob IN (?)";
     con.query(sql, [problem], function (err, rows) {
         if (err) throw err;
