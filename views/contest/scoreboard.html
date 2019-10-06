@@ -40,11 +40,11 @@
 					for(var k = 0; k < do_prob; k++) {
 						if(problem[j].id_Prob == score[i].task[k].task) idx = k
 					}
-					if(idx != -1) tr.append("<td>" + score[i].task[idx].score + "</td>");
+					if(idx != -1) tr.append("<td>" + score[i].task[idx].score.toFixed() + "</td>");
 					else tr.append("<td>" + "0" + "</td>");
 				}
-				tr.append("<td>" + score[i].score + "</td>");
-				tr.append("<td>" + score[i].timeuse + "</td>");
+				tr.append("<td>" + score[i].score.toFixed() + "</td>");
+				tr.append("<td>" + score[i].timeuse.toFixed(2) + "</td>");
 				$("#body").append(tr);
 			}
 		});
