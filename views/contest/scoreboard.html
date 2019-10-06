@@ -15,6 +15,40 @@
 
   <!-- main source of custom css -->
 	<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+	<script>
+		$(document).ready(function() {
+			var score = <%-JSON.stringify(score)%>;
+			var problem = <%-JSON.stringify(problem)%>;
+			console.log(score);
+			console.log(problem);
+			var tr;
+			var sz = score.length;
+			var sz_prob = problem.length;
+			//alert(sz);
+			for (var i = 0; i < sz; i++) {
+				var do_prob = score[i].task.length;
+				tr = $("<tr/>");
+				tr.addClass("item");
+				var name = score[i].name;
+				if(score[i].score == 300) tr.addClass("w3-khaki")
+				tr.append("<td>" + (i+1) + "</td>");
+				tr.append("<td>" + name + "</td>");
+				for(var j = 0; j < sz_prob; j++) {
+					var idx = -1;
+					for(var k = 0; k < do_prob; k++) {
+						if(problem[j].id_Prob == score[i].task[k].task) idx = k
+					}
+					if(idx != -1) tr.append("<td>" + score[i].task[idx].score + "</td>");
+					else tr.append("<td>" + "0" + "</td>");
+				}
+				tr.append("<td>" + score[i].score + "</td>");
+				tr.append("<td>" + score[i].timeuse + "</td>");
+				$("#body").append(tr);
+			}
+		});
+	</script>
 </head>
 
 <body>
@@ -79,35 +113,7 @@
 				<th scope="col">Running time</th>
 			</tr>
 		</thead>
-		<tbody>
-				<tr>
-					<td>1</td>
-					<td><a href="#">Kristopher</a></td>
-					<td>100</td>
-					<td>100</td>
-					<td>100</td>
-					<td>300</td>
-					<td>0.03</td>
-				</tr>
-				<tr>
-					<td>2</td>
-					<td><a href="#">Anos</a></td>
-					<td>100</td>
-					<td>100</td>
-					<td>100</td>
-					<td>300</td>
-					<td>0.17</td>
-				</tr>
-				<tr>
-					<td>3</td>
-					<td><a href="#">KarnInwZa</a></td>
-					<td>100</td>
-					<td>100</td>
-					<td>100</td>
-					<td>300</td>
-					<td>1.09</td>
-				</tr>
-			</tbody>
+		<tbody id='body'></tbody>
 	</table>
 	<hr>
 	<footer>
