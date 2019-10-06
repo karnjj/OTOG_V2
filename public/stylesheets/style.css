@@ -182,48 +182,52 @@ a:hover{
   }
 }
 
-.count_button {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: rgb(200,200,200);
-  border-radius: 1rem;
-  width: 128px;
-  height: 100px;
-  padding: 20px;
-  margin: 3px;
-  opacity: 0.8;
-}
 :root {
   --btn_blue: #17B4E9;
   --btn_green:#41E241;
   --btn_red:  #FF4D4D;
   --btn_orng: #FFAD33;
-  --btn_gray: #111111;
+  --btn_grey: #C8C8C8;
+  --btn_black: #111111;
+}
+.count_button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--btn_grey);
+  border-radius: 1rem;
+  width: 128px;
+  height: 95px;
+  padding: 20px;
+  margin: 3px;
+  opacity: 0.8;
+  cursor: pointer;
+  box-shadow: 0 5px var(--btn_grey);
 }
 .count_button.blue:hover{
-  transition: background-color 0.2;
+  transition: background-color 0.1s;
   background-color: var(--btn_blue);
 }
 .count_button.green:hover{
-  transition: background-color 0.2s;
+  transition: background-color 0.1s;
   background-color: var(--btn_green);
 }
 .count_button.red:hover{
-  transition: background-color 0.2s;
+  transition: background-color 0.1s;
   background-color: var(--btn_red);
 }
 .count_button.org:hover{
-  transition: background-color 0.2s;
+  transition: background-color 0.1s;
   background-color: var(--btn_orng);
 }
 .count_button.gray:hover{
   transition: background-color 0.2s;
-  background-color: var(--btn_gray);
+  background-color: var(--btn_black);
 }
 .count_button:active{
   transition: opacity 0.1s;
+  transform: translateY(4px);
   opacity: 1.0;
 }
 /* media query for responsive */
