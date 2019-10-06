@@ -44,7 +44,7 @@ router.get('/', async function(req, res, next) {
     if(err) throw err;
     result = make_scoreboard(results);
     result.sort((a,b) => {return b.score-a.score;})
-    console.log(result);
+    //console.log(result);
     var sql = "SELECT * FROM Problem WHERE id_Prob IN (?)";
     con.query(sql, [problem], function (err, rows) {
         if (err) throw err;

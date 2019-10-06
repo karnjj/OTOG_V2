@@ -21,19 +21,22 @@
 		$(document).ready(function() {
 			var score = <%-JSON.stringify(score)%>;
 			var problem = <%-JSON.stringify(problem)%>;
-			console.log(score);
-			console.log(problem);
+			//console.log(score);
+			//console.log(problem);
 			var tr;
 			var sz = score.length;
 			var sz_prob = problem.length;
+			var number = 1;
 			//alert(sz);
 			for (var i = 0; i < sz; i++) {
 				var do_prob = score[i].task.length;
 				tr = $("<tr/>");
 				tr.addClass("item");
 				var name = score[i].name;
+				var totalscore = score[i].score.toFixed();
+				if(i != 0 && totalscore != score[i-1].score.toFixed()) number = i+1
 				if(score[i].score == 300) tr.addClass("w3-khaki")
-				tr.append("<td>" + (i+1) + "</td>");
+				tr.append("<td>" + number + "</td>");
 				tr.append("<td>" + name + "</td>");
 				for(var j = 0; j < sz_prob; j++) {
 					var idx = -1;
@@ -43,7 +46,7 @@
 					if(idx != -1) tr.append("<td>" + score[i].task[idx].score.toFixed() + "</td>");
 					else tr.append("<td>" + "0" + "</td>");
 				}
-				tr.append("<td>" + score[i].score.toFixed() + "</td>");
+				tr.append("<td>" + totalscore + "</td>");
 				tr.append("<td>" + score[i].timeuse.toFixed(2) + "</td>");
 				$("#body").append(tr);
 			}
