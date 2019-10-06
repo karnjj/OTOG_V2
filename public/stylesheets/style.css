@@ -195,15 +195,16 @@ a:hover{
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  user-select: none;
+  cursor: pointer;
   background: var(--btn_grey);
+  box-shadow: 0 5px var(--btn_grey);
   border-radius: 1rem;
   width: 128px;
   height: 95px;
   padding: 20px;
   margin: 3px;
   opacity: 0.8;
-  cursor: pointer;
-  box-shadow: 0 5px var(--btn_grey);
 }
 .count_button.blue:hover{
   transition: background-color 0.1s;
@@ -221,13 +222,14 @@ a:hover{
   transition: background-color 0.1s;
   background-color: var(--btn_orng);
 }
-.count_button.gray:hover{
+.count_button.black:hover{
   transition: background-color 0.2s;
   background-color: var(--btn_black);
 }
 .count_button:active{
   transition: opacity 0.1s;
-  transform: translateY(4px);
+  transform: translateY(3px);
+  box-shadow: 0 2px var(--btn_grey);
   opacity: 1.0;
 }
 /* media query for responsive */
