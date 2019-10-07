@@ -60,7 +60,8 @@ router.get('/id/:idContest', async function(req, res, next) {
   }));
   var problem = JSON.parse(res1.problems);
   var time_end = res1.time_end;
-  if(time_end < time_now) res.redirect('/contest');
+  var time_start = res1.time_start;
+  if(time_end < time_now || time_start > time_now) res.redirect('/contest');
   else {
     var sql = "SELECT User.sname,Result.prob_id FROM Result INNER JOIN User ON Result.user_id=User.idUser "
     +"WHERE state = 1 and score = 100 group by CONCAT(prob_id, '_', user_id)";
