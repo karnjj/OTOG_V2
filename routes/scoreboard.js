@@ -28,9 +28,9 @@ function make_scoreboard(results){
 }
 
 /* GET home page. */
-router.get('/', async function(req, res, next) {
+router.get('/id/:idContest', async function(req, res, next) {
   var sql = "SELECT problems FROM Contest WHERE idContest = ?";
-  var res1 = await new Promise((resolve, reject) => con.query(sql, [10], function(err,result){
+  var res1 = await new Promise((resolve, reject) => con.query(sql, [req.params.idContest], function(err,result){
     if (err) reject(err)
     else resolve(result[0].problems);
   }));
@@ -53,6 +53,7 @@ router.get('/', async function(req, res, next) {
         title: 'scoreboard',
         score : result,
         problem : rows,
+        is_login : req.session.is_login
       });
     });
   })
