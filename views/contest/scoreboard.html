@@ -15,7 +15,6 @@
 
   <!-- main source of custom css -->
 	<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
-	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 	<link rel="stylesheet" type="text/css" href="/stylesheets/chat_button.css">
 
 	<script>
@@ -36,16 +35,19 @@
 				var name = score[i].name;
 				var totalscore = score[i].score.toFixed();
 				if(i != 0 && totalscore != score[i-1].score.toFixed()) number = i+1
-				if(score[i].score == 300) tr.addClass("w3-khaki")
-				tr.append("<td>" + number + "</td>");
+				if(score[i].score == 300) tr.append("<td>&#11088;" + number + "</td>");
+				else tr.append("<td>" + number + "</td>");
 				tr.append("<td>" + name + "</td>");
 				for(var j = 0; j < sz_prob; j++) {
 					var idx = -1;
 					for(var k = 0; k < do_prob; k++) {
 						if(problem[j].id_Prob == score[i].task[k].task) idx = k
 					}
-					if(idx != -1) tr.append("<td>" + score[i].task[idx].score.toFixed() + "</td>");
-					else tr.append("<td>" + "0" + "</td>");
+					if(idx != -1) {
+						var do_score = score[i].task[idx].score.toFixed();
+						if(do_score == 100) tr.append("<td class='item AC'>" + do_score + "</td>");
+						else tr.append("<td class='item WA'>" + do_score + "</td>");
+					} else tr.append("<td>" + "0" + "</td>");
 				}
 				tr.append("<td>" + totalscore + "</td>");
 				tr.append("<td>" + score[i].timeuse.toFixed(2) + "</td>");
