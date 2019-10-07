@@ -11,7 +11,20 @@ import socketserver as SocketServer
 import subprocess
 import codecs
 import mysql.connector
+import socketio
+sio = socketio.Client()
 
+try :
+    print("Connect to server...")
+    time.sleep(3)
+    sio.connect('http://localhost')
+except :
+    print("Server not online...")
+else :
+    print("Server online...")
+    print("Ready for realtime grading...")
+finally :
+    print("*****Grader started*****")
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
@@ -202,5 +215,6 @@ while 1:
         sql = "UPDATE Result SET result = %s, score = %s, timeuse = %s, status = 1, errmsg = %s WHERE idResult = %s"
         val = (ans, score, round(sumtime, 2), errmsg, myresult[0])
         mycursor.execute(sql, val)
+        sio.emit('req_table', "update result")
     mydb.commit()
     time.sleep(1)

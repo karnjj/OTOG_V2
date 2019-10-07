@@ -96,6 +96,7 @@ app.use(function(err, req, res, next) {
 });
 io.on('connection',function(client){
   console.log('Client connected..');
+  /*
   var sql = "SELECT Result.idResult,Problem.name,User.sname,Result.result,Result.score,Result.timeuse,User.rating,Result.user_id,Result.status FROM Result "
   +"INNER JOIN Problem ON Result.prob_id=Problem.id_Prob "
   +"INNER JOIN User ON Result.user_id=User.idUser where contestmode is null ORDER BY Result.time desc LIMIT 100";
@@ -110,10 +111,18 @@ io.on('connection',function(client){
       con.commit();
     }
   },1000);
+  */
   client.on('req_table',function(data){
       console.log(data);
-      io.onload = true;
-      io.senddata = true;
+      var sql = "SELECT Result.idResult,Problem.name,User.sname,Result.result,Result.score,Result.timeuse,User.rating,Result.user_id,Result.status FROM Result "
+        +"INNER JOIN Problem ON Result.prob_id=Problem.id_Prob "
+        +"INNER JOIN User ON Result.user_id=User.idUser where contestmode is null ORDER BY Result.time desc LIMIT 100";
+      con.query(sql, function (err, rows) {
+        if (err) throw err;
+        io.sockets.emit('submission',{submission:rows});
+      });
+      //io.onload = true;
+      //io.senddata = true;
   });
   client.on('req_table_WithID',function(id){
       var sql = "SELECT Result.idResult,Problem.name,User.sname,Result.result,Result.score,Result.timeuse,User.rating,Result.user_id,Result.status FROM Result "
@@ -126,7 +135,7 @@ io.on('connection',function(client){
   });
   client.on("stop_req", function(data){
     console.log(data);
-    io.senddata = false;
+    //io.senddata = false;
     //clearInterval(io.serverInterval);
   });
   client.on("chat message", function(data) {
