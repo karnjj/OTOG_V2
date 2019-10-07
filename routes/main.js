@@ -68,7 +68,11 @@ router.get('/', function(req, res, next) {
   var sql = "SELECT * FROM Problem WHERE state = 1 ORDER BY see_date desc";
   con.query(sql, function (err, result, fields) {
     if (err) throw err;
-    req.sessionStore.length(function(err, len) {
+    req.sessionStore.all(function(err, online) {
+      var arr = new Array;
+      for(var i in online) {
+        arr.push(online[i].name_user);
+      }
       res.render("main/main.html", {
         title: 'main',
         showname: req.session.name_user,
@@ -80,7 +84,8 @@ router.get('/', function(req, res, next) {
         nosub: result.length-(total_pass+total_nopass),
         problems : cnt(result,passcnt),
         todayprob: prob_today,
-        online : len
+        online : arr.length,
+        who_online : arr
       });
     });
     //console.log(Problems);
