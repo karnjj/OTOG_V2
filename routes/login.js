@@ -13,6 +13,8 @@ router.post('/', function(req, res){
   var hash = sha256.create();
 	var username = req.body.username;
   var password = req.body.password;
+  var remember = req.body.remember;
+  
   hash.update(password);
 	var sql = "SELECT * FROM User WHERE username = ?";
 	con.query(sql, [username], function (err, result, fields) {
@@ -25,6 +27,7 @@ router.post('/', function(req, res){
       req.session.name_user = result[0].sname;
       req.session.name_id = result[0].idUser;
       req.session.is_admin = result[0].state;
+      if(remember == "true") req.session.cookie.maxAge = 86400000;
       req.session.is_login = 1;
       //console.log(name_user);
       res.redirect('main');
