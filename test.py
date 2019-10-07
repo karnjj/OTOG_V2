@@ -215,6 +215,7 @@ while 1:
         sql = "UPDATE Result SET result = %s, score = %s, timeuse = %s, status = 1, errmsg = %s WHERE idResult = %s"
         val = (ans, score, round(sumtime, 2), errmsg, myresult[0])
         mycursor.execute(sql, val)
+        mydb.commit()
         sio.emit('req_table', "update result")
     mydb.commit()
     time.sleep(1)
