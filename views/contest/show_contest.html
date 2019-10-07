@@ -61,7 +61,8 @@
         tr.append("<td>" + length + "</td>");
 				tr.append("<td>" + mode + "(" + judge + ")" + "</td>");
         tr.append("<td>" + "0" + "</td>");
-        if (time_end <= (Date.now()/1000)) tr.append("<td>" + "Closed " + "</td>");
+        if (time_end <= (Date.now()/1000)) tr.append("<td>" + "<a class='btn otogbtn' "+
+          "href='/scoreboard/id/"+ id +"' >Scoreboard</a>" + "</td>");
         else if (time_start <= (Date.now()/1000)) tr.append("<td>" + "<a class='btn otogbtn' "+
           "href='/contest/id/"+ id +"' >Enter >></a>" + "</td>");
         else tr.append("<td>" + "Before start "+ difftime(time_start-Date.now()/1000) + "</td>");
