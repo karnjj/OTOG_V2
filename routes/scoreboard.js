@@ -40,7 +40,7 @@ router.get('/id/:idContest', async function(req, res, next) {
     "from (select user_id,prob_id, max(time) as latest from Result where contestmode = ? group by user_id,prob_id) "+
     "as x inner join Result as R on R.user_id = x.user_id and R.prob_id = x.prob_id and R.time = x.latest "+
     "inner join User on R.user_id = User.idUser where User.state = 1 order by User.sname"
-  await con.query(sql, await function(err,results) {
+  await con.query(sql, [idContest], await function(err,results) {
     if(err) throw err;
     result = make_scoreboard(results);
     result.sort((a,b) => {return b.score-a.score;})
