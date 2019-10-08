@@ -1,13 +1,5 @@
-body {
-}
-#livechat-compact-container {
-  height: 153px;
-  position: fixed;
-  right: 0;
-  top: 200px;
-  top: 30vh;
-  z-index: 10000;
-}
+
+/*
 .btn-chat a {
   font-family: arial;
   color: #fff;
@@ -22,14 +14,11 @@ body {
   border-radius: 2px;
   -ms-transform: rotate(90deg) translate(0, -20px);
   -webkit-transform: rotate(90deg) translate(0, -20px);
-  transform: rotate(90deg) translate(0, -20px);
   position: relative;
   right: -27px;
   bottom: -400px;
-  transition: background 0.2s, right 0.2s;
 }
 .btn-chat a:hover {
   background: #ffa454;
   right: -20px;
-  transition: background 0.2s, right 0.2s;
-}
+}*/

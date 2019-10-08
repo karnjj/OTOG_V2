@@ -33,12 +33,11 @@
 .WA{
   background-color: rgb(255,235,235);
 }
-
 .AC:hover{
-  background-color: rgb(235,255,235,0.8);
+  background-color: rgba(205,225,205);
 }
-.WA{
-  background-color: rgb(255,235,235,0.8);
+.WA:hover{
+  background-color: rgba(225,205,205);
 }
 
 .cnt_msg{
@@ -72,7 +71,7 @@
   color: #FFAD33;
 }
 .font_blue{
-  color : #17b4e9;
+  color: #17b4e9;
 }
 
 .head_typo, .nav-link:hover{
@@ -232,10 +231,31 @@ a:hover{
   box-shadow: 0 2px var(--btn_grey);
   opacity: 1.0;
 }
-
+/*chat*/
+.btn-chat {
+  left:100%;
+  margin: 20px -70px;
+  color: var(--btn_grey);
+  background-color: white;
+  box-shadow: var(--btn_grey);
+  width: 50px;
+  height: 50px;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn-chat:hover {
+  color: white;
+  background-color: var(--otog);
+}
+#chatbox {
+  left: 100%;
+  margin: -1.5rem -19rem;
+}
 
 /*blink for new contest*/
-blink {
+blink .blink{
   animation: blinker 1.0s linear infinite;
 }
 @keyframes blinker {  
@@ -243,7 +263,7 @@ blink {
 }
 .notif {
   float: right;
-  margin: 2px -10px 15px -20px;
+  margin: 0 -10px 0 -20px;
 }
 
 /* media query for responsive large lg*/
@@ -268,10 +288,10 @@ blink {
   }
   .notif::after {
     content: "";
+    z-index: 1;
     float: right;
     border-radius: 4px;
     border: 4px solid var(--otog);
-    animation: blinker 1.0s linear infinite;
   }
 }
 
