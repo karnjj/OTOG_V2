@@ -231,7 +231,7 @@ a:hover{
   box-shadow: 0 2px var(--btn_grey);
   opacity: 1.0;
 }
-/*chat*/
+/*chat button*/
 .btn-chat {
   left:100%;
   margin: 20px -70px;
@@ -248,6 +248,7 @@ a:hover{
 .btn-chat:hover {
   color: white;
   background-color: var(--otog);
+  transition: all 0.1s;
 }
 #chatbox {
   left: 100%;
@@ -255,7 +256,7 @@ a:hover{
 }
 
 /*blink for new contest*/
-blink .blink{
+blink, .blink{
   animation: blinker 1.0s linear infinite;
 }
 @keyframes blinker {  
