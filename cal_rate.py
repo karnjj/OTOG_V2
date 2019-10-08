@@ -50,7 +50,9 @@ for idx in range(len(user)) :
 	sql = "update User set rating = %s where idUser = %s"
 	val = (arr[idx],user[idx])
 	mycursor.execute(sql, val)
-mydb.commit()
+confirm = input("Update now ?(y/n)")
+if confirm == 'y' :
+	mydb.commit()
 print("SD : ",std)
 print("MEAN : ",mean)
 print("rank : ",rank)
