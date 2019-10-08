@@ -9,8 +9,8 @@ function make_scoreboard(results){
     var task = [];
     var data = {};
     var prev = '';
-    results.forEach(function(e,index) {
-      //console.log(e.sname);
+    results.forEach((e,index) => {
+      //console.log(index);
       if(prev != e.sname && index != 0) {
         data.task = task;
         new_result.push(data);
@@ -24,6 +24,9 @@ function make_scoreboard(results){
       task.push({'task':e.prob_id,'score':e.score,'timeuse':e.timeuse});
       prev = e.sname;
     });
+    data.task = task;
+    new_result.push(data);
+    //console.log(new_result.length);
   return new_result
 }
 
@@ -40,10 +43,12 @@ router.get('/id/:idContest', async function(req, res, next) {
     "from (select user_id,prob_id, max(time) as latest from Result where contestmode = ? group by user_id,prob_id) "+
     "as x inner join Result as R on R.user_id = x.user_id and R.prob_id = x.prob_id and R.time = x.latest "+
     "inner join User on R.user_id = User.idUser where User.state = 1 order by User.sname"
-  await con.query(sql, [req.params.idContest], await function(err,results) {
+  await con.query(sql, [req.params.idContest], async function(err,results) {
     if(err) throw err;
-    result = make_scoreboard(results);
-    result.sort((a,b) => {return b.score-a.score;})
+    
+    result = await new Promise((resolve, reject) => resolve(make_scoreboard(results)))
+    //console.log(result);
+    await result.sort((a,b) => {return b.score-a.score;})
     //console.log(result);
     var sql = "SELECT * FROM Problem WHERE id_Prob IN (?)";
     con.query(sql, [problem], function (err, rows) {
