@@ -89,7 +89,7 @@
 				else tr.append("<td>" + result + "</td>");
 				tr.append("<td>" + time + " วินาที" + "</td>");
 				tr.append("<td>" + score + "</td>");
-				if (isLogin == "1" && id_user == res[i].user_id || isAdmin == "0") tr.append("<td>" + "<button class='btn otogbtn' onclick=" + param + "data-toggle = 'modal' data-target='#scmodal'>View Code</button>" + "</td>");
+				if (isLogin == "1" && id_user == res[i].user_id || isAdmin == "0") tr.append("<td>" + "<button class='btn otogbtn' onclick=" + param + "data-toggle = 'modal' data-target='#scmodal'><i class=\"fa fa-hashtag\"></i></button>" + "</td>");
 				else tr.append("<td></td>");
 				$("#body").append(tr);
 			}
