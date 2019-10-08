@@ -32,10 +32,10 @@
 .WA{
   background-color: rgb(255,235,235);
 }
-.table-hover tbody tr:hover td .AC{
+.table-hover tbody tr:hover td.AC{
   background-color: rgb(205,225,205);
 }
-.table-hover tbody tr:hover td .WA{
+.table-hover tbody tr:hover td.WA{
   background-color: rgb(225,205,205);
 }
 
