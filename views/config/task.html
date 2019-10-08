@@ -26,7 +26,8 @@ $(document).ready(function(){
 		var tr;
 		var sz = prob.length;
 		for (var i = 0; i < sz; i++) {
-			tr = $("<tr class=\"d-flex flex-wrap justify-content-between d-md-table-row\"/>");
+			tr = $("<tr />");
+			tr.addClass("d-flex flex-wrap justify-content-between d-md-table-row");
 			var id = prob[i].id_Prob;
 			var name = prob[i].name;
 			var sname = prob[i].sname;
