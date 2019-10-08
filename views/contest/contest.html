@@ -7,7 +7,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<!-- bootstrap integral -->
- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -15,7 +15,6 @@
 
   <!-- main source of custom css -->
   <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
-  <link rel="stylesheet" type="text/css" href="/stylesheets/chat_button.css">
   
   <!-- js for show contest -->
   <script>
@@ -79,10 +78,27 @@
 			</li>
 		</ul>
 	</nav><br><br><br>
+	
 	<div class="container table-responsive">
 	<div id="contest_section"></div>
-
+	
 	<!-- Live Chat -->
+	<a data-toggle="collapse" href="#chatbox" role="button" aria-expanded="false" aria-controls="chatbox">
+		<div class="btn-chat fixed-bottom shadow">
+			<h3 style="font-size: 1.6rem"><i class="fa fa-commenting fa-flip-horizontal"></i></h3>
+		</div>
+	</a>
+	<div class="collapse multi-collapse fixed-bottom" id="chatbox">
+		<div class="card bg-light mb-3" style="max-width: 18rem">
+			<div class="card-header d-flex justify-content-between align-items-baseline">
+				<a onclick="window.open('/chat','name','width=350,height=500')" href="/chat"
+				target="popup" class="link font_org">New Chat Comming Soon...</a>
+				<a data-toggle="collapse" href="#chatbox" role="button" aria-expanded="false"
+				aria-controls="chatbox" class="font_gray"><i class="fa fa-times"></i></a>
+			</div>
+			<div class="card-body"></div>
+		</div>
+	</div>
 	<!-- footer of Phakphum Dev Team -->
 	<hr>
 	<footer>

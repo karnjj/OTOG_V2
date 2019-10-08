@@ -29,15 +29,14 @@
 .AC{
   background-color: rgb(235,255,235);
 }
-
 .WA{
   background-color: rgb(255,235,235);
 }
-.AC:hover{
-  background-color: rgba(205,225,205);
+.table-hover tbody tr:hover td .AC{
+  background-color: rgb(205,225,205);
 }
-.WA:hover{
-  background-color: rgba(225,205,205);
+.table-hover tbody tr:hover td .WA{
+  background-color: rgb(225,205,205);
 }
 
 .cnt_msg{
