@@ -77,12 +77,11 @@
 	</script>
 
 	<!-- chat load -->
-	<!--<script type="text/javascript">
+	<script type="text/javascript">
 		$(document).ready(function() {
-			$("#chatbox").load("chat");
+			$("#chat").load("chat");
 		});
 	</script>
-	-->
 </head>
 
 <body>
@@ -214,22 +213,7 @@
 			</table>
 		</div>
 		<!-- Live Chat -->
-		<a data-toggle="collapse" href="#chatbox" role="button" aria-expanded="false" aria-controls="chatbox">
-			<div class="btn-chat fixed-bottom shadow">
-				<h3 style="font-size: 1.6rem"><i class="fa fa-commenting fa-flip-horizontal"></i></h3>
-			</div>
-		</a>
-		<div class="collapse multi-collapse fixed-bottom" id="chatbox">
-			<div class="card bg-light mb-3" style="max-width: 18rem">
-				<div class="card-header d-flex justify-content-between align-items-baseline">
-					<a onclick="window.open('/chat','name','width=350,height=500')" href="/chat"
-					target="popup" class="link font_org">New Chat Comming Soon...</a>
-					<a data-toggle="collapse" href="#chatbox" role="button" aria-expanded="false"
-					aria-controls="chatbox" class="font_gray"><i class="fa fa-times"></i></a>
-				</div>
-				<div class="card-body"></div>
-			</div>
-		</div>
+		<div id="chat"></div>
 		<!-- footer of Phakphum Dev Team -->
 		<hr>
 		<footer>

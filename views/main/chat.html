@@ -1,27 +1,26 @@
-<!doctype  html>
-<html>
-    <head>
-        <title><%= title %></title>
-        <link  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"  rel="stylesheet"  id="bootstrap-css">
-        <!------ Include the above in your HEAD tag ---------->
-        <link  href="/stylesheets/stylechat.css"  type="text/css"  rel="stylesheet"/>
-    </head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
 <body>
-    <div class="chat_window">
-        <div class="top_menu">
-            <div class="buttons">
-            </div>
-        <div class="title">Chat</div>
-    </div>
-    <ul id="messages" class="messages"></ul>
-    <div class="bottom_wrapper clearfix">
-        <i id="typing"></i>
-        <form id="form">
-            <div class="message_input_wrapper">
-                <input autocomplete="off" id="message" class="message_input" placeholder="Type your message here...">
-            </div>
-            <button class="send_message">Send</button>
+    <a class="btn-chat shadow fixed-bottom-right" data-toggle="collapse" href="#chatbox" role="button" aria-expanded="false" aria-controls="chatbox">
+        <h3 style="font-size: 1.8rem"><i class="fa fa-commenting fa-flip-horizontal"></i></h3>
+    </a>
+    <div id="chatbox" class="collapse multi-collapse fixed-bottom-right">
+    <div class="card bg-light">
+        <div class="card-header chat-head pointer d-flex justify-content-between align-items-baseline"
+            data-toggle="collapse" href="#chatbox" role="button" aria-expanded="false" aria-controls="chatbox">
+            <b>Chat</b><i class="fa fa-times"></i>
+        </div>
+        <div class="card-body overflow-auto">
+            <ul id="messages"></ul>
+        </div>
+        <form id="form" class="chat-form form-inline">
+            <input autocomplete="off" id="message" class="form-control rounded-0 shadow-none"
+                placeholder="Type your message...">
+            <button class="input-group-text rounded-0 shadow-none">Send</div>
         </form>
+    </div>
     </div>
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>

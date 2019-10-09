@@ -230,10 +230,16 @@ a:hover{
   box-shadow: 0 2px var(--btn_grey);
   opacity: 1.0;
 }
-/*chat button*/
+
+/*all about chat*/
+.fixed-bottom-right {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+}
 .btn-chat {
-  left:100%;
-  margin: 20px -70px;
+  z-index: 1;
+  margin: 20px 20px;
   color: var(--btn_grey);
   background-color: white;
   width: 50px;
@@ -249,8 +255,54 @@ a:hover{
   transition: all 0.1s;
 }
 #chatbox {
-  left: 100%;
-  margin: -1.5rem -19rem;
+  z-index: 2;
+  max-width: 20rem;
+  max-height: 26rem;
+}
+.chat-head:hover {
+  color: white;
+  background-color: var(--otog);
+}
+#messages {
+  padding: 0;
+  max-height: 16rem;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+#messages li {
+  padding: 5px 10px;
+  border-radius: 30px;
+  margin: 1px 0;
+  max-width: 16rem;
+  background-color: #eee;
+  align-self: flex-start;
+  flex-wrap: wrap;
+}
+/*
+#messages li .me{
+  background: #0084ff;
+  color: white;
+  align-self: flex-end;
+  flex-wrap: wrap;
+}
+#message li .you{
+  background-color: #eee;
+  align-self: flex-start;
+  flex-wrap: wrap;
+}
+#message span .me {
+  align-self: flex-end
+#message span .you {
+  align-self: flex-start
+}
+*/
+#messages span {
+  font-weight: bold;
+  font-size: 0.95rem;
+}
+.chat-form .form-control {
+  width: 16rem;
 }
 
 /*blink for new contest*/
@@ -298,6 +350,10 @@ blink, .blink{
 @media only screen and (max-width: 767px) {
   .navbar-brand span {
     display: none;
+  } 
+  .chat-head {
+    color: white;
+    background-color: var(--otog);
   }
 }
 
