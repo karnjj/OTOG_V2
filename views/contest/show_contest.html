@@ -1,127 +1,125 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!-- main source of custom css -->
-  <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
-  <!-- load contest table -->
-  <script>
+    <!-- main source of custom css -->
+    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+    <!-- load contest table -->
+    <script>
     function timeConverter(timestamp){
-      var a = new Date(timestamp * 1000);
-      var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-      var year = a.getFullYear();
-      var month = months[a.getMonth()];
-      var date = a.getDate();
-      var hour = a.getHours().toString();
-      var min = a.getMinutes().toString();
-      if(hour.length == 1) hour = '0' + hour;
-      if(min.length == 1) min = '0' + min;
-      var time = date + '/' + month + '/' + year + ' ' + hour + ':' + min;
-      return time;
+        var a = new Date(timestamp * 1000);
+        var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+        var year = a.getFullYear();
+        var month = months[a.getMonth()];
+        var date = a.getDate();
+        var hour = a.getHours().toString();
+        var min = a.getMinutes().toString();
+        if(hour.length == 1) hour = '0' + hour;
+        if(min.length == 1) min = '0' + min;
+        var time = date + '/' + month + '/' + year + ' ' + hour + ':' + min;
+        return time;
     }
     function difftime(timestamp){
-      timestamp = Math.floor(timestamp/60);
-      var int_hours = Math.floor(timestamp / 60);
-      var hours = int_hours.toString();
-      var minutes = (timestamp % 60).toString();
-      if(hours.length == 1) hours = '0' + hours;
-      if(minutes.length == 1) minutes = '0' + minutes;
-      if(int_hours > 23) return (Math.floor(int_hours/24)).toString() + " days";
-      else return hours+":"+minutes;
+        timestamp = Math.floor(timestamp/60);
+        var int_hours = Math.floor(timestamp / 60);
+        var hours = int_hours.toString();
+        var minutes = (timestamp % 60).toString();
+        if(hours.length == 1) hours = '0' + hours;
+        if(minutes.length == 1) minutes = '0' + minutes;
+        if(int_hours > 23) return (Math.floor(int_hours/24)).toString() + " days";
+        else return hours+":"+minutes;
     }
-  </script>
-  <script>
-		$(document).ready(function() {
-			var con = <%-JSON.stringify(contest)%>;
-			var tr;
-			var sz = con.length;
-			var isLogin = "<%= is_login %>";
-			for (var i = 0; i < sz; i++) {
-				tr = $("<tr/>");
-				var id = con[i].idContest;
-				var name = con[i].name;
-				var mode = con[i].mode_grader;
-        var judge = con[i].judge;
-        var time_start = Number(con[i].time_start);
-        var time_end = Number(con[i].time_end);
-				var start = timeConverter(con[i].time_start);
-				var length = difftime(Number(con[i].time_end)-time_start);
-				var problems = con[i].problems;
-        //var number = (JSON.parse(con[i].problems)).length;
-				tr.append("<td>" + id + "</td>");
-				tr.append("<td>" + name + "</td>");
-				//tr.append("<td>" + number + "</td>");
-        tr.append("<td>" + start + "</td>");
-        tr.append("<td>" + length + "</td>");
-				tr.append("<td>" + mode + "(" + judge + ")" + "</td>");
-        tr.append("<td>" + "0" + "</td>");
-        if (time_end <= (Date.now()/1000)) tr.append("<td>" + "<a class='btn otogbtn' "+
-          "href='/scoreboard/id/"+ id +"' >Scoreboard</a>" + "</td>");
-        else if (time_start <= (Date.now()/1000)) tr.append("<td>" + "<a class='btn otogbtn' "+
-          "href='/contest/id/"+ id +"' >Enter >></a>" + "</td>");
-        else tr.append("<td>" + "Before start "+ difftime(time_start-Date.now()/1000) + "</td>");
-				$("#body").append(tr);
-			}
-		});
-	</script>
+    </script>
+    <script>
+        $(document).ready(function() {
+            var con = <%-JSON.stringify(contest)%>;
+            var tr;
+            var sz = con.length;
+            var isLogin = "<%= is_login %>";
+            for (var i = 0; i < sz; i++) {
+                tr = $("<tr/>");
+                var id = con[i].idContest;
+                var name = con[i].name;
+                var mode = con[i].mode_grader;
+                var judge = con[i].judge;
+                var time_start = Number(con[i].time_start);
+                var time_end = Number(con[i].time_end);
+                var start = timeConverter(con[i].time_start);
+                var length = difftime(Number(con[i].time_end)-time_start);
+                var problems = con[i].problems;
+                //var number = (JSON.parse(con[i].problems)).length;
+                tr.append("<td>" + id + "</td>");
+                tr.append("<td>" + name + "</td>");
+                //tr.append("<td>" + number + "</td>");
+                tr.append("<td>" + start + "</td>");
+                tr.append("<td>" + length + "</td>");
+                tr.append("<td>" + mode + "(" + judge + ")" + "</td>");
+                tr.append("<td>" + "0" + "</td>");
+                if (time_end <= (Date.now()/1000)) tr.append("<td>" + "<a class='btn otogbtn' "+
+                   "href='/scoreboard/id/"+ id +"' >Scoreboard</a>" + "</td>");
+                else if (time_start <= (Date.now()/1000)) tr.append("<td>" + "<a class='btn otogbtn' "+
+                    "href='/contest/id/"+ id +"' >Enter >></a>" + "</td>");
+                else tr.append("<td>" + "Before start "+ difftime(time_start-Date.now()/1000) + "</td>");
+                $("#body").append(tr);
+            }
+        });
+	  </script>
 </head>
 <body>
-<div class="container">
-	<div class="row">
-		<div class="col-md-6">
-			<h2><i class="fa fa-trophy"></i> Contest mode</h2>
-		</div>
-	</div>
-	<hr>
-	<!-- fetch contest -->
-	<table class="table table-condensed table-hover" style="text-align: center;">
-		<thead>
-			<tr style="color: #FF851B">
-				<th scope="col">#</th>
-				<th scope="col">Name</th>
-				<th scope="col">Start</th>
-				<th scope="col">Length</th>
-        <th scope="col">Mode</th>
-        <th scope="col">Registered</th>
-        <th></th>
-			</tr>
-		</thead>
-		<tbody id= "body" class="justify-content-center"></tbody>
-	</table>
-</div>
-<!-- submit form -->
-<div class="modal fade" id="submit_modal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-
-      <!-- Modal Header -->
-      <div class="modal-header">
-        <h4 id = "prob_head" class="modal-title"> Modal Header </h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
-
-      <!-- Modal body -->
-      <div class="modal-body">
-        <form action="upload" method="post" enctype="multipart/form-data">
-
-          <div class="custom-file">
-            <input type="file" class="custom-file-input" name="customfile" id="customfile">
-            <label class="custom-file-label" for="customfile" id = "file_name">Choose file</label>
-          </div><br><br>
-
-          <label>Choose Language</label>
-          <select class="custom-select">
-            <option selected value="c">C</option>
-            <option selected value="cpp">C++</option>
-          </select><br><br>
-          <input type="hidden" value = "#" name="prod_id" id = "send_id">
-          <div class="modal-footer">
-          <button type="submit" class="btn otogbtn">Submit</button>
-          </div>
-
-        </form>
-      </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h2><i class="fa fa-trophy"></i> Contest mode</h2>
+            </div>
+        </div>
+        <hr>
+        <!-- fetch contest -->
+        <table class="table table-condensed table-hover" style="text-align: center;">
+            <thead>
+                <tr style="color: #FF851B">
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Start</th>
+                <th scope="col">Length</th>
+                <th scope="col">Mode</th>
+                <th scope="col">Registered</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody id= "body" class="justify-content-center"></tbody>
+        </table>
     </div>
-  </div>
-</div>
+    <!-- submit form -->
+    <div class="modal fade" id="submit_modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 id = "prob_head" class="modal-title"> Modal Header </h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <form action="upload" method="post" enctype="multipart/form-data">
+                    <div class="custom-file">
+                    <input type="file" class="custom-file-input" name="customfile" id="customfile">
+                    <label class="custom-file-label" for="customfile" id = "file_name">Choose file</label>
+                    </div><br><br>
+
+                    <label>Choose Language</label>
+                    <select class="custom-select">
+                        <option selected value="c">C</option>
+                        <option selected value="cpp">C++</option>
+                    </select><br><br>
+                    <input type="hidden" value = "#" name="prod_id" id = "send_id">
+                    <div class="modal-footer">
+                        <button type="submit" class="btn otogbtn">Submit</button>
+                    </div>
+                </form>
+            </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

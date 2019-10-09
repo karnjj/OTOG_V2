@@ -31,7 +31,7 @@
 				var path = "problems/docs/" + sname;
 				var param = '"' + "show_submit(" + i + ")" + '"';
 				tr.append("<td>" + id + "</td>");
-				tr.append("<td>" + "<a class = 'otogtxt' href =" + path + ">" + name + "<br>" +
+				tr.append("<td>" + "<a class = 'otogtxt' target='_blank' href =" + path + ">" + name + "<br>" +
 					"(" + time + " วินาที, " + mem + " MB" + ")" + "</a>" + "</td>");
 				tr.append("<td>" + "1500" + "</td>");
 				tr.append("<td>" + pass + "</td>");
@@ -82,6 +82,7 @@
 <body>
 	<!-- problem section -->
 	<div class="container">
+
 	<!-- search problem -->
 	<h2> <i class ="fa fa-puzzle-piece"></i> Problem </h2><br>
 	<div class="row">
@@ -105,10 +106,10 @@
 			<tbody id = "body"></tbody>
 	</table>
 
-  <!-- submit form -->
-  <div class="modal fade" id="submit_modal">
-    <div class="modal-dialog">
-      <div class="modal-content">
+	<!-- submit form -->
+	<div class="modal fade" id="submit_modal">
+		<div class="modal-dialog">
+      	<div class="modal-content">
 
         <!-- Modal Header -->
         <div class="modal-header">
@@ -118,28 +119,28 @@
 
         <!-- Modal body -->
         <div class="modal-body">
-          <form name="form1"action="upload" method="post" enctype="multipart/form-data" onSubmit="return OnUploadCheck();">
+          	<form name="form1"action="upload" method="post" enctype="multipart/form-data" onSubmit="return OnUploadCheck();">
+				<div class="custom-file">
+					<input type="file" class="custom-file-input" name="customfile" id="customfile">
+					<label class="custom-file-label" for="customfile" id = "file_name">Choose file</label>
+				</div><br><br>
 
-            <div class="custom-file">
-              <input type="file" class="custom-file-input" name="customfile" id="customfile">
-              <label class="custom-file-label" for="customfile" id = "file_name">Choose file</label>
-            </div><br><br>
-
-            <label>Choose Language</label>
-            <select class="custom-select">
-              <option selected value="c">C</option>
-              <option selected value="cpp">C++</option>
-            </select><br><br>
-            <input type="hidden" value = "#" name="prod_id" id = "send_id">
-            <div class="modal-footer">
-            <button type="submit" class="btn otogbtn">Submit</button>
-            </div>
-
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-  </div>
+				<label>Choose Language</label>
+				<select class="custom-select">
+					<option selected value="c">C</option>
+					<option selected value="cpp">C++</option>
+				</select><br><br>
+				<input type="hidden" value = "#" name="prod_id" id = "send_id">
+				<div class="modal-footer">
+				<button type="submit" class="btn otogbtn">Submit</button>
+				</div>
+          	</form>
+		</div>
+		
+      	</div>
+    	</div>
+	</div>
+	  
+  	</div>
 </body>
 </html>

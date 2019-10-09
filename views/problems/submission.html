@@ -21,8 +21,7 @@
 	<!-- main source of custom css -->
 	<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
 
-	<link rel="stylesheet"
-  href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/styles/default.min.css">
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/styles/default.min.css">
 	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
 	<script>hljs.initHighlightingOnLoad();</script>
 	<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
@@ -33,11 +32,11 @@
 		$(document).ready(function() {
 			$("#scmodal").hide();
 			if (isLogin == "1") {
-				$("#login_but").html("<i class=\"fa fa-sign-in\"></i> <span>Logout</span>");
+				$("#login_but").html("<i class='fa fa-sign-in'></i> <span>Logout</span>");
 				$("#login_but").attr("href", "logout");
 				$("#login_but").css("color", "red");
 			} else {
-				$("#login_but").html("<i class=\"fa fa-sign-in\"></i> <span>Login</span>");
+				$("#login_but").html("<i class='fa fa-sign-in'></i> <span>Login</span>");
 				$("#login_but").attr("href", "login");
 				$("#login_but").css("color", "rgba(0, 0, 0, 0.7)");
 			}
@@ -52,7 +51,7 @@
       if(load_table(data.submission)) socket.emit('stop_req','stop_req from client');
     });
 	</script>
-<!-- load submission -->
+	<!-- load submission -->
 	<script>
 		function load_table(res) {
 			$("#body").html("");
@@ -83,12 +82,15 @@
 				else
 					tr.append("<td class='regular'>" + sname + "</td>");
 				tr.append("<td>" + pname + "</td>");
-				if(result != "Compilation Error") tr.append("<td>" + result + "</td>");
-				else if(isLogin == "1" && id_user == res[i].user_id || isAdmin == "0")tr.append("<td>" + "<p id='demo' class = 'otogtxt' onclick=" + errortxt + "data-toggle = 'modal' data-target='#scmodal'>" + result + "</p>" + "</td>");
-				else tr.append("<td>" + result + "</td>");
+				if(result != "Compilation Error")
+					tr.append("<td>" + result + "</td>");
+				else if(isLogin == "1" && id_user == res[i].user_id || isAdmin == "0")
+					tr.append("<td>" + "<p id='demo' class = 'otogtxt pointer' onclick=" + errortxt + "data-toggle = 'modal' data-target='#scmodal'>" + result + "</p>" + "</td>");
+				else 
+					tr.append("<td>" + result + "</td>");
 				tr.append("<td>" + time + " วินาที" + "</td>");
 				tr.append("<td>" + score + "</td>");
-				if (isLogin == "1" && id_user == res[i].user_id || isAdmin == "0") tr.append("<td>" + "<button class='btn otogbtn' onclick=" + param + "data-toggle = 'modal' data-target='#scmodal'><i class=\"fa fa-hashtag\"></i></button>" + "</td>");
+				if (isLogin == "1" && id_user == res[i].user_id || isAdmin == "0") tr.append("<td>" + "<button class='btn otogbtn' onclick=" + param + "data-toggle = 'modal' data-target='#scmodal'><i class='fa fa-hashtag'></i></button>" + "</td>");
 				else tr.append("<td></td>");
 				$("#body").append(tr);
 			}
@@ -111,7 +113,6 @@
 			});
 		}
 	</script>
-	<!-- load submission -->
 </head>
 
 <body>
@@ -121,20 +122,17 @@
 		<ul class="navbar-nav">
 			<li class="nav-item">
 				<a class="nav-link head_typo" href="main">
-					<i class="fa fa-home"></i>
-					<span>Main</span>
+					<i class="fa fa-home"></i><span>Main</span>
 				</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link head_typo active" href="problems">
-					<i class="fa fa-puzzle-piece"></i>
-					<span>Problems</span>
+					<i class="fa fa-puzzle-piece"></i><span>Problems</span>
 				</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link head_typo" href="contest">
-					<i class="fa fa-trophy"></i>
-					<span>Contest</span>
+					<i class="fa fa-trophy"></i><span>Contest</span>
 					<!-- contest notification
 					<sup class="notif blink"> <span class="badge badge-warning badge-pill 
 						d-none d-lg-inline-block">New</span>
@@ -143,14 +141,12 @@
 			</li>
 			<li class="nav-item">
 				<a class="nav-link head_typo" href="ratings">
-					<i class="fa fa-bar-chart"></i>
-					<span>Ratings</span>
+					<i class="fa fa-bar-chart"></i><span>Ratings</span>
 				</a>
 			</li>
 			<li class="nav-item">
 				<a id = "login_but" class="nav-link head_typo" href="login">
-					<i class="fa fa-sign-in"></i>
-					<span>Login</span>
+					<i class="fa fa-sign-in"></i><span>Login</span>
 				</a>
 			</li>
 		</ul>
@@ -183,54 +179,54 @@
 		</table>
 
 	<!-- submit form -->
-  <div class="modal fade" id="scmodal">
+  	<div class="modal fade" id="scmodal">
     <div class="modal-dialog">
-      <div class="modal-content">
+      	<div class="modal-content">
 
         <!-- Modal Header -->
         <div class="modal-header">
-          <h4 id = "schead" class="modal-title"> Modal Header </h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        	<h4 id = "schead" class="modal-title"> Modal Header </h4>
+          	<button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
 
         <!-- Modal body -->
         <div class="modal-body">
-					<pre class="prettyprint linenums">
-						<code class="cpp" id = "sc"></code>
-					</pre>
-        </div>
-      </div>
+			<pre class="prettyprint linenums">
+				<code class="cpp" id = "sc"></code>
+			</pre>
+		</div>
+
+      	</div>
     </div>
-  </div>
-		<!--Live Chat-->  
-		<a data-toggle="collapse" href="#chatbox" role="button" aria-expanded="false" aria-controls="chatbox">
-			<div class="btn-chat fixed-bottom shadow">
-				<h3 style="font-size: 1.6rem"><i class="fa fa-commenting fa-flip-horizontal"></i></h3>
+  	</div>
+	<!--Live Chat-->  
+	<a data-toggle="collapse" href="#chatbox" role="button" aria-expanded="false" aria-controls="chatbox">
+		<div class="btn-chat fixed-bottom shadow">
+			<h3 style="font-size: 1.6rem"><i class="fa fa-commenting fa-flip-horizontal"></i></h3>
+		</div>
+	</a>
+	<div class="collapse multi-collapse fixed-bottom" id="chatbox">
+		<div class="card bg-light mb-3" style="max-width: 18rem">
+			<div class="card-header d-flex justify-content-between align-items-baseline">
+				<a onclick="window.open('/chat','name','width=350,height=500')" href="/chat"
+				target="popup" class="link font_org">New Chat Comming Soon...</a>
+				<a data-toggle="collapse" href="#chatbox" role="button" aria-expanded="false"
+				aria-controls="chatbox" class="font_gray"><i class="fa fa-times"></i></a>
 			</div>
-		</a>
-		<div class="collapse multi-collapse fixed-bottom" id="chatbox">
-			<div class="card bg-light mb-3" style="max-width: 18rem">
-				<div class="card-header d-flex justify-content-between align-items-baseline">
-					<a onclick="window.open('/chat','name','width=350,height=500')" href="/chat"
-					target="popup" class="link font_org">New Chat Comming Soon...</a>
-					<a data-toggle="collapse" href="#chatbox" role="button" aria-expanded="false"
-					aria-controls="chatbox" class="font_gray"><i class="fa fa-times"></i></a>
-				</div>
-				<div class="card-body"></div>
+			<div class="card-body"></div>
+		</div>
+	</div>
+	<!-- footer of Phakphum Dev Team -->
+	<hr>
+	<footer>
+		<div class="row">
+			<div class="col-md-6">
+				<p>If you have any problem or suggestion, please <a href="#" style="color: #FF851B"> Contact Us </a></p>
+			</div>
+			<div class="col-md-6">
+				<span class="float-right"> &copy; 2019 Phakphum Dev Team</span>
 			</div>
 		</div>
-		<!-- footer of Phakphum Dev Team -->
-		<hr>
-		<footer>
-			<div class="row">
-				<div class="col-md-6">
-					<p>If you have any problem or suggestion, please <a href="#" style="color: #FF851B"> Contact Us </a></p>
-				</div>
-				<div class="col-md-6">
-					<span class="float-right"> &copy; 2019 Phakphum Dev Team</span>
-				</div>
-			</div>
-		</footer>
+	</footer>
 </body>
-
 </html>

@@ -33,11 +33,11 @@
 		var isLogin = "<%= is_login %>";
 		$(document).ready(function() {
 			if (isLogin == "1") {
-				$("#login_but").html("<i class=\"fa fa-sign-in\"></i> <span>Logout</span>");
+				$("#login_but").html("<i class='fa fa-sign-in'></i> <span>Logout</span>");
 				$("#login_but").attr("href", "logout");
 				$("#login_but").css("color", "red");
 			} else {
-				$("#login_but").html("<i class=\"fa fa-sign-in\"></i> <span>Login</span>");
+				$("#login_but").html("<i class='fa fa-sign-in'></i> <span>Login</span>");
 				$("#login_but").attr("href", "login");
 				$("#login_but").css("color", "rgba(0, 0, 0, 0.7)");
 			}
