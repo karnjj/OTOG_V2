@@ -64,10 +64,15 @@ function timeConverter(timestamp){
         li.setAttribute("title", timeConverter(data.time));
         messages.appendChild(span).append(data.user);
         messages.appendChild(li).append(data.msg);
-        var xH = messages.scrollHeight; 
+        var xH = messages.scrollHeight;
         messages.scrollTo(0, xH);
       });
     });
 })();
 
-
+function scrollDown() {
+  setTimeout(function() {
+    var xH = messages.scrollHeight;
+    messages.scrollTo(0, xH);
+  }, 150);
+}
