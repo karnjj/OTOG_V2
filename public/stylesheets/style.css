@@ -236,7 +236,6 @@ a:hover{
   margin: 20px -70px;
   color: var(--btn_grey);
   background-color: white;
-  box-shadow: var(--btn_grey);
   width: 50px;
   height: 50px;
   border-radius: 30px;
