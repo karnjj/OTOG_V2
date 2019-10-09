@@ -73,6 +73,11 @@
 				var rating = res[i].rating;
 				var param = '"' + "show_code(" + id + ")" + '"';
 				var errortxt = '"' + "errortxt(" + id + ")" + '"';
+				var delqueue = '"' + "delsub(" + id + ")" + '"';
+				var del = "<button class='btn btn-danger' onclick=" + delqueue + 
+				"data-toggle='tooltip' title='Delete'><i class='fa fa-trash'></i></button>"
+				var viewcode = "<button class='btn otogbtn' onclick=" + param + 
+				"data-toggle = 'modal' data-target='#scmodal'><i class='fa fa-hashtag'></i></button>"
 				if(score == 100) tr.addClass("AC");
 				tr.append("<td>" + id + "</td>");
 				if (rating >= 2000)
@@ -90,8 +95,9 @@
 					tr.append("<td>" + result + "</td>");
 				tr.append("<td>" + time + " วินาที" + "</td>");
 				tr.append("<td>" + score + "</td>");
-				if (isLogin == "1" && id_user == res[i].user_id || isAdmin == "0") tr.append("<td>" + "<button class='btn otogbtn' onclick=" + param + "data-toggle = 'modal' data-target='#scmodal'><i class='fa fa-hashtag'></i></button>" + "</td>");
+				if (isLogin == "1" && id_user == res[i].user_id || isAdmin == "0") tr.append("<td>" + viewcode +"</td>" );
 				else tr.append("<td></td>");
+				if(isAdmin == "0")  tr.append("<td>"+del+"</td>")
 				$("#body").append(tr);
 			}
 			return is_complete;
@@ -111,6 +117,15 @@
 			$("#sc").load("request_sc/error", {id : id}, function(response, status, xhr) {
 				$("#sc").text(response)
 			});
+		}
+		function delsub(id) {
+			if(confirm("Are you sure to delete submission id : "+id)) {
+				$.post("/config/del",
+				{
+					idSub: id,
+				});
+				location.reload(true);
+			}
 		}
 	</script>
 </head>

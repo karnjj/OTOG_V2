@@ -88,5 +88,12 @@ router.post('/contest/update', function(req, res, next) {
     	if (err) throw err;
 	});
 });
-
+router.post('/del', function(req, res, next) {
+  if(!is_admin(req)) {res.redirect('/main'); return 0;}
+  var sql = "delete from Result where idResult = ?";
+  con.query(sql, [req.body.idSub], function (err, rows) {
+      if (err) throw err;
+      res.status(200);
+  });
+});
 module.exports = router;

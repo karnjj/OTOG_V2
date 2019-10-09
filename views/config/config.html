@@ -42,8 +42,6 @@ bootstrap.min.css">
 		});
 	}
 	function show_contest(selectedValue) {
-		if(selectedValue != "No Contest") $('#contest').show();
-		else $('#contest').hide();
 		mode = selectedValue;
 	}
 </script>
@@ -98,44 +96,7 @@ bootstrap.min.css">
 				</div>
 				</div>
 				<br>
-				<!-- contest form -->
-				<div id = "contest">
-					<form class="form-group" action="#">
-					<label for="mode">Judge Mode : </label>
-					<div class="input-group mb-3">
-					<select class="custom-select" id="judge">
-						<option selected>Classic (Time based)</option>
-						<option>ACM Mode</option>
-						<option disabled>OTOG Mode</option>
-						<option disabled>Blind Mode</option>
-					</select>
-					</div>
-				</form><br>
-
-			<!-- start + end contest -->
-			<form action="#">
-				<label>Choose start and finish time : </label>
-				<div class="input-group">
-  			<input type="text" aria-label="start" class="form-control" placeholder="start time">
-  			<input type="text" aria-label="finish" class="form-control" placeholder="finish time">
-  			<div class="input-group-append">
-  			</div>
-				</div>
-			</form><br>
 			</div>
-			</div>
-
-			<div class="col-lg-3">
-				<div class="card">
-					<div class="card-header bg-danger"><b>Warning</b></div>
-					<div class="card-body">
-						Please write Date in form MM/DD/YY and time in form HOUR:MINUTE
-						<br>
-						<b>Example :</b> 02/19/2019 14:03
-					</div>
-				</div>
-			</div>
-
 		</div>
 	</div>
 </body>
