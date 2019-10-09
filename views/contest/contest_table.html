@@ -110,6 +110,12 @@
 			return true;
 		}
 	</script>
+	<!-- chat load -->
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#chat").load("chat");
+		});
+	</script>
 </head>
 
 <body>
@@ -169,10 +175,10 @@
 			<tbody id = "body"></tbody>
 	</table>
 
-  <!-- submit form -->
-  <div class="modal fade" id="submit_modal">
+  	<!-- submit form -->
+  	<div class="modal fade" id="submit_modal">
     <div class="modal-dialog">
-      <div class="modal-content">
+      	<div class="modal-content">
 
         <!-- Modal Header -->
         <div class="modal-header">
@@ -182,17 +188,17 @@
 
         <!-- Modal body -->
         <div class="modal-body">
-          <form name="form1"action="/upload" method="post" enctype="multipart/form-data" onSubmit="return OnUploadCheck();">
+          	<form name="form1"action="/upload" method="post" enctype="multipart/form-data" onSubmit="return OnUploadCheck();">
 
             <div class="custom-file">
-              <input type="file" class="custom-file-input" name="customfile" id="customfile">
-              <label class="custom-file-label" for="customfile" id = "file_name">Choose file</label>
+              	<input type="file" class="custom-file-input" name="customfile" id="customfile">
+              	<label class="custom-file-label" for="customfile" id = "file_name">Choose file</label>
             </div><br><br>
 
             <label>Choose Language</label>
             <select class="custom-select">
-              <option selected value="c">C</option>
-              <option selected value="cpp">C++</option>
+              	<option selected value="c">C</option>
+              	<option selected value="cpp">C++</option>
             </select><br><br>
 			<input type="hidden" value = "#" name="prod_id" id = "send_id">
 			<input type="hidden" value = "#" name="contest_id" id = "contest_id">
@@ -200,11 +206,13 @@
             <button type="submit" class="btn otogbtn">Submit</button>
             </div>
 
-          </form>
+          	</form>
         </div>
-      </div>
     </div>
-  </div>
+    </div>
+</div>
+  	<!--Live chat-->
+  	<div id="chat"></div>
 	<!-- footer of Phakphum Dev Team -->
 	<hr>
 	<footer>

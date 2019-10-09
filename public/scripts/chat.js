@@ -14,6 +14,7 @@ function timeConverter(timestamp){
   var time = date + '/' + month + '/' + year + ' ' + hour + ':' + min;
   return time;
 }
+//submit
 (function() {
   $("form").submit(function(e) {
     if(showname == undefined) showname = "Guest";
@@ -25,22 +26,24 @@ function timeConverter(timestamp){
     }
     socket.emit("chat message", data);
 
-    messages.appendChild(li).append($("#message").val());
     let span = document.createElement("span");
-    messages.appendChild(span).append("by " + showname + ": " + "just now");
+    messages.appendChild(span).append(showname);
+    li.setAttribute("title","Just now");
+    messages.appendChild(li).append($("#message").val());
 
     $("#message").val("");
-    var xH = messages.scrollHeight; 
+    var xH = messages.scrollHeight;
     messages.scrollTo(0, xH);
     return false;
   });
-
+//recieve sonteen
   socket.on("received", data => {
     let li = document.createElement("li");
     let span = document.createElement("span");
     var messages = document.getElementById("messages");
+    li.setAttribute("title", timeConverter(data.time));
+    messages.appendChild(span).append(data.user);
     messages.appendChild(li).append(data.message);
-    messages.appendChild(span).append("by " + data.user + ": " + "just now");
     var xH = messages.scrollHeight; 
     messages.scrollTo(0, xH);
   });
@@ -58,14 +61,18 @@ function timeConverter(timestamp){
       json.chat.map(data => {
         let li = document.createElement("li");
         let span = document.createElement("span");
+        li.setAttribute("title", timeConverter(data.time));
+        messages.appendChild(span).append(data.user);
         messages.appendChild(li).append(data.msg);
-        messages
-          .appendChild(span)
-          .append("by " + data.user + ": " + timeConverter(data.time));
-        var xH = messages.scrollHeight; 
+        var xH = messages.scrollHeight;
         messages.scrollTo(0, xH);
       });
     });
 })();
 
-
+function scrollDown() {
+  setTimeout(function() {
+    var xH = messages.scrollHeight;
+    messages.scrollTo(0, xH);
+  }, 150);
+}
