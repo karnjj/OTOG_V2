@@ -32,7 +32,7 @@ function timeConverter(timestamp){
     messages.appendChild(li).append($("#message").val());
 
     $("#message").val("");
-    var xH = messages.scrollHeight; 
+    var xH = messages.scrollHeight;
     messages.scrollTo(0, xH);
     return false;
   });
