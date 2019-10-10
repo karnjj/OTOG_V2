@@ -16,16 +16,21 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-	<!-- W3.js -->
+	<!--W3.js -->
 	<script src="https://www.w3schools.com/lib/w3.js"></script>
-
+	
 	<!-- main source of custom css -->
 	<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
 	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/styles/default.min.css">
-
-	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
+	
+	<!--script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
 	<script>hljs.initHighlightingOnLoad();</script>
-	<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script-->
+	
+	<!--rainbow code-->
+    <link href="/stylesheets/monokai.css" rel="stylesheet" type="text/css">
+	<script src="/scripts/rainbow-custom.min.js"></script>
+
 	<!-- include login script-->
 	<script>
 		var isLogin = "<%= is_login %>";
@@ -218,8 +223,8 @@
 
         <!-- Modal body -->
         <div class="modal-body">
-			<pre class="prettyprint linenums">
-				<code class="cpp" id="sc"></code>
+			<pre>
+				<code data-langauge="c" id="sc"></code>
 			</pre>
 		</div>
 
