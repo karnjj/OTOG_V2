@@ -14,8 +14,8 @@ function timeConverter(timestamp){
   var time = date + '/' + month + '/' + year + ' ' + hour + ':' + min;
   return time;
 }
-//submit
 (function() {
+  //submit
   $("form").submit(function(e) {
     if(showname == undefined) showname = "Guest";
     let li = document.createElement("li");
@@ -24,6 +24,7 @@ function timeConverter(timestamp){
       msg : $("#message").val(),
       user : showname
     }
+    if(data.msg.length == 0) /*data.msg = "<br>"*/ return;
     socket.emit("chat message", data);
 
     let span = document.createElement("span");
@@ -36,7 +37,7 @@ function timeConverter(timestamp){
     messages.scrollTo(0, xH);
     return false;
   });
-//recieve sonteen
+  //recieve messages
   socket.on("received", data => {
     let li = document.createElement("li");
     let span = document.createElement("span");
@@ -59,17 +60,18 @@ function timeConverter(timestamp){
       console.log(json);
       showname = json.showname;
       json.chat.map(data => {
-        let li = document.createElement("li");
-        let span = document.createElement("span");
-        li.setAttribute("title", timeConverter(data.time));
-        messages.appendChild(span).append(data.user);
-        messages.appendChild(li).append(data.msg);
-        var xH = messages.scrollHeight;
-        messages.scrollTo(0, xH);
+        if(data.msg.length) {//no display for empty string
+          let li = document.createElement("li");
+          let span = document.createElement("span");
+          li.setAttribute("title", timeConverter(data.time));
+          messages.appendChild(span).append(data.user);
+          messages.appendChild(li).append(data.msg);
+        }
       });
     });
 })();
 
+//onclick event -> scroll to bottom 
 function scrollDown() {
   setTimeout(function() {
     var xH = messages.scrollHeight;

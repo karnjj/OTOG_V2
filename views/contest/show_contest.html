@@ -53,12 +53,11 @@
                 tr.append("<td>" + start + "</td>");
                 tr.append("<td>" + length + "</td>");
                 tr.append("<td>" + mode + "(" + judge + ")" + "</td>");
-                tr.append("<td>" + "0" + "</td>");
                 if (time_end <= (Date.now()/1000)) tr.append("<td>" + "<a class='btn otogbtn' "+
                    "href='/scoreboard/id/"+ id +"' >Scoreboard</a>" + "</td>");
                 else if (time_start <= (Date.now()/1000)) tr.append("<td>" + "<a class='btn otogbtn' "+
                     "href='/contest/id/"+ id +"' >Enter >></a>" + "</td>");
-                else tr.append("<td>" + "Before start "+ difftime(time_start-Date.now()/1000) + "</td>");
+                else tr.append("<td>" + "Before starting : "+ difftime(time_start-Date.now()/1000) + "</td>");
                 $("#body").append(tr);
             }
         });
@@ -75,14 +74,13 @@
         <!-- fetch contest -->
         <table class="table table-condensed table-hover" style="text-align: center;">
             <thead>
-                <tr style="color: #FF851B">
+            <tr style="color: #FF851B">
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
                 <th scope="col">Start</th>
                 <th scope="col">Length</th>
                 <th scope="col">Mode</th>
-                <th scope="col">Registered</th>
-                <th></th>
+                <th scope="col"></th>
             </tr>
             </thead>
             <tbody id= "body" class="justify-content-center"></tbody>
