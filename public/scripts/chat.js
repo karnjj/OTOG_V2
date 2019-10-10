@@ -75,6 +75,8 @@ function timeConverter(timestamp){
 function scrollDown() {
   setTimeout(function() {
     var xH = messages.scrollHeight;
+    console.log(xH);
+    messages.scrollTop = xH; //microscoft edge support
     messages.scrollTo(0, xH);
   }, 150);
 }

@@ -28,8 +28,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script-->
 	
 	<!--rainbow code-->
-    <link href="/stylesheets/monokai.css" rel="stylesheet" type="text/css">
-	<script src="/scripts/rainbow-custom.min.js"></script>
+	<link href="/stylesheets/monokai.css" rel="stylesheet" type="text/css">
 
 	<!-- include login script-->
 	<script>
@@ -120,6 +119,9 @@
 			$("#sc").load("request_sc", {id : id}, function(response, status, xhr) {
 				$("#sc").text(response)
 			});
+			/*setTimeout(function() {
+				$.getScript("/scripts/rainbow-custom.min.js");
+			}, 500);*/
 		}
 		function errortxt(id) {
 			var str = "Error : " + id;
@@ -223,9 +225,7 @@
 
         <!-- Modal body -->
         <div class="modal-body">
-			<pre>
-				<code data-langauge="c" id="sc"></code>
-			</pre>
+			<pre><code data-langauge="c" id="sc"></code></pre>
 		</div>
 
       	</div>
