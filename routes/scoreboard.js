@@ -42,7 +42,7 @@ router.get('/id/:idContest', async function(req, res, next) {
     "select User.sname,R.prob_id,R.score,R.timeuse "+
     "from (select user_id,prob_id, max(time) as latest from Result where contestmode = ? group by user_id,prob_id) "+
     "as x inner join Result as R on R.user_id = x.user_id and R.prob_id = x.prob_id and R.time = x.latest "+
-    "inner join User on R.user_id = User.idUser where User.state = 1 order by User.sname"
+    "inner join User on R.user_id = User.idUser where User.state = 1 group by sname,prob_id order by User.sname"
   await con.query(sql, [req.params.idContest], async function(err,results) {
     if(err) throw err;
     
