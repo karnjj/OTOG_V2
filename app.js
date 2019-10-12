@@ -116,7 +116,7 @@ io.on('connection',function(client){
       console.log(data);
       var sql = "SELECT Result.idResult,Problem.name,User.sname,Result.result,Result.score,Result.timeuse,User.rating,Result.user_id,Result.status FROM Result "
         +"INNER JOIN Problem ON Result.prob_id=Problem.id_Prob "
-        +"INNER JOIN User ON Result.user_id=User.idUser where contestmode is null ORDER BY Result.time desc LIMIT 100";
+        +"INNER JOIN User ON Result.user_id=User.idUser where contestmode is null ORDER BY Result.idResult desc LIMIT 100";
       con.query(sql, function (err, rows) {
         if (err) throw err;
         io.sockets.emit('submission',{submission:rows});
@@ -127,7 +127,7 @@ io.on('connection',function(client){
   client.on('req_table_WithID',function(id){
       var sql = "SELECT Result.idResult,Problem.name,User.sname,Result.result,Result.score,Result.timeuse,User.rating,Result.user_id,Result.status FROM Result "
           +"INNER JOIN Problem ON Result.prob_id=Problem.id_Prob "
-          +"INNER JOIN User ON Result.user_id=User.idUser where contestmode is not null ORDER BY Result.time desc LIMIT 100";
+          +"INNER JOIN User ON Result.user_id=User.idUser where contestmode is not null ORDER BY Result.idResult desc LIMIT 100";
       con.query(sql, [id], function (err, rows) {
         if (err) throw err;
         io.sockets.emit('submission_WithID',{submission:rows});
