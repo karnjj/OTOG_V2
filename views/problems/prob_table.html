@@ -30,13 +30,22 @@
 				}
 				var path = "problems/docs/" + sname;
 				var param = '"' + "show_submit(" + i + ")" + '"';
+				var showcode = '"' + "show_code(" + id + ")" + '"';
+				var viewcode = "<button class='btn otogbtn' onclick=" + showcode + 
+				"data-toggle = 'modal' data-target='#scmodal'><i class='fa fa-hashtag'></i></button>"
+				var submit =  "<button class='btn otogbtn' onclick=" + param +
+				"data-toggle = 'modal' data-target='#submit_modal'>Submit</button>"
 				tr.append("<td>" + id + "</td>");
 				tr.append("<td>" + "<a class = 'otogtxt' target='_blank' href =" + path + ">" + name + "<br>" +
 					"(" + time + " วินาที, " + mem + " MB" + ")" + "</a>" + "</td>");
 				tr.append("<td>" + "1500" + "</td>");
 				tr.append("<td>" + pass + "</td>");
-				if (is_login == "1") tr.append("<td>" + "<button class='btn otogbtn' onclick=" + param +
-					"data-toggle = 'modal' data-target='#submit_modal'>Submit</button>" + "</td>");
+				if (is_login == "1") {
+					if(pass_state[id] != 0) 
+						tr.append("<td><div class='btn-group'>" + submit + viewcode + "</div></td>");
+					else 
+						tr.append("<td>" + submit + "</td>");
+				}
 				$("#body").append(tr);
 			}
 		});
@@ -77,6 +86,18 @@
 			return true;
 		}
 	</script>
+	<script>
+		function show_code(id){
+			var str = "Submission : " + id;
+			$("#schead").text(str);
+			$("#sc").load("/request_sc/latest", {prob_id : id}, function(response, status, xhr) {
+				$("#sc").text(response)
+			});
+			/*setTimeout(function() {
+				$.getScript("/scripts/rainbow-custom.min.js");
+			}, 500);*/
+		}
+	</script>
 </head>
 
 <body>
@@ -106,6 +127,27 @@
 			<tbody id = "body"></tbody>
 	</table>
 
+		<!-- view form -->
+  	<div class="modal fade" id="scmodal">
+    <div class="modal-dialog">
+      	<div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+        	<h4 id = "schead" class="modal-title"> Modal Header </h4>
+          	<button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+			<pre><code data-langauge="c" id="sc"></code></pre>
+		</div>
+
+      	</div>
+    </div>
+	</div>
+	  
+	
 	<!-- submit form -->
 	<div class="modal fade" id="submit_modal">
 		<div class="modal-dialog">

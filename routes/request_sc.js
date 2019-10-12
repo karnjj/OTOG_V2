@@ -20,6 +20,22 @@ router.post('/', function(req, res) {
     //console.log(contents);
   });
 });
+router.post('/latest', function(req, res) {
+  var sql = "select * from (select max(idResult) as latest from Result where user_id = ? and prob_id = ?) "+
+  "as X inner join Result as R on R.idResult = X.latest";
+  con.query(sql, [req.session.name_id,req.body.prob_id], function (err, rows, fields) {
+    //console.log(__dir);
+    file_name = rows[0].prob_id + "_" + rows[0].user_id + "_" + rows[0].time + ".cpp";
+    try {
+      var contents = fs.readFileSync('./uploaded/'+file_name,'utf8');
+      res.send(contents);
+    } catch(err) {
+      console.log(err);
+      res.send("Error code ENOENT.");
+    }
+    //console.log(contents);
+  });
+});
 router.post('/error', function(req, res) {
   var sql = "SELECT errmsg FROM Result WHERE idResult = ?";
   console.log(req.body.id);
