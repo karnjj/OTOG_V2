@@ -10,10 +10,10 @@ mydb = mysql.connector.connect(
 )
 mycursor = mydb.cursor()
 idContest = input("Enter contest id : ")
-sql = "select user_id,rating,sum(score) as sumscore,sum(time) as sumtime from (select R.user_id,R.score,rating,time \
+sql = "select user_id,rating,sum(score) as sumscore,sum(time) as sumtime from (select R.user_id,R.prob_id,R.score,rating,time \
 from (select user_id,prob_id, max(time) as latest from Result where contestmode = "+idContest+" group by user_id,prob_id) \
 as x inner join Result as R on R.user_id = x.user_id and R.prob_id = x.prob_id and R.time = x.latest \
-inner join User on R.user_id = User.idUser where User.state = 1) as scoreb group by user_id order by sumscore desc, sumtime"
+inner join User on R.user_id = User.idUser where User.state = 1 group by user_id,prob_id) as scoreb group by user_id order by sumscore desc, sumtime"
 mycursor.execute(sql);
 ranking = mycursor.fetchall()
 arr = []
