@@ -44,6 +44,7 @@
 					else 
 						tr.append("<td>" + submit + "</td>");
 				}
+				else $("#submit-header").hide();
 				$("#body").append(tr);
 			}
 		});
@@ -101,11 +102,10 @@
 <!-- problem section -->
 <body>
 	<!-- search problem -->
-	<h2> <i class ="fa fa-puzzle-piece"></i> Problem </h2><br>
-	<div class="container row m-0">
-		<input class ="col-md-8 form-control" oninput="w3.filterHTML('#probs', '.item', this.value)" placeholder="ค้นหาโจทย์">
-		<div class="col-md-2"></div>
-		<a href="submission" class="col-md-2 btn otogbtn">View Submission</a>
+	<h2> <i class ="fa fa-puzzle-piece"></i> Problem </h2><br class="d-none d-md-block">
+	<div class="row m-auto justify-content-between">
+		<input class ="col-6 col-md-8 form-control" oninput="w3.filterHTML('#probs', '.item', this.value)" placeholder="ค้นหาโจทย์">
+		<a href="submission" class="col-auto col-md-auto btn otogbtn">View Submission</a>
 	</div> <hr>
 	<div class="table-responsive">
 	<table class="table table-hover" id="probs" style="text-align: center;">
@@ -115,7 +115,7 @@
 				<th onclick= "w3.sortHTML('#probs', '.item', 'td:nth-child(2)')">Name</th>
 				<th onclick= "w3.sortHTML('#probs', '.item', 'td:nth-child(3)')">Rating</th>
 				<th onclick= "w3.sortHTML('#probs', '.item', 'td:nth-child(4)')">Passed</th>
-				<th></th>
+				<th id="submit-header"></th>
 			</tr>
 		</thead>
 		<tbody id = "body"></tbody>
@@ -130,7 +130,7 @@
         <div class="modal-header">
         	<h4 id = "schead" class="modal-title"> Modal Header </h4>
           	<button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
+        </div>	
 
         <!-- Modal body -->
         <div class="modal-body">
