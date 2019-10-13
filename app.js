@@ -34,6 +34,7 @@ var SubmissionRouter = require('./routes/submission')(io);
 var scoreboardRouter = require('./routes/scoreboard');
 var request_scRouter = require('./routes/request_sc');
 var scriptsRouter = require('./routes/scripts');
+var RestartRouter = require('./routes/restart');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -70,6 +71,7 @@ app.use('/upload', UploadRouter);
 app.use('/submission', SubmissionRouter);
 app.use('/scoreboard', scoreboardRouter);
 app.use('/request_sc', request_scRouter);
+app.use('/restart', RestartRouter);
 //app.use('/scripts', scriptsRouter);
 /*
 app.use(function(req, res, next){
