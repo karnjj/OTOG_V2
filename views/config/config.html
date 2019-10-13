@@ -45,6 +45,13 @@ bootstrap.min.css">
 		mode = selectedValue;
 	}
 </script>
+<script>
+	function restart() {
+		$.get("/restart").then(function(result){
+			alert(result);
+		})
+	}
+</script>
 </head>
 
 <body>
@@ -94,9 +101,9 @@ bootstrap.min.css">
 				</select>
 				</div>
 				<div>
-					<a class="btn btn-danger" href="/restart">
+					<button class="btn btn-danger" onclick="restart();">
 						Restart Grader
-					</a>
+					</button>
 				</div>
 				<br>
 			</div>
