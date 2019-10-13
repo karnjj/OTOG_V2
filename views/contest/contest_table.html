@@ -6,6 +6,7 @@
 	<meta charset="utf-8">
 	<title>OTOG - One Tambon One Grader</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 
 	<!-- bootstrap integral -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -18,7 +19,6 @@
 
 	<!-- main source of custom css -->
 	<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
-	<link rel="stylesheet" type="text/css" href="/stylesheets/chat_button.css">
 
 	<!-- include login script + load problems-->
 	<script>
@@ -150,7 +150,7 @@
 				</a>
 			</li>
 		</ul>
-	</nav><br><br><br>
+	</nav><br><br class="d-none d-md-block"><br class="d-none d-lg-block">
 
 	<!-- problem section -->
 	<div class="container">
@@ -161,7 +161,7 @@
     <a href="/contest/submission" class="col-md-2 btn otogbtn">View Submission</a>
 	</div>
 	<hr>
-
+	<div class="table-responsive">
 	<table class="table table-hover" id = "probs" style="text-align: center;">
 			<thead>
 				<tr style="color: #FF851B">
@@ -174,6 +174,7 @@
 			</thead>
 			<tbody id = "body"></tbody>
 	</table>
+	</div>
 
   	<!-- submit form -->
   	<div class="modal fade" id="submit_modal">
@@ -216,12 +217,12 @@
 	<!-- footer of Phakphum Dev Team -->
 	<hr>
 	<footer>
-		<div class="row">
-			<div class="col-md-6">
-				<p>If you have any problem or suggestion, please <a href="#" style="color: #FF851B"> Contact Us </a></p>
+		<div class="row mb-3">
+			<div class="text-center text-md-left col-md-6">
+				<p class="m-0">If you have any problem or suggestion, please <a href="#" style="color: #FF851B"> Contact Us </a></p>
 			</div>
-			<div class="col-md-6">
-				<span class="float-right"> &copy; 2019 Phakphum Dev Team</span>
+			<div class="text-center text-md-right col-md-6">
+				<span>&copy; 2019 Phakphum Dev Team</span>
 			</div>
 		</div>
 	</footer>

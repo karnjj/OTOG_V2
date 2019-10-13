@@ -33,8 +33,7 @@ function timeConverter(timestamp){
     messages.appendChild(li).append($("#message").val());
 
     $("#message").val("");
-    var xH = messages.scrollHeight;
-    messages.scrollTo(0, xH);
+    scrollDown(0);
     return false;
   });
   //recieve messages
@@ -45,8 +44,7 @@ function timeConverter(timestamp){
     li.setAttribute("title", timeConverter(data.time));
     messages.appendChild(span).append(data.user);
     messages.appendChild(li).append(data.message);
-    var xH = messages.scrollHeight; 
-    messages.scrollTo(0, xH);
+    scrollDown(0);
   });
 })();
 
@@ -72,11 +70,10 @@ function timeConverter(timestamp){
 })();
 
 //onclick event -> scroll to bottom 
-function scrollDown() {
+function scrollDown(delay) {
   setTimeout(function() {
     var xH = messages.scrollHeight;
-    console.log(xH);
     messages.scrollTop = xH; //microscoft edge support
     messages.scrollTo(0, xH);
-  }, 150);
+  }, delay);
 }

@@ -81,6 +81,15 @@
 a:hover{
   color: #FF851B;
 }
+a.configlink {
+  color: black;
+  text-decoration: none;
+  cursor: default;
+}
+a.configlink:hover {
+  color: black;
+}
+
 .pagination > li > a{
   background-color: white;
   color: #FF851B
@@ -192,6 +201,9 @@ a:hover{
 .pointer {
   cursor: pointer;
 }
+.default {
+  cursor: default;
+}
 
 .count_button {
   display: flex;
@@ -291,7 +303,7 @@ a:hover{
   align-self: flex-end;
   flex-wrap: wrap;
 }
-#message li .you{
+#messages li .you{
   background-color: #eee;
   align-self: flex-start;
   flex-wrap: wrap;
@@ -305,9 +317,6 @@ a:hover{
 #messages span {
   font-weight: bold;
   font-size: 0.95rem;
-}
-.chat-form .form-control {
-  width: 16rem;
 }
 
 /*blink for new contest*/
@@ -372,5 +381,17 @@ blink, .blink{
   }
   h3 {
     font-size: 1.3rem;
+  }
+  a.otogbtn,
+  button.otogbtn {
+    font-size: 0.875rem;
+  }
+  p, span,
+  a.otogtxt,
+  a.configlink,
+  input::placeholder,
+  label,
+  td, th {
+    font-size: 0.85rem;
   }
 }

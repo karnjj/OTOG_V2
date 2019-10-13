@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <!-- main source of custom css -->
-    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
     <!-- load contest table -->
     <script>
     function timeConverter(timestamp){
@@ -64,60 +62,60 @@
 	</script>
 </head>
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <h2><i class="fa fa-trophy"></i> Contest mode</h2>
-            </div>
+    <div class="row">
+        <div class="col-md-6">
+            <h2><i class="fa fa-trophy"></i> Contest mode</h2>
         </div>
-        <hr>
-        <!-- fetch contest -->
-        <table class="table table-condensed table-hover" style="text-align: center;">
-            <thead>
-            <tr style="color: #FF851B">
-                <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Start</th>
-                <th scope="col">Length</th>
-                <th scope="col">Mode</th>
-                <th scope="col"></th>
-            </tr>
-            </thead>
-            <tbody id= "body" class="justify-content-center"></tbody>
-        </table>
+    </div>
+    <hr>
+    <!-- fetch contest -->
+    <div class="table-responsive">
+    <table class="table table-condensed table-hover" style="text-align: center;">
+        <thead>
+        <tr style="color: #FF851B">
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Start</th>
+            <th scope="col">Length</th>
+            <th scope="col">Mode</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody id= "body" class="justify-content-center"></tbody>
+    </table>
     </div>
     <!-- submit form -->
     <div class="modal fade" id="submit_modal">
-        <div class="modal-dialog">
-            <div class="modal-content">
+    <div class="modal-dialog">
+        <div class="modal-content">
 
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <h4 id = "prob_head" class="modal-title"> Modal Header </h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-
-            <!-- Modal body -->
-            <div class="modal-body">
-                <form action="upload" method="post" enctype="multipart/form-data">
-                    <div class="custom-file">
-                    <input type="file" class="custom-file-input" name="customfile" id="customfile">
-                    <label class="custom-file-label" for="customfile" id = "file_name">Choose file</label>
-                    </div><br><br>
-
-                    <label>Choose Language</label>
-                    <select class="custom-select">
-                        <option selected value="c">C</option>
-                        <option selected value="cpp">C++</option>
-                    </select><br><br>
-                    <input type="hidden" value = "#" name="prod_id" id = "send_id">
-                    <div class="modal-footer">
-                        <button type="submit" class="btn otogbtn">Submit</button>
-                    </div>
-                </form>
-            </div>
-            </div>
+        <!-- Modal Header -->
+        <div class="modal-header">
+            <h4 id = "prob_head" class="modal-title"> Modal Header </h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+            <form action="upload" method="post" enctype="multipart/form-data">
+                <div class="custom-file">
+                <input type="file" class="custom-file-input" name="customfile" id="customfile">
+                <label class="custom-file-label" for="customfile" id = "file_name">Choose file</label>
+                </div><br><br>
+
+                <label>Choose Language</label>
+                <select class="custom-select">
+                    <option selected value="c">C</option>
+                    <option selected value="cpp">C++</option>
+                </select><br><br>
+                <input type="hidden" value = "#" name="prod_id" id = "send_id">
+                <div class="modal-footer">
+                    <button type="submit" class="btn otogbtn">Submit</button>
+                </div>
+            </form>
+        </div>
+        </div>
+    </div>
     </div>
 </body>
 </html>

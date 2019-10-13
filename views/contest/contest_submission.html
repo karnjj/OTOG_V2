@@ -157,11 +157,11 @@
 				</a>
 			</li>
 		</ul>
-	</nav><br><br><br>
+	</nav><br><br class="d-none d-md-block"><br class="d-none d-lg-block">
 
 	<!-- problem section -->
 	<div id="nav"></div>
-	<div class="container table-responsive">
+	<div class="container">
 
 		<!-- search problem -->
 		<div class="row">
@@ -169,8 +169,8 @@
 			<a href="javascript:history.back()" class="col-md-2 btn otogbtn">Back to contest</a>
 		</div>
 		<hr>
-
-		<table class="table table-hover" id="probs" style="text-align: center;">
+		<div class="table-responsive">
+		<table class="table table-hover text-nowrap" id="probs" style="text-align: center;">
 			<thead>
 				<tr style="color: #FF851B">
 					<th>#</th>
@@ -184,6 +184,7 @@
 			</thead>
 			<tbody id="body"></tbody>
 		</table>
+		</div>
 
 	<!-- submit form -->
   	<div class="modal fade" id="scmodal">
@@ -210,12 +211,12 @@
 	<!-- footer of Phakphum Dev Team -->
 	<hr>
 	<footer>
-		<div class="row">
-			<div class="col-md-6">
-				<p>If you have any problem or suggestion, please <a href="#" style="color: #FF851B"> Contact Us </a></p>
+		<div class="row mb-3">
+			<div class="text-center text-md-left col-md-6">
+				<p class="m-0">If you have any problem or suggestion, please <a href="#" style="color: #FF851B"> Contact Us </a></p>
 			</div>
-			<div class="col-md-6">
-				<span class="float-right"> &copy; 2019 Phakphum Dev Team</span>
+			<div class="text-center text-md-right col-md-6">
+				<span>&copy; 2019 Phakphum Dev Team</span>
 			</div>
 		</div>
 	</footer>
