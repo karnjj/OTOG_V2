@@ -3,8 +3,7 @@
 <head>
 </head>
 <body>
-    <a class="btn-chat shadow fixed-bottom-right" data-toggle="collapse" href="#chatbox" role="button" aria-expanded="false" aria-controls="chatbox"
-        onclick="scrollDown()">
+    <a class="btn-chat shadow fixed-bottom-right" data-toggle="collapse" href="#chatbox" role="button" aria-expanded="false" aria-controls="chatbox" onclick="scrollDown(150)">
         <h3 style="font-size: 1.8rem"><i class="fa fa-commenting fa-flip-horizontal"></i></h3>
     </a>
     <div id="chatbox" class="collapse multi-collapse fixed-bottom-right">
@@ -16,7 +15,7 @@
         <div class="card-body chat-body">
             <ul id="messages"></ul>
         </div>
-        <form id="form" class="chat-form form-inline">
+        <form id="form" class="chat-form d-inline-flex">
             <input autocomplete="off" id="message" class="form-control rounded-0 shadow-none"
                 placeholder="Type your message...">
             <button class="input-group-text rounded-0 shadow-none">Send</div>
