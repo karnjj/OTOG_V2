@@ -5,7 +5,7 @@ let runSh = new Promise(function(success, nosuccess) {
     ChildProcess.exec('~/OTOG_V2/./restart.sh',
     function (error, stdout, stderr) {
         console.log(error,stdout,stderr);
-        if (error !== null || stderr !== null) {
+        if (error !== null) {
         nosuccess('exec error: ' + error + '\nstderr : '+stderr);
         }else success('stdout: ' + stdout);
     });
