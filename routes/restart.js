@@ -14,11 +14,9 @@ let runSh = new Promise(function(success, nosuccess) {
 /* GET home page. */
 router.get('/', function(req, res, next) {
     runSh.then(function(result) {
-        console.log(result);
-        res.end(result);
+        res.end(result.toString());
     }).catch(function(result){
-        console.log(result);
-        res.end(result);
+        res.end(result.toString());
     })
 });
 
