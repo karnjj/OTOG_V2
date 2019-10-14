@@ -92,9 +92,6 @@
 			$("#sc").load("/request_sc/latest", {prob_id : id}, function(response, status, xhr) {
 				$("#sc").text(response)
 			});
-			/*setTimeout(function() {
-				$.getScript("/scripts/rainbow-custom.min.js");
-			}, 500);*/
 		}
 	</script>
 </head>
@@ -102,20 +99,20 @@
 <!-- problem section -->
 <body>
 	<!-- search problem -->
-	<h2> <i class ="fa fa-puzzle-piece"></i> Problem </h2><br class="d-none d-md-block">
+	<h2> <i class ="fa fa-puzzle-piece"></i> Problem </h2><br>
 	<div class="row m-auto justify-content-between">
 		<input class ="col-6 col-md-8 form-control" oninput="w3.filterHTML('#probs', '.item', this.value)" placeholder="ค้นหาโจทย์">
-		<a href="submission" class="col-auto col-md-auto btn otogbtn">View Submission</a>
+		<a href="submission" class="col-auto col-lg-2 btn otogbtn">View Submission</a>
 	</div> <hr>
 	<div class="table-responsive">
 	<table class="table table-hover" id="probs" style="text-align: center;">
 		<thead>
-			<tr style="color: #FF851B">
+			<tr style="color: var(--otog)">
 				<th onclick= "w3.sortHTML('#probs', '.item', 'td:nth-child(1)')">#</th>
 				<th onclick= "w3.sortHTML('#probs', '.item', 'td:nth-child(2)')">Name</th>
 				<th onclick= "w3.sortHTML('#probs', '.item', 'td:nth-child(3)')">Rating</th>
 				<th onclick= "w3.sortHTML('#probs', '.item', 'td:nth-child(4)')">Passed</th>
-				<th id="submit-header"></th>
+				<th id="submit-header">Submit</th>
 			</tr>
 		</thead>
 		<tbody id = "body"></tbody>
