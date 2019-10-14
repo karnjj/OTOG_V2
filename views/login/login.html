@@ -23,44 +23,44 @@
 <body style="background-color: #f5f5f5;">
 <div class="container">
 	<div class="row">
-		<div class="col-md-4"></div>
-		<div class="col-md-4" style="padding-top: 125px">
+		<div class="col-1 col-md-3 col-lg-4"></div>
+		<div class="col-10 col-md-6 col-lg-4" style="padding-top: 125px">
 			<div class="card">
 				<div class="card-header">
-				<div class="text-center font-weight-bold"> OTOG - One Tambon One Grader </div>
+					<div class="text-center font-weight-bold"> OTOG - One Tambon One Grader </div>
 				</div>
-					<div class="card-body">
-						<div id="failed">
-							<div class="alert alert-danger alert-dismissible fade show">
-    						<button type="button" class="close" data-dismiss="alert">&times;</button>
-    						<strong>Login Failed!</strong> <br>
-    						Username หรือ Password <br> ไม่ถูกต้อง
-  						</div>
+				<div class="card-body">
+					<div id="failed">
+						<div class="alert alert-danger alert-dismissible fade show">
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+						<strong>Login Failed!</strong> <br>
+						Username หรือ Password <br> ไม่ถูกต้อง
+					</div>
+					</div>
+					<form class="form-login" action="login" method="post">
+						<label for="inputUsername" class="sr-only">Username</label>
+						<input type="username" name="username" class="form-control"
+						placeholder="Username" required autofocus><br>
+						<label for="inputPassword" class="sr-only">Password</label>
+						<input type="password" name="password" class="form-control"
+						placeholder="Password" required>
+						<br>
+						<div class="custom-control custom-checkbox mr-sm-2">
+							<input type="checkbox" class="custom-control-input" id="remember"
+							name="remember" value="true">
+							<label class="custom-control-label pointer select-none" for="remember">
+								Remember me for a day
+							</label>
 						</div>
-						<form class="form-login" action="login" method="post">
-							<label for="inputUsername" class="sr-only">Username</label>
-							<input type="username" name="username" class="form-control"
-							placeholder="Username" required autofocus><br>
-							<label for="inputPassword" class="sr-only">Password</label>
-							<input type="password" name="password" class="form-control"
-							placeholder="Password" required>
-							<br>
-							<div class="custom-control custom-checkbox mr-sm-2">
-								<input type="checkbox" class="custom-control-input" id="remember"
-								name="remember" value="true">
-								<label class="custom-control-label pointer select-none" for="remember">
-									Remember me for a day
-								</label>
-							</div>
-							<br>
-							<button class="btn otogbtn
-							btn-lg btn-block" type="submit">Sign in</button>
-							<a class="btn otogbtn btn-lg btn-block" href="register">Register</a>
-						</form>
+						<br>
+						<button class="btn otogbtn
+						btn-lg btn-block" type="submit">Sign in</button>
+						<a class="btn otogbtn btn-lg btn-block" href="register">Register</a>
+					</form>
 				</div>
 			</div>
 		</div>
-		<div class="col-md-4"></div>
+		<div class="col-1 col-md-3 col-lg-4"></div>
 	</div>
 </div>
 </body>
