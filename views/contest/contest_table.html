@@ -68,6 +68,7 @@
 				tr.append("<td>" + pass + "</td>");
 				if (is_login == "1") tr.append("<td>" + "<button class='btn otogbtn' onclick=" + param +
 					"data-toggle = 'modal' data-target='#submit_modal'>Submit</button>" + "</td>");
+				else $("#submit-header").hide();
 				$("#body").append(tr);
 			}
 		});
@@ -110,12 +111,12 @@
 			return true;
 		}
 	</script>
-	<!-- chat load>
+	<!-- chat load -->
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$("#chat").load("/chat");
 		});
-	</script-->
+	</script>
 </head>
 
 <body>
@@ -155,21 +156,19 @@
 	<!-- problem section -->
 	<div class="container">
 	<!-- search problem -->
-	<h2> <i class ="fa fa-trophy"></i>Contest</h2><br>
-	<div class="row">
-    <div class="col-md-10"></div>
-    <a href="/contest/submission" class="col-md-2 btn otogbtn">View Submission</a>
-	</div>
-	<hr>
+	<h2> <i class ="fa fa-trophy"></i> Contest</h2><br>
+	<div class="row m-auto justify-content-end">
+		<a href="/contest/submission" class="col-auto col-lg-2 btn otogbtn">View Submission</a>
+	</div> <hr>
 	<div class="table-responsive">
 	<table class="table table-hover" id = "probs" style="text-align: center;">
 			<thead>
-				<tr style="color: #FF851B">
-					<th onclick = "w3.sortHTML('#probs', '.item', 'td:nth-child(1)')">#</th>
+				<tr style="color: var(--otog)">
+					<th onclick= "w3.sortHTML('#probs', '.item', 'td:nth-child(1)')">#</th>
 					<th onclick= "w3.sortHTML('#probs', '.item', 'td:nth-child(2)')">Name</th>
 					<th onclick= "w3.sortHTML('#probs', '.item', 'td:nth-child(3)')">Rating</th>
 					<th onclick= "w3.sortHTML('#probs', '.item', 'td:nth-child(4)')">Passed</th>
-					<th></th>
+					<th id="submit-header">Submit</th>
 				</tr>
 			</thead>
 			<tbody id = "body"></tbody>
@@ -219,7 +218,7 @@
 	<footer>
 		<div class="row mb-3">
 			<div class="text-center text-md-left col-md-6">
-				<p class="m-0">If you have any problem or suggestion, please <a href="#" style="color: #FF851B"> Contact Us </a></p>
+				<p class="m-0">If you have any problem or suggestion, please <a href="#" style="color: var(--otog)"> Contact Us </a></p>
 			</div>
 			<div class="text-center text-md-right col-md-6">
 				<span>&copy; 2019 Phakphum Dev Team</span>
