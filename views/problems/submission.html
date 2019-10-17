@@ -48,12 +48,12 @@
 	</script>
 	<script>
 		var socket = io();
-    socket.on('connect',function(data) {
-      socket.emit('req_table','req_table from client');
-    });
-    socket.on('submission',function(data){
-      if(load_table(data.submission)) socket.emit('stop_req','stop_req from client');
-    });
+		socket.on('connect',function(data) {
+		socket.emit('req_table','req_table from client');
+		});
+		socket.on('submission',function(data){
+		if(load_table(data.submission)) socket.emit('stop_req','stop_req from client');
+		});
 	</script>
 	<!-- load submission -->
 	<script>
@@ -119,9 +119,6 @@
 			$("#sc").load("request_sc", {id : id}, function(response, status, xhr) {
 				$("#sc").text(response)
 			});
-			/*setTimeout(function() {
-				$.getScript("/scripts/rainbow-custom.min.js");
-			}, 500);*/
 		}
 		function errortxt(id) {
 			var str = "Error : " + id;
@@ -194,7 +191,7 @@
 			<div id="latest-problem" class="col-12 col-sm-8 col-md-6 col-lg-5 d-flex align-items-baseline justify-content-between">
 				<label class="text-nowrap"><b>ส่งข้อล่าสุด : </b></label>
 				<a href="#" class="otogtxt text-center"> Latest Submission<!--% = latest_submit %--></a>
-				<button class="btn otogbtn">Submit</button>
+				<button class="btn otogbtn" onclick="show_submit()" data-toggle="modal" data-target="#submit_modal">Submit</button>
 			</div>
 			<div class="col-12 col-sm-4 col-md-3 col-lg-2 d-flex mt-1">
 				<a href="problems" class="btn otogbtn w-100">View Problem</a>
@@ -217,38 +214,75 @@
 			<tbody id="body"></tbody>
 		</table>
 		</div>
-	<!-- submit form -->
-  	<div class="modal fade" id="scmodal">
-    <div class="modal-dialog">
-      	<div class="modal-content">
+		<!-- view form -->
+		<div class="modal fade" id="scmodal">
+		<div class="modal-dialog">
+			<div class="modal-content">
 
-        <!-- Modal Header -->
-        <div class="modal-header">
-        	<h4 id = "schead" class="modal-title"> Modal Header </h4>
-          	<button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-
-        <!-- Modal body -->
-        <div class="modal-body">
-			<pre><code data-langauge="c" id="sc"></code></pre>
-		</div>
-
-      	</div>
-    </div>
-  	</div>
-	<!--Live Chat-->
-	<div id="chat"></div>
-	<!-- footer of Phakphum Dev Team -->
-	<hr>
-	<footer>
-		<div class="row mb-3">
-			<div class="text-center text-md-left col-md-6">
-				<p class="m-0">If you have any problem or suggestion, please <a href="#" class="otogtxt"> Contact Us </a></p>
+			<!-- Modal Header -->
+			<div class="modal-header">
+				<h4 id = "schead" class="modal-title"> Modal Header </h4>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
-			<div class="text-center text-md-right col-md-6">
-				<span>&copy; 2019 Phakphum Dev Team</span>
+
+			<!-- Modal body -->
+			<div class="modal-body">
+				<pre><code data-langauge="c" id="sc"></code></pre>
+			</div>
+
 			</div>
 		</div>
-	</footer>
+		</div>
+		
+		<!-- submit form -->
+		<div class="modal fade" id="submit_modal">
+			<div class="modal-dialog">
+			<div class="modal-content">
+
+			<!-- Modal Header -->
+			<div class="modal-header">
+				<h4 id = "prob_head" class="modal-title"> Modal Header </h4>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+
+			<!-- Modal body -->
+			<div class="modal-body">
+				<form name="form1"action="upload" method="post" enctype="multipart/form-data" onSubmit="return OnUploadCheck();">
+				<div class="custom-file">
+					<input type="file" class="custom-file-input" name="customfile" id="customfile">
+					<label class="custom-file-label" for="customfile" id = "file_name">Choose file</label>
+				</div><br><br>
+
+				<label>Choose Language</label>
+				<select class="custom-select">
+					<option selected value="c">C</option>
+					<option selected value="cpp">C++</option>
+				</select><br><br>
+				<input type="hidden" value = "#" name="prod_id" id = "send_id">
+				<div class="modal-footer">
+				<button type="submit" class="btn otogbtn">Submit</button>
+				</div>
+				</form>
+			</div>
+					
+			</div>
+			</div>
+		</div>
+	
+		<!--Live Chat-->
+		<div id="chat"></div>
+		<!-- footer of Phakphum Dev Team -->
+		<hr>
+		<footer>
+			<div class="row mb-3">
+				<div class="text-center text-md-left col-md-6">
+					<p class="m-0">If you have any problem or suggestion, please <a href="#" class="otogtxt"> Contact Us </a></p>
+				</div>
+				<div class="text-center text-md-right col-md-6">
+					<span>&copy; 2019 Phakphum Dev Team</span>
+				</div>
+			</div>
+		</footer>
+	</div>
 </body>
 </html>
