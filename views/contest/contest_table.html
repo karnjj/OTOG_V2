@@ -56,8 +56,8 @@
 				//var rating = prob[i].rating;
 				var pass = prob[i].pass;
 				if(is_login == "1") {
-					if(pass_state[id] == 2) tr.addClass("item AC");
-					else if(pass_state[id] == 1)tr.addClass("item WA");
+					if(pass_state[id] == 2) tr.addClass("AC");
+					else if(pass_state[id] == 1)tr.addClass("WA");
 				}
 				var path = "/problems/docs/" + sname;
 				var param = '"' + "show_submit(" + i + ")" + '"';
@@ -158,10 +158,10 @@
 	<!-- search problem -->
 	<h2> <i class ="fa fa-trophy"></i> Contest</h2><br>
 	<div class="row m-auto justify-content-end">
-		<a href="/contest/submission" class="col-auto col-lg-2 btn otogbtn">View Submission</a>
+		<a href="/contest/submission" class="col-12 col-sm-4 col-md-3 col-lg-2 btn otogbtn mt-1">View Submission</a>
 	</div> <hr>
 	<div class="table-responsive">
-	<table class="table table-hover" id = "probs" style="text-align: center;">
+	<table class="table table-hover" id = "probs" style="text-align: center">
 			<thead>
 				<tr style="color: var(--otog)">
 					<th onclick= "w3.sortHTML('#probs', '.item', 'td:nth-child(1)')">#</th>
