@@ -13,7 +13,8 @@ module.exports = function(io) {
 				if (err) reject(err)
 				else resolve(result[0]);
 			}));
-			name = lastest.name;
+			if(lastest == undefined) lastest = null,name = "";
+			else name = lastest.name;
 		}
 		res.render("problems/submission.html", {
 			title: 'Problems',
