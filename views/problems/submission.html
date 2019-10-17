@@ -190,21 +190,21 @@
 	<div class="container">
 		<!-- search problem -->
 		<h2> <i class="fa fa-puzzle-piece"></i> Submission </h2><br>
-		<div class="row justify-content-start justify-content-sm-between align-items-baseline flex-row-reverse">
-			<div class="col-6 col-sm-4 col-md-auto col-lg-2 d-flex justify-content-end mb-1">
-				<a href="problems" class="btn otogbtn w-100">View Problem</a>
-			</div>
+		<div class="row justify-content-between align-items-baseline">
 			<div id="latest-problem" class="col-12 col-sm-8 col-md-6 col-lg-5 d-flex align-items-baseline justify-content-between">
 				<label class="text-nowrap"><b>ส่งข้อล่าสุด : </b></label>
 				<a href="#" class="otogtxt text-center"> Latest Submission<!--% = latest_submit %--></a>
 				<button class="btn otogbtn">Submit</button>
+			</div>
+			<div class="col-12 col-sm-4 col-md-3 col-lg-2 d-flex mt-1">
+				<a href="problems" class="btn otogbtn w-100">View Problem</a>
 			</div>
 		</div>
 		<hr>
 		<div class="table-responsive">
 		<table class="table table-hover" id="probs" style="text-align: center">
 			<thead>
-				<tr style="color: var(--otog)">
+				<tr class="otogtxt">
 					<th>#</th>
 					<th>ชื่อผู้ใช้</th>
 					<th>ชื่อโจทย์</th>
@@ -243,7 +243,7 @@
 	<footer>
 		<div class="row mb-3">
 			<div class="text-center text-md-left col-md-6">
-				<p class="m-0">If you have any problem or suggestion, please <a href="#" style="color: var(--otog)"> Contact Us </a></p>
+				<p class="m-0">If you have any problem or suggestion, please <a href="#" class="otogtxt"> Contact Us </a></p>
 			</div>
 			<div class="text-center text-md-right col-md-6">
 				<span>&copy; 2019 Phakphum Dev Team</span>

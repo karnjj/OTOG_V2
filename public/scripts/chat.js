@@ -16,7 +16,7 @@ function timeConverter(timestamp){
 }
 (function() {
   //submit
-  $("form").submit(function(e) {
+  $("#form").submit(function(e) {
     if(showname == undefined) showname = "Guest";
     let li = document.createElement("li");
     e.preventDefault(); // prevents page reloading
@@ -44,7 +44,6 @@ function timeConverter(timestamp){
     li.setAttribute("title", timeConverter(data.time));
     messages.appendChild(span).append(data.user);
     messages.appendChild(li).append(data.message);
-    scrollDown(0);
   });
 })();
 
