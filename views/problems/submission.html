@@ -140,7 +140,43 @@
 			}
 		}
 	</script>
-
+	<script>
+		function show_submit() {
+			var lastest = <%-JSON.stringify(lastest)%>;
+			if(lastest == null) location.reload(true);
+			var pname = lastest.name;
+			//alert(pname);
+			$("#prob_head").text(pname);
+			$("#send_id").attr("value", lastest.id_Prob);
+		}
+	</script>
+	<!-- submission script -->
+	<script>
+		$(document).ready(function() {
+			var input = document.getElementById('customfile');
+			var label = document.getElementById('file_name');
+			input.addEventListener('change', showFileName);
+			function showFileName(event) {
+				var input = event.srcElement;
+				var fileName = input.files[0].name;
+				label.textContent = fileName;
+			}
+		});
+	</script>
+	<script>
+		function OnUploadCheck()
+		{
+			var extall="c,cpp";
+			file = document.form1.customfile.value;
+			ext = file.split('.').pop().toLowerCase();
+			if(parseInt(extall.indexOf(ext)) < 0)
+			{
+				alert('Extension support : ' + extall);
+				return false;
+			}
+			return true;
+		}
+	</script>
 	<!-- chat load -->
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -196,8 +232,8 @@
 			</div>
 			<div id="latest-problem" class="col-12 col-sm-8 col-md-6 col-lg-5 d-flex align-items-baseline justify-content-between">
 				<label class="text-nowrap"><b>ส่งข้อล่าสุด : </b></label>
-				<a href="#" class="otogtxt text-center"> Latest Submission<!--% = latest_submit %--></a>
-				<button class="btn otogbtn">Submit</button>
+				<a class="otogtxt text-center"><%=name%></a>
+				<button class='btn otogbtn' onclick='show_submit();' data-toggle = 'modal' data-target='#submit_modal'>Submit</button>
 			</div>
 		</div>
 		<hr>
@@ -217,7 +253,7 @@
 			<tbody id="body"></tbody>
 		</table>
 		</div>
-	<!-- submit form -->
+	<!-- view form -->
   	<div class="modal fade" id="scmodal">
     <div class="modal-dialog">
       	<div class="modal-content">
@@ -235,7 +271,40 @@
 
       	</div>
     </div>
-  	</div>
+	</div>
+	<!-- submit form -->
+	<div class="modal fade" id="submit_modal">
+		<div class="modal-dialog">
+      	<div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 id = "prob_head" class="modal-title"> Modal Header </h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+          	<form name="form1"action="/upload" method="post" enctype="multipart/form-data" onSubmit="return OnUploadCheck();">
+				<div class="custom-file">
+					<input type="file" class="custom-file-input" name="customfile" id="customfile">
+					<label class="custom-file-label" for="customfile" id = "file_name">Choose file</label>
+				</div><br><br>
+
+				<label>Choose Language</label>
+				<select class="custom-select">
+					<option selected value="c">C</option>
+					<option selected value="cpp">C++</option>
+				</select><br><br>
+				<input type="hidden" value = "#" name="prod_id" id = "send_id">
+				<div class="modal-footer">
+				<button type="submit" class="btn otogbtn">Submit</button>
+				</div>
+          	</form>
+		</div>
+      	</div>
+    	</div>
+	</div>
 	<!--Live Chat-->
 	<div id="chat"></div>
 	<!-- footer of Phakphum Dev Team -->
