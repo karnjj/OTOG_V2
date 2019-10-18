@@ -218,29 +218,56 @@ a.configlink:hover {
   height: 95px;
   padding: 20px;
   margin: 6px 3px;
-  opacity: 0.8;
-  /*transition: background-color 0.1s;*/
+  transition: background-color 0.2s;
 }
-.count_button.blue:hover{
-  background-color: var(--btn_blue);
+.count_button.blue {
+  background-color: rgba(23, 181, 233, 0.5);
 }
-.count_button.green:hover{
-  background-color: var(--btn_green);
+.count_button.green {
+  background-color: rgba(65, 226, 65, 0.5);
 }
-.count_button.red:hover{
-  background-color: var(--btn_red);
+.count_button.red {
+  background-color: rgba(255, 77, 77, 0.5);
 }
-.count_button.org:hover{
-  background-color: var(--btn_orng);
+.count_button.org {
+  background-color: rgba(255, 173, 51, 0.5);
 }
-.count_button.black:hover{
-  background-color: var(--btn_black);
+.count_button.black {
+  background-color: rgba(17, 17, 17, 0.5);
+}
+.count_button.blue:hover {
+  background-color: rgba(23, 181, 233, 0.8);
+}
+.count_button.green:hover {
+  background-color: rgba(65, 226, 65, 0.8);
+}
+.count_button.red:hover {
+  background-color: rgba(255, 77, 77, 0.8);
+}
+.count_button.org:hover {
+  background-color: rgba(255, 173, 51, 0.8);
+}
+.count_button.black:hover {
+  background-color: rgba(17, 17, 17, 0.8);
+}
+.count_button.blue:active {
+  background-color: rgb(23, 181, 233);
+}
+.count_button.green:active {
+  background-color: rgb(65, 226, 65);
+}
+.count_button.red:active {
+  background-color: rgb(255, 77, 77);
+}
+.count_button.org:active {
+  background-color: rgb(255, 173, 51);
+}
+.count_button.black:active {
+  background-color: rgb(17, 17, 17);
 }
 .count_button:active{
-  transition: opacity 0.1s;
   transform: translateY(3px);
   box-shadow: 0 2px var(--btn_grey);
-  opacity: 1.0;
 }
 
 /*all about chat*/
