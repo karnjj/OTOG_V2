@@ -54,7 +54,6 @@ function timeConverter(timestamp){
       return data.json();
     })
     .then(json => {
-      console.log(json);
       showname = json.showname;
       json.chat.map(data => {
         if(data.msg.length) {//no display for empty string

@@ -43,6 +43,7 @@
 				$("#login_but").html("<i class='fa fa-sign-in'></i> <span>Login</span>");
 				$("#login_but").attr("href", "login");
 				$("#login_but").css("color", "rgba(0, 0, 0, 0.7)");
+				$("#code-display").hide();
 			}
 		});
 	</script>
@@ -105,8 +106,6 @@
 					else
 						tr.append("<td>" + viewcode +"</td>" );
 				}
-				else
-					$("#code-display").hide();
 				$("#body").append(tr);
 			}
 			return is_complete;
@@ -140,10 +139,7 @@
 	<script>
 		function show_submit() {
 			var lastest = <%-JSON.stringify(lastest)%>;
-			if(lastest == null) location.reload(true);
-			var pname = lastest.name;
-			//alert(pname);
-			$("#prob_head").text(pname);
+			$("#prob_head").text(lastest.name);
 			$("#send_id").attr("value", lastest.id_Prob);
 		}
 	</script>
@@ -157,6 +153,16 @@
 				var input = event.srcElement;
 				var fileName = input.files[0].name;
 				label.textContent = fileName;
+			}
+		});
+	</script>
+	<script> 
+		$(document).ready(function() {
+			var lastest = <%-JSON.stringify(lastest)%>;
+			if(lastest) {
+				$("#latest-problem").append('<label class="text-nowrap"><b>ส่งข้อล่าสุด : </b></label>');
+				$("#latest-problem").append('<a href="'+ "problems/docs/" + lastest.sname + '" class="otogtxt text-center"><%=name%></a>');
+				$("#latest-problem").append('<button class="btn otogbtn" onclick="show_submit()" data-toggle="modal" data-target="#submit_modal">Submit</button>');
 			}
 		});
 	</script>
@@ -225,9 +231,6 @@
 		<h2> <i class="fa fa-puzzle-piece"></i> Submission </h2><br>
 		<div class="row justify-content-between align-items-baseline">
 			<div id="latest-problem" class="col-12 col-sm-8 col-md-6 col-lg-5 d-flex align-items-baseline justify-content-between">
-				<label class="text-nowrap"><b>ส่งข้อล่าสุด : </b></label>
-				<a href="#" class="otogtxt text-center"><%=name%></a>
-				<button class="btn otogbtn" onclick="show_submit()" data-toggle="modal" data-target="#submit_modal">Submit</button>
 			</div>
 			<div class="col-12 col-sm-4 col-md-3 col-lg-2 d-flex mt-1">
 				<a href="problems" class="btn otogbtn w-100">View Problem</a>
