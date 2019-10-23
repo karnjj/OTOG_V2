@@ -6,7 +6,7 @@ module.exports = function(io) {
 	router.get('/', async function(req, res, next) {
 		var lastest = null;
 		var name = "";
-		var sql = "select name,id_Prob from ( select max(idResult) as lastest from Result where user_id = ?) "+
+		var sql = "select name,id_Prob,sname from ( select max(idResult) as lastest from Result where user_id = ?) "+
 			"as X inner join Result on Result.idResult = X.lastest inner join Problem on prob_id = Problem.id_Prob"
 		if(req.session.name_id != undefined) {
 			lastest = await new Promise((resolve, reject) => con.query(sql,[req.session.name_id], function(err,result){
