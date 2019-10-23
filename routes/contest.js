@@ -112,7 +112,7 @@ router.get('/unshow_contest', function(req, res, next) {
 });
 
 router.get('/show_contest', function(req, res, next) {
-  var sql = "SELECT * FROM Contest";
+  var sql = "SELECT * FROM Contest order by idContest desc";
   con.query(sql, function(err, result, fields) {
     if (err) throw err;
     res.render("contest/show_contest.html", {
