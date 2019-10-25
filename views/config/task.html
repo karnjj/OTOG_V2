@@ -64,19 +64,39 @@ $(document).ready(function(){
 
 	</script>
 	<!-- toggle problem -->
-  <script>
-  function ptoggle(i){
-    var prob = <%-JSON.stringify(problems)%>;
-    var see = prob[i].state;
-    see ^= 1;
-    $.post("/config/toggle",
-    {
-      id: prob[i].id_Prob,
-      state : see
-    });
-    location.reload(true);
-  }
-</script>
+	<script>
+	function ptoggle(i){
+		var prob = <%-JSON.stringify(problems)%>;
+		var see = prob[i].state;
+		see ^= 1;
+		$.post("/config/toggle",
+		{
+		id: prob[i].id_Prob,
+		state : see
+		});
+		location.reload(true);
+	}
+	</script>
+	<script>
+	$(document).ready(function() {
+		var pdf_input = document.getElementById('customfile_pdf');
+		var pdf_label = document.getElementById('name_pdf');
+		var zip_input = document.getElementById('customfile_zip');
+		var zip_label = document.getElementById('name_zip');
+		pdf_input.addEventListener('change', pdfshowFileName);
+		function pdfshowFileName(event) {
+			var input = event.srcElement;
+			var fileName = input.files[0].name;
+			pdf_label.textContent = fileName;
+		}
+		zip_input.addEventListener('change', zipshowFileName);
+		function zipshowFileName(event) {
+			var input = event.srcElement;
+			var fileName = input.files[0].name;
+			zip_label.textContent = fileName;
+		}
+	});
+	</script>
 </head>
 <body>
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
@@ -142,35 +162,35 @@ $(document).ready(function(){
 
         <!-- Modal body -->
         <div class="modal-body">
-          <form action="upload" method="post" enctype="multipart/form-data">
+          <form action="/config/task" method="post" enctype="multipart/form-data">
 
 						<label>Problem Description :</label>
 						<div class="input-group">
-  						<input type="text" aria-label="pname"
+  						<input type="text" aria-label="pname" name="name" autocomplete="off" required
   						class="form-control" placeholder="Problem Name">
-  						<input type="text" aria-label="sname"
+  						<input type="text" aria-label="sname" name="sname" autocomplete="off" required
   						class="form-control" placeholder="Short Name">
 						</div><br>
 
-						<div class="custom-file">
-              <input type="file" class="custom-file-input" name="customfile" id="customfile">
-              <label class="custom-file-label" for="customfile" id = "file_name">Add Your Problem Document (pdf only) </label>
+			<div class="custom-file">
+              <input type="file" class="custom-file-input" name="customfile_pdf" id="customfile_pdf">
+              <label class="custom-file-label" for="customfile_pdf" id = "name_pdf">Add Your Problem Document (pdf only) </label>
             </div><br><br>
 
             <div class="custom-file">
-              <input type="file" class="custom-file-input" name="customfile" id="customfile">
-              <label class="custom-file-label" for="customfile" id = "file_name">Add Your Testcases (zip only)</label>
+              <input type="file" class="custom-file-input" name="customfile_zip" id="customfile_zip">
+              <label class="custom-file-label" for="customfile_zip" id = "name_zip">Add Your Testcases (zip only)</label>
             </div><br><br>
 
             <label>Problem Constraint :</label>
 						<div class="input-group">
-  						<input type="text" aria-label="timelim"
+  						<input type="text" aria-label="timelim" name="time" required
   						class="form-control" placeholder="Time limit (second)">
-  						<input type="text" aria-label="mlim"
+  						<input type="text" aria-label="mlim" name="memory" required
   						class="form-control" placeholder="Memory limit (MB)">
 						</div><br>
 						<div class="input-group">
-  						<input type="text" aria-label="tcnum"
+  						<input type="text" aria-label="tcnum" name="testcases" required
   						class="form-control" placeholder="Number of testcases">
   						<input type="text" aria-label="mlim"
   						class="form-control" placeholder="Problem Author">

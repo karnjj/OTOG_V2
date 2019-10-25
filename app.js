@@ -33,7 +33,6 @@ var UploadRouter = require('./routes/upload');
 var SubmissionRouter = require('./routes/submission')(io);
 var scoreboardRouter = require('./routes/scoreboard');
 var request_scRouter = require('./routes/request_sc');
-var scriptsRouter = require('./routes/scripts');
 var RestartRouter = require('./routes/restart');
 
 // view engine setup

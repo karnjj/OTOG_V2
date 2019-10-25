@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var mysql = require('mysql');
+var fs = require('fs');
+var unzipper = require('unzipper');
 var con = mysql.createConnection(global.gConfig.mysql);
 
 function is_admin(req) {
@@ -39,6 +41,39 @@ router.get('/task', function(req, res, next) {
       problems : rows,
     });
   });
+});
+//new task
+router.post('/task', function(req, res, next) {
+  if(!is_admin(req)) {res.redirect('/main'); return 0;}
+  console.log(req.files);
+  var data = req.body;
+  var sql = "insert into Problem (name, sname, score, time, memory) values ?";
+  var values = [ 
+    [data.name,data.sname,100,data.time,data.memory],
+  ];
+  con.query(sql,[values],(err,rows) => {
+    if(err) throw err;
+  })
+  var dir = './source/' + data.sname;
+  if (!fs.existsSync(dir)) fs.mkdirSync(dir);
+  fs.writeFile(dir+'/script.php', 'cases = '+data.testcases+';', function (err) {
+    if (err) throw err;
+  });
+  if(req.files.customfile_pdf) {
+    var pdf_file = req.files.customfile_pdf;
+    pdf_file.mv('./routes/docs/' + data.sname + ".pdf");
+  }
+  if(req.files.customfile_zip) {
+    var zip_dir = dir + '/' + data.sname + ".zip";
+    var zip_file = req.files.customfile_zip;
+    zip_file.mv(zip_dir);
+    fs.createReadStream(zip_dir)
+      .pipe(unzipper.Extract({ path: dir }));
+    fs.unlink(zip_dir, function (err) {
+      if (err) throw err;
+    }); 
+  }
+  res.redirect('/config/task');
 });
 router.post('/toggle', function(req, res, next) {
   if(!is_admin(req)) {res.redirect('/main'); return 0;}
