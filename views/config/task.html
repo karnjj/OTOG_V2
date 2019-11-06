@@ -36,15 +36,15 @@ $(document).ready(function(){
 			var see = prob[i].state;
 			var path = "/problems/docs/" + sname;
 			var param = '"' + "ptoggle(" + i + ")" + '"';
-
+			var del_task = '"' + "del_task(" + id + ")" + '"';
 			// button group
 			var toggle;
 			var edit = "<button class='btn btn-info' data-toggle='tooltip' title='Edit'>" +
 			"<i class='fa fa-pencil'></i></button>";
 			var rejudge = "<button class='btn btn-warning' data-toggle='tooltip' title='Rejudge'>" +
 			"<i class='fa fa-refresh'></i></button>";
-			var del = "<button class='btn btn-danger' data-toggle='tooltip' title='Delete'>" +
-			"<i class='fa fa-trash'></i></button>"
+			var del = "<button class='btn btn-danger' onclick="+ del_task
+			+"data-toggle='tooltip' title='Delete'><i class='fa fa-trash'></i></button>"
 
 			tr.append("<td class=\"d-md-table-cell\">" + id + "</td>");
 			tr.append("<td class=\"w-50 d-md-table-cell\" >" + "<a class = 'otogtxt' href =" + path + ">" + name + "</a>" + "</td>");1
@@ -62,6 +62,18 @@ $(document).ready(function(){
 		}
 	});
 
+	</script>
+	<!-- other function -->
+	<script>
+		function del_task(id) {
+			if(confirm("Are you sure to delete problem id : "+id)) {
+				$.post("/config/del_task",
+				{
+					idSub: id,
+				});
+				location.reload(true);
+			}
+		}
 	</script>
 	<!-- toggle problem -->
 	<script>
@@ -173,7 +185,7 @@ $(document).ready(function(){
 						</div><br>
 
 			<div class="custom-file">
-              <input type="file" class="custom-file-input" name="customfile_pdf" id="customfile_pdf">
+              <input type="file" class="custom-file-input" name="customfile_pdf" id="customfile_pdf" required>
               <label class="custom-file-label" for="customfile_pdf" id = "name_pdf">Add Your Problem Document (pdf only) </label>
             </div><br><br>
 

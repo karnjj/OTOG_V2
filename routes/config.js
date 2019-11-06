@@ -131,4 +131,18 @@ router.post('/del', function(req, res, next) {
       res.status(200);
   });
 });
+router.post('/del_task', function(req, res, next) {
+  if(!is_admin(req)) {res.redirect('/main'); return 0;}
+  var sql = "select * from Problem where id_Prob = ?";
+  con.query(sql, [req.body.idSub], (err,rows)=> {
+    //console.log(rows[0]);
+    var dir = './source/' + rows[0].sname;
+    fs.rmdirSync(dir, { recursive: true });
+  })
+  var sql = "delete from Problem where id_Prob = ?";
+  con.query(sql, [req.body.idSub], function (err, rows) {
+      if (err) throw err;
+  });
+  res.status(200);
+});
 module.exports = router;
