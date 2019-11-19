@@ -51,7 +51,7 @@ function cnt(rows,passcnt) {
   return rows;
 }
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', async function(req, res, next) {
   total_pass = 0;
   total_nopass = 0;
   var pass = [];
@@ -59,10 +59,16 @@ router.get('/', function(req, res, next) {
   var sql = "SELECT User.sname,Result.prob_id FROM Result INNER JOIN User ON Result.user_id=User.idUser "
           +"WHERE state = 1 and score = 100 group by CONCAT(prob_id, '_', user_id)";
     //console.log(sql);
+  passcnt = await new Promise((resolve, reject) => con.query(sql, function(err,result){
+    if (err) throw(err)
+    else resolve(result);
+  }))
+  /*
   con.query(sql, function (err, rows) {
     //console.log(err);
     passcnt = rows;
   });
+  */
   if(req.session.is_login == 1) {
     var sql = "SELECT * FROM Result WHERE user_id = "+req.session.name_id+" ORDER BY time desc";
     //console.log(sql);
