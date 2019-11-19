@@ -20,6 +20,7 @@
 	<!-- main source of custom css -->
 	<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
 
+	<script src="navbar.js?id=prob" id="nav-bar"></script>
 	<!-- include login script + load problems-->
 	<script>
 		$(document).ready(function() {
@@ -54,40 +55,8 @@
 
 <body>
 	<!-- navigation bar -->
-	<nav class="navbar navbar-expand-sm navbar-light justify-content-between" style="background-color: #F1F1F1">
-		<a class="navbar-brand head_typo" href="main">OTOG<span> - One Tambon One Grader</span></a>
-		<ul class="navbar-nav">
-			<li class="nav-item">
-				<a class="nav-link head_typo" href="main">
-					<i class="fa fa-home"></i> <span>Main</span>		
-				</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link head_typo active" href="problems">
-					<i class="fa fa-puzzle-piece"></i> <span>Problems</span>
-				</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link head_typo" href="contest">
-					<i class="fa fa-trophy"></i> <span>Contest</span>
-					<!-- contest notification
-					<sup class="notif blink"> <span class="badge badge-warning badge-pill 
-						d-none d-lg-inline-block">New</span>
-					</sup>-->
-				</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link head_typo" href="ratings">
-					<i class="fa fa-bar-chart"></i> <span>Ratings</span>
-				</a>
-			</li>
-			<li class="nav-item">
-				<a id = "login_but" class="nav-link head_typo" href="login">
-					<i class="fa fa-sign-in"></i> <span>Login</span>
-				</a>
-			</li>
-		</ul>
-	</nav><br><br class="d-none d-md-block"><br class="d-none d-lg-block">
+	<div id="navbar-frame" >
+	</div><br><br class="d-none d-md-block"><br class="d-none d-lg-block">
 
 	<!-- problem section -->
 	<div class="container">
