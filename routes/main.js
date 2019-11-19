@@ -29,9 +29,15 @@ function cnt(rows,passcnt) {
   //console.log(time_now);
   var arr = new Array(1000);
   arr.fill(0);
+  var sz = passcnt.length;
+  for(var i = 0; i < sz; i++) {
+    arr[passcnt[i].prob_id]++;
+  }
+  /*
   passcnt.forEach(function(e) {
     arr[e.prob_id] = arr[e.prob_id] + 1;
   });
+  */
   rows.forEach(function(part, index) {
     this[index].pass = arr[part.id_Prob];
     if(this[index].see_date > (time_now - 86400)) {
