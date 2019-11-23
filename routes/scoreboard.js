@@ -32,6 +32,8 @@ function make_scoreboard(results){
 
 /* GET home page. */
 router.get('/id/:idContest', async function(req, res, next) {
+  console.log(req.params.idContest);
+  
   var sql = "SELECT problems FROM Contest WHERE idContest = ?";
   var res1 = await new Promise((resolve, reject) => con.query(sql, [req.params.idContest], function(err,result){
     if (err) reject(err)

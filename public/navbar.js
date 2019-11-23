@@ -1,5 +1,5 @@
 $(function () {
-    var bar = '<nav class="navbar navbar-expand-sm navbar-light justify-content-between" style="background-color: #F1F1F1">\
+    var bar = '<nav class="navbar navbar-expand-sm navbar-light justify-content-between sticky-top" style="background-color: #F1F1F1">\
     <a class="navbar-brand head_typo" href="main">OTOG<span> - One Tambon One Grader</span></a>\
     <ul class="navbar-nav">\
         <li class="nav-item">\
@@ -15,7 +15,7 @@ $(function () {
         <li class="nav-item">\
             <a id="contest" class="nav-link head_typo" href="/contest">\
                 <i class="fa fa-trophy"></i> <span>Contest</span>\
-                <!-- contest notification\
+                <!-- contest notification \
                 <sup class="notif blink"><span class="badge badge-warning\
                     badge-pill d-none d-lg-inline-block">New</span>\
                 </sup>-->\
@@ -34,21 +34,10 @@ $(function () {
     </ul>\
 </nav>';
     $("#navbar-frame").html(bar);
+    $("#navbar-frame").addClass("sticky-top");
  
     var id = getValueByName("id");
     $("#" + id).addClass("active");
-    var isLogin = !{is_login};
-    console.log(isLogin);
-    
-    if (isLogin == "1") {
-        $("#login_but").html("<i class='fa fa-sign-in'></i> <span>Logout</span>");
-        $("#login_but").attr("href", "logout");
-        $("#login_but").css("color", "red");
-    } else {
-        $("#login_but").html("<i class='fa fa-sign-in'></i> <span>Login</span>");
-        $("#login_but").attr("href", "login");
-        $("#login_but").css("color", "rgba(0, 0, 0, 0.7)");
-    }
 });
  
 function getValueByName(name) {
