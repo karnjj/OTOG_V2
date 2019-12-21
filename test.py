@@ -17,7 +17,7 @@ sio = socketio.Client()
 try :
     print("Connect to server...")
     time.sleep(3)
-    sio.connect('http://localhost')
+    sio.connect('http://localhost:3001')
 except :
     print("Server not online...")
 else :
