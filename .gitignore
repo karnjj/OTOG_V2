@@ -1,4 +1,5 @@
 /node_modules
-compiled
-uploaded
-source
+/compiled
+/uploaded
+/source
+/routrs/docs
